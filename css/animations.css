@@ -1,0 +1,222 @@
+/* Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Logo Spin */
+@keyframes logoSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Loader Animation */
+@keyframes loaderFade {
+    0% {
+        opacity: 1;
+        visibility: visible;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Apply Animations to Elements */
+.logo a {
+    transition: all 0.3s ease;
+}
+
+.logo a:hover {
+    transform: scale(1.1);
+    color: var(--green);
+}
+
+.nav-links a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--green);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section Animations */
+.hero-section > * {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.hero-section .small-heading {
+    animation-delay: 0.1s;
+}
+
+.hero-section .big-heading:nth-of-type(1) {
+    animation-delay: 0.2s;
+}
+
+.hero-section .big-heading:nth-of-type(2) {
+    animation-delay: 0.3s;
+}
+
+.hero-section .hero-description {
+    animation-delay: 0.4s;
+}
+
+.hero-section .cta-button {
+    animation-delay: 0.5s;
+}
+
+/* Section Heading Animation */
+.section-heading {
+    position: relative;
+    animation: slideIn 0.5s ease forwards;
+}
+
+/* Project Card Hover Effects */
+.project-card {
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--green);
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.project-image:hover::before {
+    opacity: 0;
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Social Links Animation */
+.social-links a {
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+/* Mobile Menu Animation */
+.mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Hamburger Menu Animation */
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--green);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Loader */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--navy);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: loaderFade 0.5s ease 2s forwards;
+}
+
+.loader-content {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--light-navy);
+    border-top: 3px solid var(--green);
+    border-radius: 50%;
+    animation: logoSpin 1s linear infinite;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add this JavaScript to make scroll reveal work */

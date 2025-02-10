@@ -4,8 +4,8 @@ class TagSphere {
         this.icons = icons;
         
         // Configuration
-        this.radius = 200;
-        this.maxSpeed = 0.05;
+        this.radius = 300;
+        this.maxSpeed = 0.1;
         this.initialSpeed = 0.01;
         this.mouseX = 0;
         this.mouseY = 0;
@@ -48,11 +48,11 @@ class TagSphere {
         const material = new THREE.SpriteMaterial({ 
             map: texture,
             transparent: true,
-            opacity: 0.8
+            opacity: 2.0
         });
         
         const sprite = new THREE.Sprite(material);
-        sprite.scale.set(30, 30, 1); // Adjust size of icons
+        sprite.scale.set(60, 60, 1); // Adjust size of icons
         
         return sprite;
     }

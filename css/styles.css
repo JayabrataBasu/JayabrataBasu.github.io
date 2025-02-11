@@ -487,13 +487,16 @@ section {
 }
 
 .tech-sphere {
-    width: 100%;
-    height: 60vh;
-    position: relative;
+    position: absolute; /* Position relative to the page */
+    top: 30%; /* Adjust vertical placement */
+    right: -20%; /* Adjust horizontal placement */
+    width: 300px; /* Adjust sphere size */
+    height: 300px; /* Match width for a perfect circle */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center-right;
+    align-items: center-right;
 }
+
 
 .tagcloud {
     display: inline-block;

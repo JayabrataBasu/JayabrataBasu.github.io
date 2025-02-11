@@ -45,17 +45,26 @@ class TagSphere {
     createIconSprite(iconPath) {
         const loader = new THREE.TextureLoader();
         const texture = loader.load(iconPath);
-        const material = new THREE.SpriteMaterial({ 
+    
+        // Ensure crisp rendering
+        texture.minFilter = THREE.LinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.generateMipmaps = false;
+    
+        const material = new THREE.SpriteMaterial({
             map: texture,
             transparent: true,
-            opacity: 2.0
+            opacity: 1.0, // Full opacity for vibrant colors
         });
-        
+    
         const sprite = new THREE.Sprite(material);
-        sprite.scale.set(60, 60, 1); // Adjust size of icons
-        
+    
+        // Adjust icon size (scale) to match the desired look
+        sprite.scale.set(40, 40, 1); // Adjust size as needed
+    
         return sprite;
     }
+    
     
     updateRotation() {
         if (this.group) {
@@ -84,7 +93,7 @@ class TagSphere {
 
 // Tech stack icons array (replace with your icon paths)
 const techStackIcons = [
-    'assets/images/icons8-javascript.svg',
+    'assets/images/js-svgrepo-com.svg',
     'assets/images/icons8-android-studio.svg',
     'assets/images/icons8-java.svg',
     'assets/images/icons8-python.svg',
@@ -118,4 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
             sphere.initialSpeed = 0.01;
         });
     }
+});
+
+techStackIcons.forEach(tech => {
+    const img = document.createElement('img');
+    img.src = tech.icon;
+    img.alt = tech.name;
+    img.style.width = '48px'; // Set a fixed width
+    img.style.height = '48px'; // Set a fixed height
+    img.style.imageRendering = 'crisp-edges'; // Ensure crisp rendering
+    document.getElementById('tech-stack').appendChild(img);
 });

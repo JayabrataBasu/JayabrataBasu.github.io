@@ -1,18 +1,58 @@
+const techStackIcons = [
+    'assets/images/android-studio.svg',
+    'assets/images/arduino.svg',
+    'assets/images/c.svg',
+    'assets/images/cplusplus.svg',
+    'assets/images/css-3.svg',
+    'assets/images/django.svg',
+    'assets/images/git-icon.svg',
+    'assets/images/github-icon.svg',
+    'assets/images/html-5.svg',
+    'assets/images/intellij-idea.svg',
+    'assets/images/java.svg',
+    'assets/images/javascript.svg',
+    'assets/images/jupyter.svg',
+    'assets/images/kotlin-icon.svg',
+    'assets/images/linux-mint.svg',
+    'assets/images/mysql.svg',
+    'assets/images/postgresql.svg',
+    'assets/images/pycharm.svg',
+    'assets/images/python.svg',
+    'assets/images/pytorch-icon.svg',
+    'assets/images/react.svg',
+    'assets/images/repo-com.svg',
+    'assets/images/tailwindcss-icon.svg',
+    'assets/images/typescript-icon.svg',
+    'assets/images/visual-studio-code.svg'
+];
+
 class TagSphere {
     constructor(element, icons) {
+        // Device pixel ratio handling
+        this.dpr = Math.min(2, window.devicePixelRatio || 1);
         this.element = element;
         this.icons = icons;
         
         // Configuration
-        this.radius = 300;
+        this.radius = 230;
         this.maxSpeed = 0.1;
         this.initialSpeed = 0.01;
         this.mouseX = 0;
         this.mouseY = 0;
         
+        // Scene setup
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, element.offsetWidth / element.offsetHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        this.camera = new THREE.PerspectiveCamera(65, element.offsetWidth / element.offsetHeight, 0.1, 1000);
+        
+        // Enhanced renderer configuration
+        this.renderer = new THREE.WebGLRenderer({ 
+            alpha: true, 
+            antialias: true,
+            powerPreference: "high-performance",
+            precision: "highp"
+        });
+        
+        this.renderer.setPixelRatio(this.dpr);
         
         this.setupScene();
         this.createSphere();
@@ -20,9 +60,50 @@ class TagSphere {
     }
     
     setupScene() {
-        this.renderer.setSize(this.element.offsetWidth, this.element.offsetHeight);
+        const width = this.element.clientWidth * this.dpr;
+        const height = this.element.clientHeight * this.dpr;
+        this.renderer.setSize(width, height, false);
         this.element.appendChild(this.renderer.domElement);
         this.camera.position.z = 500;
+        
+        // Add ambient light
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        this.scene.add(ambientLight);
+    }
+    
+    createIconSprite(iconPath) {
+        const loader = new THREE.TextureLoader();
+        
+        const texture = loader.load(iconPath, (tex) => {
+            tex.needsUpdate = true;
+            tex.generateMipmaps = true;
+        });
+        
+        // Optimal texture filtering
+        texture.minFilter = THREE.LinearMipmapLinearFilter;
+        texture.magFilter = THREE.LinearFilter;
+        texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
+        
+        // Prevent texture wrapping
+        texture.wrapS = THREE.ClampToEdgeWrapping;
+        texture.wrapT = THREE.ClampToEdgeWrapping;
+        
+        const material = new THREE.SpriteMaterial({
+            map: texture,
+            transparent: true,
+            opacity: 0.95,
+            depthWrite: false,
+            depthTest: true
+        });
+        
+        const sprite = new THREE.Sprite(material);
+        
+        // Scale based on device pixel ratio
+        const baseSize = 30;
+        const scaledSize = baseSize * Math.pow(this.dpr, 0.85);
+        sprite.scale.set(scaledSize, scaledSize, 1);
+        
+        return sprite;
     }
     
     createSphere() {
@@ -35,6 +116,11 @@ class TagSphere {
             const sprite = this.createIconSprite(icon);
             sprite.position.setFromSphericalCoords(this.radius, phi, theta);
             
+            // Round positions
+            sprite.position.x = Math.round(sprite.position.x * 100) / 100;
+            sprite.position.y = Math.round(sprite.position.y * 100) / 100;
+            sprite.position.z = Math.round(sprite.position.z * 100) / 100;
+            
             group.add(sprite);
         });
         
@@ -42,35 +128,11 @@ class TagSphere {
         this.group = group;
     }
     
-    createIconSprite(iconPath) {
-        const loader = new THREE.TextureLoader();
-        const texture = loader.load(iconPath);
-    
-        // Ensure crisp rendering
-        texture.minFilter = THREE.NearestFilter;
-        texture.magFilter = THREE.NearestFilter;
-        texture.generateMipmaps = false;
-        texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
-    
-        const material = new THREE.SpriteMaterial({
-            map: texture,
-            transparent: true,
-            opacity: 1.0, // Full opacity for vibrant colors
-        });
-    
-        const sprite = new THREE.Sprite(material);
-    
-        // Adjust icon size (scale) to match the desired look
-        sprite.scale.set(50, 50, 1); // Adjust size as needed
-    
-        return sprite;
-    }
-    
-    
     updateRotation() {
         if (this.group) {
-            this.group.rotation.x += this.initialSpeed + (this.mouseY * 0.001);
-            this.group.rotation.y += this.initialSpeed + (this.mouseX * 0.001);
+            const delta = 0.050; // Assuming 60fps
+            this.group.rotation.x += (this.initialSpeed + (this.mouseY * 0.001)) * delta;
+            this.group.rotation.y += (this.initialSpeed + (this.mouseX * 0.001)) * delta;
         }
     }
     
@@ -81,47 +143,23 @@ class TagSphere {
     }
     
     onMouseMove(event) {
-        this.mouseX = (event.clientX - window.innerWidth / 2) / 100;
-        this.mouseY = (event.clientY - window.innerHeight / 2) / 100;
+        const rect = this.element.getBoundingClientRect();
+        this.mouseX = ((event.clientX - rect.left) - this.element.offsetWidth / 2) / 100;
+        this.mouseY = ((event.clientY - rect.top) - this.element.offsetHeight / 2) / 100;
     }
     
     onResize() {
-        this.camera.aspect = this.element.offsetWidth / this.element.offsetHeight;
+        const width = this.element.clientWidth;
+        const height = this.element.clientHeight;
+        
+        this.camera.aspect = width / height;
         this.camera.updateProjectionMatrix();
-        this.renderer.setSize(this.element.offsetWidth, this.element.offsetHeight);
+        
+        this.renderer.setSize(width * this.dpr, height * this.dpr, false);
+        this.renderer.domElement.style.width = width + 'px';
+        this.renderer.domElement.style.height = height + 'px';
     }
 }
-
-// Tech stack icons array (replace with your icon paths)
-const techStackIcons = [
-    'assets/images/repo-com.svg',
-    'assets/images/android-studio.svg',
-    'assets/images/java.svg',
-    'assets/images/python.svg',
-    'assets/images/cplusplus.svg',
-    'assets/images/kotlin-icon.svg',
-    'assets/images/css-3.svg',
-    'assets/images/html-5.svg',
-    'assets/images/arduino.svg',
-    'assets/images/linux-mint.svg',
-    'assets/images/pytorch-icon.svg',
-    'assets/images/pycharm.svg',  // Assuming this is for IntelliJ IDEA, correct if needed
-    'assets/images/c.svg',  // C programming, correct if needed
-    'assets/images/visual-studio-code.svg',  // Assuming this replaces VirtualBox
-    'assets/images/conda.svg', // Assuming this replaces Anaconda
-    'assests/images/intellij-idea.svg',
-    'assets/images/postgresql.svg',
-    'assets/images/mysql.svg',
-    'assets/images/django.svg',
-    'assets/images/jupyter.svg',
-    'assets/images/git-icon.svg',
-    'assets/images/github-icon.svg',
-    'assets/images/typescript-icon.svg',
-    'assets/images/javascript.svg',
-    'assets/images/react.svg',
-    'assets/images/tailwindcss-icon.svg',
-];
-
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -133,21 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', () => sphere.onResize());
         
         container.addEventListener('mouseenter', () => {
-            sphere.initialSpeed = 0.003;
+            sphere.initialSpeed = 0.03;
         });
         
         container.addEventListener('mouseleave', () => {
             sphere.initialSpeed = 0.01;
         });
     }
-});
-
-techStackIcons.forEach(tech => {
-    const img = document.createElement('img');
-    img.src = tech.icon;
-    img.alt = tech.name;
-    img.style.width = '60px'; // Set a fixed width
-    img.style.height = '60px'; // Set a fixed height
-    img.style.imageRendering = 'crisp-edges'; // Ensure crisp rendering
-    document.getElementById('tech-stack').appendChild(img);
 });

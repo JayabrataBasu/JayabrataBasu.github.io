@@ -9,6 +9,10 @@
 }
 
 /* Global Styles */
+body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -71,6 +75,11 @@ body {
 }
 
 /* Hero Section */
+.hero-section img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .hero-section {
     display: flex;
     flex-direction: column;
@@ -214,6 +223,11 @@ section {
 }
 
 /* About Section */
+.about-image img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .about-content {
     display: grid;
     grid-template-columns: 3fr 2fr;
@@ -276,6 +290,11 @@ section {
 }
 
 /* Projects Section */
+.project-image img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
 .projects-grid {
     display: grid;
     gap: 100px;
@@ -516,4 +535,3 @@ section {
 .tagcloud--item:hover {
     color: var(--green);
 }
-

@@ -47,9 +47,10 @@ class TagSphere {
         const texture = loader.load(iconPath);
     
         // Ensure crisp rendering
-        texture.minFilter = THREE.LinearFilter;
-        texture.magFilter = THREE.LinearFilter;
+        texture.minFilter = THREE.NearestFilter;
+        texture.magFilter = THREE.NearestFilter;
         texture.generateMipmaps = false;
+        texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
     
         const material = new THREE.SpriteMaterial({
             map: texture,
@@ -60,7 +61,7 @@ class TagSphere {
         const sprite = new THREE.Sprite(material);
     
         // Adjust icon size (scale) to match the desired look
-        sprite.scale.set(40, 40, 1); // Adjust size as needed
+        sprite.scale.set(50, 50, 1); // Adjust size as needed
     
         return sprite;
     }
@@ -93,22 +94,34 @@ class TagSphere {
 
 // Tech stack icons array (replace with your icon paths)
 const techStackIcons = [
-    'assets/images/js-svgrepo-com.svg',
-    'assets/images/icons8-android-studio.svg',
-    'assets/images/icons8-java.svg',
-    'assets/images/icons8-python.svg',
-    'assets/images/icons8-c++.svg',
-    'assets/images/icons8-kotlin.svg',
-    'assets/images/icons8-css3.svg',
-    'assets/images/icons8-html5.svg',
-    'assets/images/icons8-arduino.svg',
-    'assets/images/icons8-linux-mint.svg',
-    'assets/images/icons8-pytorch.svg',
-    'assets/images/icons8-intellij-idea.svg',
-    'assets/images/icons8-c-programming.svg',
-    'assets/images/icons8-virtualbox.svg',
-    'assets/images/icons8-anaconda.svg'
+    'assets/images/repo-com.svg',
+    'assets/images/android-studio.svg',
+    'assets/images/java.svg',
+    'assets/images/python.svg',
+    'assets/images/cplusplus.svg',
+    'assets/images/kotlin-icon.svg',
+    'assets/images/css-3.svg',
+    'assets/images/html-5.svg',
+    'assets/images/arduino.svg',
+    'assets/images/linux-mint.svg',
+    'assets/images/pytorch-icon.svg',
+    'assets/images/pycharm.svg',  // Assuming this is for IntelliJ IDEA, correct if needed
+    'assets/images/c.svg',  // C programming, correct if needed
+    'assets/images/visual-studio-code.svg',  // Assuming this replaces VirtualBox
+    'assets/images/conda.svg', // Assuming this replaces Anaconda
+    'assests/images/intellij-idea.svg',
+    'assets/images/postgresql.svg',
+    'assets/images/mysql.svg',
+    'assets/images/django.svg',
+    'assets/images/jupyter.svg',
+    'assets/images/git-icon.svg',
+    'assets/images/github-icon.svg',
+    'assets/images/typescript-icon.svg',
+    'assets/images/javascript.svg',
+    'assets/images/react.svg',
+    'assets/images/tailwindcss-icon.svg',
 ];
+
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -133,8 +146,8 @@ techStackIcons.forEach(tech => {
     const img = document.createElement('img');
     img.src = tech.icon;
     img.alt = tech.name;
-    img.style.width = '48px'; // Set a fixed width
-    img.style.height = '48px'; // Set a fixed height
+    img.style.width = '60px'; // Set a fixed width
+    img.style.height = '60px'; // Set a fixed height
     img.style.imageRendering = 'crisp-edges'; // Ensure crisp rendering
     document.getElementById('tech-stack').appendChild(img);
 });

@@ -1,189 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your Portfolio - Developer & Designer">
-    <meta name="keywords" content="developer, designer, portfolio, web development">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Jayabrata Basu - Software Engineer & Builder" />
+    <meta name="keywords" content="Jayabrata Basu, software engineer, portfolio, projects" />
     <title>Jayabrata Basu | Portfolio</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    
+
+    <!-- Favicon (placeholder) -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/react.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/animations.css">
-    
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+C3vSmZ8yug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <!-- Scroll Reactive Gradient Background -->
+    <div class="scroll-gradient" aria-hidden="true"></div>
     <!-- Loader -->
     <div class="loader">
         <div class="loader-content"></div>
     </div>
 
     <!-- Header -->
-    <header class="header">
-        <nav class="nav-container">
-            <div class="logo">
-                <a href="#home">YN</a>
+    <header class="header" role="banner">
+        <nav class="nav-container" aria-label="Main navigation">
+            <div class="logo" aria-label="Home link">
+                <a href="#home">JB</a>
             </div>
-            
-            <div class="nav-links">
-                <a href="#about"><span>01.</span> About</a>
-                <a href="#experience"><span>02.</span> Experience</a>
-                <a href="#work"><span>03.</span> Work</a>
-                <a href="#contact"><span>04.</span> Contact</a>
-                <a href="/resume.pdf" class="resume-button">Resume</a>
+            <div class="nav-links" role="menubar">
+                <a role="menuitem" href="#about"><span>01.</span> About</a>
+                <a role="menuitem" href="#skills"><span>02.</span> Skills</a>
+                <a role="menuitem" href="#projects"><span>03.</span> Projects</a>
+                <a role="menuitem" href="#contact"><span>04.</span> Contact</a>
+                <a role="menuitem" href="resume.pdf" class="resume-button" download>Resume</a>
             </div>
-
-    <div class="hamburger" onclick="toggleMobileMenu()">
-
+            <button class="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </nav>
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="main" tabindex="-1">
         <!-- Hero Section -->
-        <section id="home" class="hero-section">
-            <h1 class="small-heading">Hi, my name is</h1>
-            <h2 class="big-heading">Jayabrata Basu.</h2>
-            <h3 class="big-heading">I build stuff I think is cool!</h3>
+        <section id="home" class="hero-section" aria-label="Hero">
+            <div class="hero-bg-gradient" aria-hidden="true"></div>
+            <h1 class="intro small-heading">Hi, I'm</h1>
+            <h2 class="hero-name gradient-text">Jayabrata Basu</h2>
+            <h3 class="typewriter" aria-live="polite"><span id="typewriter-text"></span><span class="cursor" aria-hidden="true">▌</span></h3>
             <p class="hero-description">
-                I'm a software engineer specializing in building (and occasionally designing) 
-                exceptional digital experiences. Currently, I'm focused on building accessible, 
-                human-centered products.
+                <strong>[ Edit this intro ]</strong> I'm a software engineer crafting delightful, performant software products. I love intersecting <em>systems thinking</em>, <em>ML</em>, and <em>fintech</em> to build tools people genuinely enjoy using.
             </p>
             <div class="cta-button">
-                <a href="#work">Check out my work!</a>
+                <a href="#projects" class="primary-btn">See my work</a>
+                <a href="resume.pdf" class="secondary-btn" download>Download CV</a>
             </div>
         </section>
-
-        
 
         <!-- About Section -->
-        <section id="about" class="about-section">
-            <h2 class="section-heading"><span>01.</span> About Me</h2>
+        <section id="about" class="about-section" aria-labelledby="about-heading">
+            <h2 class="section-heading" id="about-heading"><span>01.</span> About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm a CS undergraduate from <a href="https://www.srmist.edu.in/" target="_blank">SRMIST </a>with an interest in Machine Learning and Finance</p>
-                    <p>Technologies I've been working with:</p>
+                    <p><strong>[ Edit this bio ]</strong> I'm a CS undergraduate at <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener">SRMIST</a> exploring the intersection of machine learning, finance, and scalable product engineering.</p>
+                    <p>My current goals: deepen expertise in distributed systems, contribute to impactful open-source ML tooling, and ship a product that helps developers move faster.</p>
+                    <p class="tech-intro">Core technologies & tools:</p>
                     <ul class="skills-list">
-                        <li>JavaScript (ES6+)</li>
-                        <li>React</li>
-                        <li>Node.js</li>
                         <li>TypeScript</li>
+                        <li>React</li>
                         <li>Python</li>
-                        <li>SQL</li>
+                        <li>PostgreSQL</li>
+                        <li>Node.js</li>
+                        <li>Machine Learning</li>
                     </ul>
                 </div>
-                <div class="about-image">
-                    <div class="wrapper">
-                        <img src="images/avatar.jpg" alt="Profile Picture">
+                <figure class="about-image">
+                    <div class="wrapper gradient-ring">
+                        <img src="assets/images/python.svg" alt="Placeholder avatar icon" loading="lazy" />
                     </div>
+                    <figcaption class="visually-hidden">Avatar / profile placeholder</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- CV Section -->
+        <section id="cv" class="cv-section" aria-labelledby="cv-heading">
+            <h2 class="section-heading" id="cv-heading"><span>02.</span> Curriculum Vitae</h2>
+            <div class="cv-inner">
+                <p>[ Replace this paragraph with a short highlight of your experience / value proposition. ]</p>
+                <a href="resume.pdf" class="resume-download" download aria-label="Download resume as PDF">
+                    <span class="icon"><i class="fa-solid fa-download"></i></span>
+                    <span>Download CV</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Skills (Orb) Section -->
+        <section id="skills" class="skills-section" aria-labelledby="skills-heading">
+            <h2 class="section-heading" id="skills-heading"><span>03.</span> Skills & Tools</h2>
+            <div class="skills-layout">
+                <div class="skills-copy">
+                    <p>The interactive orb showcases a subset of technologies & tools I enjoy working with. Hover or move your cursor to explore. Tooltips will appear for each skill.</p>
+                </div>
+                <div class="sphere-wrapper">
+                    <div id="tech-sphere" class="tech-sphere" aria-label="Interactive rotating sphere of skill icons"></div>
+                    <div id="skill-tooltip" class="skill-tooltip" role="tooltip" hidden></div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="experience-section">
-            <h2 class="section-heading"><span>02.</span> Experience</h2>
-            <div class="experience-content">
-                <div id="tech-sphere" class="tech-sphere"></div>
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section" aria-labelledby="projects-heading">
+            <h2 class="section-heading" id="projects-heading"><span>04.</span> Selected Projects</h2>
+            <div class="projects-controls" role="search">
+                <input type="search" id="project-search" placeholder="Search projects or filter by tag..." aria-label="Search projects" />
+                <div class="filter-tags" aria-label="Quick filters">
+                    <button class="tag-filter active" data-tag="all">All</button>
+                    <button class="tag-filter" data-tag="ml">ML</button>
+                    <button class="tag-filter" data-tag="web">Web</button>
+                    <button class="tag-filter" data-tag="fintech">Fintech</button>
+                </div>
             </div>
-        </section>
-        
-
-        <!-- Work Section -->
-        <section id="work" class="work-section">
-            <h2 class="section-heading"><span>03.</span> Some Things I've Built</h2>
-            <div class="projects-grid">
-                <!-- Project 1 -->
-                <article class="project-card">
-                    <div class="project-content">
-                        <div class="project-label">Featured Project</div>
-                        <h3 class="project-title">Project Name</h3>
-                        <div class="project-description">
-                            <p>Project description goes here...</p>
-                        </div>
-                        <ul class="project-tech-list">
-                            <li>React</li>
-                            <li>Node.js</li>
-                            <li>MongoDB</li>
+            <div class="projects-grid" id="projects-grid" aria-live="polite">
+                <!-- Project Card Template (Duplicate & edit) -->
+                <article class="project-card" data-tags="web react" tabindex="0">
+                    <div class="project-media">
+                        <div class="media-placeholder gradient-sheen" aria-hidden="true">IMG</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Project Alpha</h3>
+                        <p class="project-desc">[ Replace ] A performant React + TypeScript dashboard for real-time analytics.</p>
+                        <ul class="project-tags">
+                            <li>React</li><li>TypeScript</li><li>Web</li>
                         </ul>
                         <div class="project-links">
-                            <a href="#" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="#" target="_blank" rel="noopener noreferrer">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
+                            <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+                            <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </div>
-                    <div class="project-image">
-                        <img src="images/projects/project1.jpg" alt="Project 1">
+                </article>
+                <article class="project-card" data-tags="ml python" tabindex="0">
+                    <div class="project-media">
+                        <div class="media-placeholder gradient-sheen" aria-hidden="true">IMG</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">Model Forge</h3>
+                        <p class="project-desc">[ Replace ] Lightweight model experimentation toolkit for structured tabular data.</p>
+                        <ul class="project-tags">
+                            <li>Python</li><li>ML</li><li>Toolkit</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+                            <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
                     </div>
                 </article>
-                <!-- Add more project cards as needed -->
+                <article class="project-card" data-tags="fintech web" tabindex="0">
+                    <div class="project-media">
+                        <div class="media-placeholder gradient-sheen" aria-hidden="true">IMG</div>
+                    </div>
+                    <div class="project-body">
+                        <h3 class="project-title">LedgerLite</h3>
+                        <p class="project-desc">[ Replace ] Minimal personal finance tracker with envelope budgeting logic.</p>
+                        <ul class="project-tags">
+                            <li>Fintech</li><li>Design</li><li>Web</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
+                            <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                </article>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <h2 class="section-heading"><span>04.</span> What's Next?</h2>
-            <h2 class="contact-title">Get In Touch</h2>
-            <p class="contact-description">
-                Whether you have a question or just want to say hi, I'll try my best 
-                to get back to you!
-            </p>
-            <div class="contact-button">
-                <a href="mailto:jayabratabasu@gmail.com">Say Hello</a>
+        <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+            <h2 class="section-heading" id="contact-heading"><span>05.</span> Contact</h2>
+            <h3 class="contact-title">Let's Build Something</h3>
+            <p class="contact-description">Have an idea, opportunity, or just want to chat about engineering & product? Reach out — I'm always open to thoughtful conversations.</p>
+            <div class="contact-actions">
+                <a class="email-link primary-btn" href="mailto:jayabratabasu@gmail.com">Email Me</a>
+                <div class="social-inline">
+                    <a href="https://github.com/JayabrataBasu" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-twitter"></i>
-            </a>
-        </div>
-        <div class="footer-credit">
-            <a href="https://github.com/JayabrataBasu" target="_blank" rel="noopener noreferrer">
-                Designed & Built by Jayabrata Basu
-            </a>
-        </div>
+    <footer class="footer" role="contentinfo">
+        <p>Designed & Built by Jayabrata Basu • <span class="year"></span></p>
     </footer>
 
     <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-
-    <nav class="mobile-nav" id="mobile-nav">
-
+    <div class="mobile-menu" id="mobile-menu" hidden>
+        <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
             <a href="#about"><span>01.</span> About</a>
-            <a href="#experience"><span>02.</span> Experience</a>
-            <a href="#work"><span>03.</span> Work</a>
+            <a href="#skills"><span>02.</span> Skills</a>
+            <a href="#projects"><span>03.</span> Projects</a>
             <a href="#contact"><span>04.</span> Contact</a>
-            <a href="/resume.pdf" class="resume-button">Resume</a>
+            <a href="resume.pdf" class="resume-button" download>Resume</a>
         </nav>
     </div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/TagCloud/2.2.0/TagCloud.min.js"></script>
     <script src="js/sphere.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>

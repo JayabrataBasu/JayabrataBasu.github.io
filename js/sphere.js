@@ -1,163 +1,148 @@
 const techStackIcons = [
-    'assets/images/android-studio.svg',
-    'assets/images/arduino.svg',
-    'assets/images/c.svg',
-    'assets/images/cplusplus.svg',
-    'assets/images/css-3.svg',
-    'assets/images/django.svg',
-    'assets/images/git-icon.svg',
-    'assets/images/github-icon.svg',
-    'assets/images/html-5.svg',
-    'assets/images/intellij-idea.svg',
-    'assets/images/java.svg',
-    'assets/images/javascript.svg',
-    'assets/images/jupyter.svg',
-    'assets/images/kotlin-icon.svg',
-    'assets/images/linux-mint.svg',
-    'assets/images/mysql.svg',
-    'assets/images/postgresql.svg',
-    'assets/images/pycharm.svg',
-    'assets/images/python.svg',
-    'assets/images/pytorch-icon.svg',
-    'assets/images/react.svg',
-    'assets/images/repo-com.svg',
-    'assets/images/tailwindcss-icon.svg',
-    'assets/images/typescript-icon.svg',
-    'assets/images/visual-studio-code.svg'
+    { name: 'JavaScript', icon: '⚡' },
+    { name: 'React', icon: '⚛️' },
+    { name: 'Node.js', icon: '🟢' },
+    { name: 'Python', icon: '🐍' },
+    { name: 'TypeScript', icon: '📘' },
+    { name: 'HTML5', icon: '🌐' },
+    { name: 'CSS3', icon: '🎨' },
+    { name: 'Git', icon: '📋' },
+    { name: 'MySQL', icon: '🗄️' },
+    { name: 'MongoDB', icon: '🍃' },
+    { name: 'Java', icon: '☕' },
+    { name: 'C++', icon: '⚙️' },
+    { name: 'Django', icon: '🐍' },
+    { name: 'Jupyter', icon: '📊' },
+    { name: 'Linux', icon: '🐧' },
+    { name: 'Docker', icon: '🐳' },
+    { name: 'AWS', icon: '☁️' },
+    { name: 'Firebase', icon: '🔥' }
 ];
 
 class TagSphere {
     constructor(element, icons) {
-        // Device pixel ratio handling
-        this.dpr = Math.min(2, window.devicePixelRatio || 1);
         this.element = element;
         this.icons = icons;
-        
-        // Configuration
-        this.radius = 230;
-        this.maxSpeed = 0.1;
-        this.initialSpeed = 0.01;
+        this.radius = 200;
         this.mouseX = 0;
         this.mouseY = 0;
+        this.rotationX = 0;
+        this.rotationY = 0;
+        this.autoRotate = true;
         
-        // Scene setup
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(65, element.offsetWidth / element.offsetHeight, 0.1, 1000);
-        
-        // Enhanced renderer configuration
-        this.renderer = new THREE.WebGLRenderer({ 
-            alpha: true, 
-            antialias: true,
-            powerPreference: "high-performance",
-            precision: "highp"
-        });
-        
-        this.renderer.setPixelRatio(this.dpr);
-        
-        this.setupScene();
-        this.createSphere();
+        this.createElement();
+        this.positionIcons();
+        this.addEventListeners();
         this.animate();
     }
     
-    setupScene() {
-        const width = this.element.clientWidth * this.dpr;
-        const height = this.element.clientHeight * this.dpr;
-        this.renderer.setSize(width, height, false);
-        this.element.appendChild(this.renderer.domElement);
-        this.camera.position.z = 500;
+    createElement() {
+        this.sphere = document.createElement('div');
+        this.sphere.className = 'sphere-container';
+        this.sphere.style.cssText = `
+            position: relative;
+            width: ${this.radius * 2}px;
+            height: ${this.radius * 2}px;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        `;
         
-        // Add ambient light
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-        this.scene.add(ambientLight);
+        this.element.appendChild(this.sphere);
     }
     
-    createIconSprite(iconPath) {
-        const loader = new THREE.TextureLoader();
-        
-        const texture = loader.load(iconPath, (tex) => {
-            tex.needsUpdate = true;
-            tex.generateMipmaps = true;
-        });
-        
-        // Optimal texture filtering
-        texture.minFilter = THREE.LinearMipmapLinearFilter;
-        texture.magFilter = THREE.LinearFilter;
-        texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
-        
-        // Prevent texture wrapping
-        texture.wrapS = THREE.ClampToEdgeWrapping;
-        texture.wrapT = THREE.ClampToEdgeWrapping;
-        
-        const material = new THREE.SpriteMaterial({
-            map: texture,
-            transparent: true,
-            opacity: 0.95,
-            depthWrite: false,
-            depthTest: true
-        });
-        
-        const sprite = new THREE.Sprite(material);
-        
-        // Scale based on device pixel ratio
-        const baseSize = 30;
-        const scaledSize = baseSize * Math.pow(this.dpr, 0.85);
-        sprite.scale.set(scaledSize, scaledSize, 1);
-        
-        return sprite;
-    }
-    
-    createSphere() {
-        const group = new THREE.Group();
-        
-        this.icons.forEach((icon, index) => {
-            const phi = Math.acos(-1 + (2 * index) / this.icons.length);
+    positionIcons() {
+        this.icons.forEach((iconData, i) => {
+            const iconElement = document.createElement('div');
+            iconElement.className = 'sphere-icon';
+            iconElement.innerHTML = `
+                <span class="icon">${iconData.icon}</span>
+                <span class="label">${iconData.name}</span>
+            `;
+            
+            // Calculate spherical coordinates
+            const phi = Math.acos(-1 + (2 * i) / this.icons.length);
             const theta = Math.sqrt(this.icons.length * Math.PI) * phi;
             
-            const sprite = this.createIconSprite(icon);
-            sprite.position.setFromSphericalCoords(this.radius, phi, theta);
+            const x = this.radius * Math.cos(theta) * Math.sin(phi);
+            const y = this.radius * Math.sin(theta) * Math.sin(phi);
+            const z = this.radius * Math.cos(phi);
             
-            // Round positions
-            sprite.position.x = Math.round(sprite.position.x * 100) / 100;
-            sprite.position.y = Math.round(sprite.position.y * 100) / 100;
-            sprite.position.z = Math.round(sprite.position.z * 100) / 100;
+            iconElement.style.cssText = `
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                width: 60px;
+                height: 60px;
+                margin: -30px 0 0 -30px;
+                transform: translate3d(${x}px, ${y}px, ${z}px);
+                transition: all 0.3s ease;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: rgba(255, 107, 107, 0.1);
+                border: 1px solid rgba(255, 107, 107, 0.3);
+                border-radius: 50%;
+                backdrop-filter: blur(10px);
+            `;
             
-            group.add(sprite);
+            iconElement.querySelector('.icon').style.cssText = `
+                font-size: 24px;
+                margin-bottom: 2px;
+            `;
+            
+            iconElement.querySelector('.label').style.cssText = `
+                font-size: 8px;
+                color: var(--white);
+                font-family: var(--font-mono);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                text-align: center;
+                white-space: nowrap;
+            `;
+            
+            iconElement.addEventListener('mouseenter', () => {
+                iconElement.style.transform += ' scale(1.2)';
+                iconElement.style.background = 'rgba(255, 107, 107, 0.2)';
+                iconElement.style.boxShadow = '0 0 20px rgba(255, 107, 107, 0.5)';
+                iconElement.querySelector('.label').style.opacity = '1';
+            });
+            
+            iconElement.addEventListener('mouseleave', () => {
+                iconElement.style.transform = iconElement.style.transform.replace(' scale(1.2)', '');
+                iconElement.style.background = 'rgba(255, 107, 107, 0.1)';
+                iconElement.style.boxShadow = 'none';
+                iconElement.querySelector('.label').style.opacity = '0';
+            });
+            
+            this.sphere.appendChild(iconElement);
         });
-        
-        this.scene.add(group);
-        this.group = group;
     }
     
-    updateRotation() {
-        if (this.group) {
-            const delta = 0.050; // Assuming 60fps
-            this.group.rotation.x += (this.initialSpeed + (this.mouseY * 0.001)) * delta;
-            this.group.rotation.y += (this.initialSpeed + (this.mouseX * 0.001)) * delta;
-        }
-    }
-    
-    animate() {
-        requestAnimationFrame(() => this.animate());
-        this.updateRotation();
-        this.renderer.render(this.scene, this.camera);
+    addEventListeners() {
+        this.element.addEventListener('mousemove', (e) => this.onMouseMove(e));
+        this.element.addEventListener('mouseenter', () => this.autoRotate = false);
+        this.element.addEventListener('mouseleave', () => this.autoRotate = true);
     }
     
     onMouseMove(event) {
         const rect = this.element.getBoundingClientRect();
-        this.mouseX = ((event.clientX - rect.left) - this.element.offsetWidth / 2) / 100;
-        this.mouseY = ((event.clientY - rect.top) - this.element.offsetHeight / 2) / 100;
+        this.mouseX = ((event.clientX - rect.left) - this.element.offsetWidth / 2) / 200;
+        this.mouseY = ((event.clientY - rect.top) - this.element.offsetHeight / 2) / 200;
     }
     
-    onResize() {
-        const width = this.element.clientWidth;
-        const height = this.element.clientHeight;
+    animate() {
+        if (this.autoRotate) {
+            this.rotationY += 0.005;
+        } else {
+            this.rotationY += this.mouseX * 0.02;
+            this.rotationX += this.mouseY * 0.02;
+        }
         
-        this.camera.aspect = width / height;
-        this.camera.updateProjectionMatrix();
+        this.sphere.style.transform = `rotateX(${this.rotationX}rad) rotateY(${this.rotationY}rad)`;
         
-        this.renderer.setSize(width * this.dpr, height * this.dpr, false);
-        this.renderer.domElement.style.width = width + 'px';
-        this.renderer.domElement.style.height = height + 'px';
+        requestAnimationFrame(() => this.animate());
     }
 }
 
@@ -166,16 +151,5 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('tech-sphere');
     if (container) {
         const sphere = new TagSphere(container, techStackIcons);
-        
-        document.addEventListener('mousemove', (e) => sphere.onMouseMove(e));
-        window.addEventListener('resize', () => sphere.onResize());
-        
-        container.addEventListener('mouseenter', () => {
-            sphere.initialSpeed = 0.03;
-        });
-        
-        container.addEventListener('mouseleave', () => {
-            sphere.initialSpeed = 0.01;
-        });
     }
 });

@@ -35,7 +35,7 @@
                 <a href="#experience"><span>02.</span> Experience</a>
                 <a href="#work"><span>03.</span> Work</a>
                 <a href="#contact"><span>04.</span> Contact</a>
-                <a href="/resume.pdf" class="resume-button">Resume</a>
+                <a href="resume.html" class="resume-button">Resume</a>
             </div>
 
     <div class="hamburger" onclick="toggleMobileMenu()">
@@ -53,7 +53,7 @@
         <section id="home" class="hero-section">
             <h1 class="small-heading">Hi, my name is</h1>
             <h2 class="big-heading">Jayabrata Basu.</h2>
-            <h3 class="big-heading">I build stuff I think is cool!</h3>
+            <h3 class="big-heading typewriter" id="typewriter-text"></h3>
             <p class="hero-description">
                 I'm a software engineer specializing in building (and occasionally designing) 
                 exceptional digital experiences. Currently, I'm focused on building accessible, 
@@ -102,19 +102,30 @@
         <!-- Work Section -->
         <section id="work" class="work-section">
             <h2 class="section-heading"><span>03.</span> Some Things I've Built</h2>
+            
+            <!-- Project Filter -->
+            <div class="project-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web Apps</button>
+                <button class="filter-btn" data-filter="mobile">Mobile</button>
+                <button class="filter-btn" data-filter="ml">Machine Learning</button>
+                <button class="filter-btn" data-filter="tools">Tools</button>
+            </div>
+            
             <div class="projects-grid">
-                <!-- Project 1 -->
-                <article class="project-card">
+                <!-- Project 1 - Web App -->
+                <article class="project-card" data-category="web">
                     <div class="project-content">
                         <div class="project-label">Featured Project</div>
-                        <h3 class="project-title">Project Name</h3>
+                        <h3 class="project-title">E-Commerce Platform</h3>
                         <div class="project-description">
-                            <p>Project description goes here...</p>
+                            <p>A full-stack e-commerce platform with user authentication, payment integration, and admin dashboard. Built with modern web technologies for optimal performance.</p>
                         </div>
                         <ul class="project-tech-list">
                             <li>React</li>
                             <li>Node.js</li>
                             <li>MongoDB</li>
+                            <li>Stripe</li>
                         </ul>
                         <div class="project-links">
                             <a href="#" target="_blank" rel="noopener noreferrer">
@@ -126,23 +137,129 @@
                         </div>
                     </div>
                     <div class="project-image">
-                        <img src="images/projects/project1.jpg" alt="Project 1">
+                        <img src="https://via.placeholder.com/600x400/4ecdc4/ffffff?text=E-Commerce+Platform" alt="E-Commerce Platform">
                     </div>
                 </article>
-                <!-- Add more project cards as needed -->
+                
+                <!-- Project 2 - ML -->
+                <article class="project-card" data-category="ml">
+                    <div class="project-content">
+                        <div class="project-label">Machine Learning</div>
+                        <h3 class="project-title">Stock Price Predictor</h3>
+                        <div class="project-description">
+                            <p>ML model using LSTM neural networks to predict stock prices with real-time data visualization and portfolio optimization features.</p>
+                        </div>
+                        <ul class="project-tech-list">
+                            <li>Python</li>
+                            <li>TensorFlow</li>
+                            <li>Pandas</li>
+                            <li>Streamlit</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400/45b7d1/ffffff?text=Stock+Predictor" alt="Stock Price Predictor">
+                    </div>
+                </article>
+                
+                <!-- Project 3 - Mobile -->
+                <article class="project-card" data-category="mobile">
+                    <div class="project-content">
+                        <div class="project-label">Mobile Application</div>
+                        <h3 class="project-title">Fitness Tracker</h3>
+                        <div class="project-description">
+                            <p>Cross-platform mobile app for fitness tracking with workout plans, progress analytics, and social features for motivation.</p>
+                        </div>
+                        <ul class="project-tech-list">
+                            <li>React Native</li>
+                            <li>Firebase</li>
+                            <li>Redux</li>
+                            <li>Expo</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400/ff6b6b/ffffff?text=Fitness+Tracker" alt="Fitness Tracker">
+                    </div>
+                </article>
+                
+                <!-- Project 4 - Tools -->
+                <article class="project-card" data-category="tools">
+                    <div class="project-content">
+                        <div class="project-label">Developer Tool</div>
+                        <h3 class="project-title">Code Quality Analyzer</h3>
+                        <div class="project-description">
+                            <p>VS Code extension that analyzes code quality, suggests improvements, and provides real-time feedback on code patterns and best practices.</p>
+                        </div>
+                        <ul class="project-tech-list">
+                            <li>TypeScript</li>
+                            <li>VS Code API</li>
+                            <li>ESLint</li>
+                            <li>Webpack</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400/8a4fcc/ffffff?text=Code+Analyzer" alt="Code Quality Analyzer">
+                    </div>
+                </article>
             </div>
         </section>
 
         <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <h2 class="section-heading"><span>04.</span> What's Next?</h2>
-            <h2 class="contact-title">Get In Touch</h2>
+            <h2 class="contact-title gradient-text">Get In Touch</h2>
             <p class="contact-description">
                 Whether you have a question or just want to say hi, I'll try my best 
-                to get back to you!
+                to get back to you! I'm currently open to new opportunities and collaborations.
             </p>
             <div class="contact-button">
                 <a href="mailto:jayabratabasu@gmail.com">Say Hello</a>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="social-links-section">
+                <h3>Connect with me</h3>
+                <div class="social-links">
+                    <a href="https://github.com/JayabrataBasu" target="_blank" rel="noopener noreferrer" title="GitHub">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/jayabrata-basu" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="mailto:jayabratabasu@gmail.com" title="Email">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://twitter.com/jayabrata_basu" target="_blank" rel="noopener noreferrer" title="Twitter">
+                        <i class="fab fa-twitter"></i>
+                        <span>Twitter</span>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
@@ -176,13 +293,12 @@
             <a href="#experience"><span>02.</span> Experience</a>
             <a href="#work"><span>03.</span> Work</a>
             <a href="#contact"><span>04.</span> Contact</a>
-            <a href="/resume.pdf" class="resume-button">Resume</a>
+            <a href="resume.html" class="resume-button">Resume</a>
         </nav>
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/TagCloud/2.2.0/TagCloud.min.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/sphere.js"></script>
 
 </body>

@@ -1,3 +1,98 @@
+/* Hero grid for side-by-side layout */
+
+/* --- HERO SECTION LAYOUT OVERRIDE --- */
+.hero-section.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 600px) 1fr;
+    align-items: start;
+    min-height: 92vh;
+    padding: 0 0 0 3vw;
+    max-width: 100vw;
+    position: relative;
+    background: none;
+}
+.hero-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 2vw;
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+    z-index: 1;
+    max-width: 600px;
+}
+.hero-sphere {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-height: 600px;
+    position: relative;
+    z-index: 1;
+}
+.sphere-wrapper.orb-hero {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-height: 900px;
+    width: 100%;
+    position: relative;
+    /* Move sphere down and right (less negative Y) */
+    transform: translate(-5vw, 20vh);
+}
+.sphere-wrapper.orb-hero .tech-sphere {
+    width: 600px !important;
+    height: 600px !important;
+    max-width: 90vw;
+    max-height: 90vh;
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+}
+
+@media (max-width: 1100px) {
+    .hero-section.hero-grid {
+        grid-template-columns: 1fr 1fr;
+        padding-left: 1vw;
+    }
+    .hero-main {
+        padding-left: 1vw;
+        max-width: 480px;
+    }
+    .sphere-wrapper.orb-hero,
+    .hero-sphere {
+        min-height: 400px;
+    }
+    .sphere-wrapper.orb-hero .tech-sphere {
+        width: 620px !important;
+        height: 620px !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .hero-section.hero-grid {
+        grid-template-columns: 1fr;
+        padding: 0 0 0 0;
+    }
+    .hero-main {
+        align-items: center;
+        padding: 4vh 0 0 0;
+        max-width: 100vw;
+        text-align: center;
+    }
+    .hero-sphere,
+    .sphere-wrapper.orb-hero {
+        justify-content: center;
+        align-items: center;
+        min-height: 220px;
+        transform: none;
+    }
+    .sphere-wrapper.orb-hero .tech-sphere {
+        width: 680px !important;
+        height: 680px !important;
+    }
+}
 /* Root Variables */
 :root {
     /* Palette: soft pastels + vibrant accents */
@@ -75,8 +170,8 @@ body::after {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 52px;
-    height: 52px;
+    width: 36px;
+    height: 36px;
     transform-origin: center center;
     will-change: transform, opacity;
     transition: filter .25s ease, transform .25s ease, opacity .4s;
@@ -543,44 +638,54 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 
 /* Skills Orb */
+
+/* Skills Orb Section */
 .skills-section {
     padding: 90px 2.2rem;
     max-width: 1250px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .skills-layout {
     display: grid;
-    grid-template-columns: 1fr; /* Single column now */
+    grid-template-columns: 1.1fr 1fr; /* Slightly more space for text */
     align-items: center;
-    gap: 0;
+    gap: 60px;
+    min-height: 480px;
+}
+
+.skills-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.08rem;
+    color: var(--text-light);
+    min-width: 0;
 }
 
 .sphere-wrapper {
     position: relative;
     width: 100%;
-    min-height: min(600px, 90vh);
+    min-height: 420px;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Align sphere to top for better visual balance */
     justify-content: center;
     overflow: visible;
     margin: 0;
+    /* Optional: add a little top margin to nudge sphere up */
+    margin-top: -30px;
 }
 
-/* Left-aligned variation */
-.sphere-wrapper.orb-left { justify-content: flex-start; }
-.sphere-wrapper.orb-left .tech-sphere { left: 0; transform: translate(0,-50%); }
-
 .tech-sphere {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: min(600px, 90vw);
-    height: min(600px, 90vw);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    width: min(380px, 38vw);
+    height: min(380px, 38vw);
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
 }
 
 .skill-tooltip {
@@ -909,13 +1014,35 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     .about-section, .cv-section, .skills-section, .projects-section, .contact-section { padding-left: 1.4rem; padding-right: 1.4rem; }
 }
 
-@media (max-width: 768px) {
+
+/* Responsive stacking for mobile */
+@media (max-width: 900px) {
     .skills-layout {
-        grid-template-columns: 1fr; /* Stack columns on smaller screens */
-        text-align: center;
+        grid-template-columns: 1fr;
         gap: 40px;
+        min-height: 0;
+    }
+    .skills-copy {
+        text-align: center;
+        align-items: center;
     }
     .sphere-wrapper {
-        min-height: 460px; /* Adjust height for mobile */
+        min-height: 260px;
+        margin-top: 0;
+    }
+    .tech-sphere {
+        width: min(220px, 70vw);
+        height: min(220px, 70vw);
     }
 }
+    .sphere-wrapper.orb-hero {
+        min-height: 220px;
+    }
+    .sphere-wrapper.orb-hero .tech-sphere {
+        width: 480px !important;
+        height: 480px !important;
+    }
+    .sphere-icon {
+        width: 36px;
+        height: 36px;
+    }

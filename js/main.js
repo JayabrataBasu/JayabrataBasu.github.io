@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
       container.style.width = size + 'px';
       container.style.height = size + 'px';
       if (wrapper && wrapper.classList.contains('orb-left')) {
-        container.style.transform = 'translate(30%,-100%)';
+        container.style.transform = 'translate(130%,-100%)';
       } else {
         container.style.transform = 'translate(-52%, -54%)';
       }

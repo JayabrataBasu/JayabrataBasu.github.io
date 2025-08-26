@@ -54,18 +54,26 @@
 
     <!-- Main Content -->
     <main id="main" tabindex="-1">
-        <!-- Hero Section -->
-        <section id="home" class="hero-section" aria-label="Hero">
+        <!-- Hero Section with Tech Sphere Side-by-Side -->
+        <section id="home" class="hero-section hero-grid" aria-label="Hero">
             <div class="hero-bg-gradient" aria-hidden="true"></div>
-            <h1 class="intro small-heading">Hi, I'm</h1>
-            <h2 class="hero-name gradient-text">Jayabrata Basu</h2>
-            <h3 class="typewriter" aria-live="polite"><span id="typewriter-text"></span><span class="cursor" aria-hidden="true">▌</span></h3>
-            <p class="hero-description">
-                <strong>[ Edit this intro ]</strong> I'm a software engineer crafting delightful, performant software products. I love intersecting <em>systems thinking</em>, <em>ML</em>, and <em>fintech</em> to build tools people genuinely enjoy using.
-            </p>
-            <div class="cta-button">
-                <a href="#projects" class="primary-btn">See my work</a>
-                <a href="resume.pdf" class="secondary-btn" download>Download CV</a>
+            <div class="hero-main">
+                <h1 class="intro small-heading">Hi, I'm</h1>
+                <h2 class="hero-name gradient-text">Jayabrata Basu</h2>
+                <h3 class="typewriter" aria-live="polite"><span id="typewriter-text"></span><span class="cursor" aria-hidden="true">▌</span></h3>
+                <p class="hero-description">
+                    <strong>[ Edit this intro ]</strong> I'm a software engineer crafting delightful, performant software products. I love intersecting <em>systems thinking</em>, <em>ML</em>, and <em>fintech</em> to build tools people genuinely enjoy using.
+                </p>
+                <div class="cta-button">
+                    <a href="#projects" class="primary-btn">See my work</a>
+                    <a href="resume.pdf" class="secondary-btn" download>Download CV</a>
+                </div>
+            </div>
+            <div class="hero-sphere">
+                <div class="sphere-wrapper orb-hero">
+                    <div id="tech-sphere" class="tech-sphere" aria-label="Interactive rotating sphere of skill icons"></div>
+                    <div id="skill-tooltip" class="skill-tooltip" role="tooltip" hidden></div>
+                </div>
             </div>
         </section>
 
@@ -123,16 +131,7 @@
             </div>
         </section>
 
-        <!-- Skills (Orb) Section -->
-        <section id="skills" class="skills-section" aria-labelledby="skills-heading">
-            <h2 class="section-heading" id="skills-heading"><span>03.</span> Skills & Tools</h2>
-            <div class="skills-layout">
-                <div class="sphere-wrapper orb-left">
-                    <div id="tech-sphere" class="tech-sphere" aria-label="Interactive rotating sphere of skill icons"></div>
-                    <div id="skill-tooltip" class="skill-tooltip" role="tooltip" hidden></div>
-                </div>
-            </div>
-        </section>
+    <!-- Skills (Orb) Section (removed, now in hero) -->
 
         <!-- Projects Section -->
         <section id="projects" class="projects-section" aria-labelledby="projects-heading">

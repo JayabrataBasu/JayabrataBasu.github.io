@@ -39,13 +39,28 @@
             </div>
             <div class="nav-links">
                 <a href="#about"><span>01.</span> About</a>
-                <a href="#skills"><span>02.</span> Skills</a>
+                <a href="#cv"><span>02.</span> CV</a>
                 <a href="#projects"><span>03.</span> Projects</a>
-                <a href="#contact"><span>04.</span> Contact</a>
+                <a href="#research"><span>04.</span> Research</a>
+                <a href="#contact"><span>05.</span> Contact</a>
                 <a href="resume.pdf" class="resume-button" download>Resume</a>
-                <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" aria-label="Cycle color theme" title="Change theme">
+                <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" aria-label="Cycle color theme" title="Change theme" aria-pressed="false">
                     <i class="fa-solid fa-moon"></i>
                 </button>
+                <button id="theme-reset-btn" class="theme-reset-btn" type="button" aria-label="Reset theme to auto" title="Reset to auto theme">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+                <div class="theme-menu-wrapper">
+                    <button id="theme-menu-trigger" class="theme-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" title="Select theme" type="button">
+                        <i class="fa-solid fa-palette"></i>
+                    </button>
+                    <ul id="theme-menu" class="theme-menu" role="menu" hidden>
+                        <li role="menuitem"><button type="button" data-theme="theme-1"><span class="swatch swatch-1"></span><span class="label">Indigo / Amber</span></button></li>
+                        <li role="menuitem"><button type="button" data-theme="theme-2"><span class="swatch swatch-2"></span><span class="label">Deep Night</span></button></li>
+                        <li role="menuitem"><button type="button" data-theme="theme-3"><span class="swatch swatch-3"></span><span class="label">Aurora</span></button></li>
+                        <li role="menuitem"><button type="button" data-theme="theme-4"><span class="swatch swatch-4"></span><span class="label">Sunrise</span></button></li>
+                    </ul>
+                </div>
             </div>
             <button class="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
                 <span></span>
@@ -88,25 +103,57 @@
                     <p><strong></strong> I'm a CS undergraduate at <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener">SRMIST</a> exploring the intersection of machine learning, finance, and simulations.</p>
                     <p>My current goals: deepen expertise in computer algorithms, scientific computing and Machine Learning.</p>
                         <div class="about-panels" aria-label="Key focus areas">
-                            <div class="about-panel">
-                                <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></div>
-                                <h3>Systems & Scale</h3>
-                                <p>Designing reliable, observable services with an eye on performance and graceful degradation.</p>
+                            <div class="about-panel flip" tabindex="0">
+                                <div class="panel-inner">
+                                    <div class="panel-face panel-front">
+                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></div>
+                                        <h3>Systems & Scale</h3>
+                                        <p>Designing reliable, observable services with performance & resilience focus.</p>
+                                    </div>
+                                    <div class="panel-face panel-back">
+                                        <h4>Focus</h4>
+                                        <p>Tracing, queues, graceful failover, cost-aware design.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="about-panel">
-                                <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></div>
-                                <h3>Applied ML</h3>
-                                <p>Rapid experimentation, feature pipelines, and pragmatic model deployment for real product impact.</p>
+                            <div class="about-panel flip" tabindex="0">
+                                <div class="panel-inner">
+                                    <div class="panel-face panel-front">
+                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></div>
+                                        <h3>Applied ML</h3>
+                                        <p>Rapid experimentation & lean deployment of useful models.</p>
+                                    </div>
+                                    <div class="panel-face panel-back">
+                                        <h4>Themes</h4>
+                                        <p>Monitoring, reproducibility & lightweight inference.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="about-panel">
-                                <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
-                                <h3>Product Craft</h3>
-                                <p>Polishing UX details & shipping iterations that compound into delightful user experiences.</p>
+                            <div class="about-panel flip" tabindex="0">
+                                <div class="panel-inner">
+                                    <div class="panel-face panel-front">
+                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
+                                        <h3>Product Craft</h3>
+                                        <p>Delight through purposeful micro‑interaction & latency realism.</p>
+                                    </div>
+                                    <div class="panel-face panel-back">
+                                        <h4>Principles</h4>
+                                        <p>Meaningful motion, progressive disclosure, clarity.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="about-panel">
-                                <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-                                <h3>Developer DX</h3>
-                                <p>Improving internal tooling, CI ergonomics & feedback loops to shorten idea-to-production time.</p>
+                            <div class="about-panel flip" tabindex="0">
+                                <div class="panel-inner">
+                                    <div class="panel-face panel-front">
+                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                                        <h3>Developer DX</h3>
+                                        <p>Shortening idea → prod loops through tooling.</p>
+                                    </div>
+                                    <div class="panel-face panel-back">
+                                        <h4>Improvements</h4>
+                                        <p>Quality gates, preview envs, visibility dashboards.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -117,10 +164,10 @@
         <section id="cv" class="cv-section" aria-labelledby="cv-heading">
             <h2 class="section-heading" id="cv-heading"><span>02.</span> Curriculum Vitae</h2>
             <div class="cv-inner">
-                <p>[ Replace this paragraph with a short highlight of your experience / value proposition. ]</p>
+                <p>This is My Resume!</p>
                 <a href="resume.pdf" class="resume-download" download aria-label="Download resume as PDF">
                     <span class="icon"><i class="fa-solid fa-download"></i></span>
-                    <span>Download CV</span>
+                    <span>Download Resume</span>
                 </a>
             </div>
         </section>
@@ -129,7 +176,7 @@
 
         <!-- Projects Section -->
         <section id="projects" class="projects-section" aria-labelledby="projects-heading">
-            <h2 class="section-heading" id="projects-heading"><span>04.</span> Selected Projects</h2>
+            <h2 class="section-heading" id="projects-heading"><span>03.</span> Selected Projects</h2>
             <div class="projects-controls" role="search">
                 <input type="search" id="project-search" placeholder="Search projects or filter by tag..." aria-label="Search projects" />
                 <div class="filter-tags" aria-label="Quick filters">
@@ -192,6 +239,22 @@
             </div>
         </section>
 
+        <section id="research" class="research-section" aria-labelledby="research-heading">
+            <h2 class="section-heading" id="research-heading"><span>04.</span> Research & Publications</h2>
+            <div class="research-grid" id="research-grid">
+                <article class="paper-card" data-year="2025">
+                    <h3 class="paper-title">[Paper Title Placeholder]</h3>
+                    <p class="paper-meta">Conference / Journal • 2025</p>
+                    <p class="paper-summary">Short abstract or one-liner about contribution goes here.</p>
+                    <div class="paper-links">
+                        <a href="#" aria-label="PDF"><i class="fa-solid fa-file-pdf"></i></a>
+                        <a href="#" aria-label="DOI"><i class="fa-solid fa-link"></i></a>
+                        <a href="#" aria-label="Code"><i class="fab fa-github"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="contact-section" aria-labelledby="contact-heading">
             <h2 class="section-heading" id="contact-heading"><span>05.</span> Contact</h2>
@@ -217,12 +280,20 @@
     <div class="mobile-menu" id="mobile-menu" hidden>
         <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
             <a href="#about"><span>01.</span> About</a>
-            <a href="#skills"><span>02.</span> Skills</a>
+            <a href="#cv"><span>02.</span> CV</a>
             <a href="#projects"><span>03.</span> Projects</a>
-            <a href="#contact"><span>04.</span> Contact</a>
+            <a href="#research"><span>04.</span> Research</a>
+            <a href="#contact"><span>05.</span> Contact</a>
             <a href="resume.pdf" class="resume-button" download>Resume</a>
         </nav>
     </div>
+
+    <!-- Cursor Ring -->
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>

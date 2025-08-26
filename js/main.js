@@ -167,7 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const LS_KEY = 'user-preferred-theme';
   const body = document.body;
   const toggleBtn = document.getElementById('theme-toggle-btn');
+  const resetBtn = document.getElementById('theme-reset-btn');
+  const themeMenuTrigger = document.getElementById('theme-menu-trigger');
+  const themeMenu = document.getElementById('theme-menu');
   let manualOverride = false;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function applyTheme(theme) {
     THEMES.forEach(t => body.classList.remove(t));
@@ -180,6 +184,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (theme === 'theme-2' || theme === 'theme-3') { i.className = 'fa-solid fa-sun'; }
         else { i.className = 'fa-solid fa-moon'; }
       }
+      toggleBtn.setAttribute('aria-pressed', String(manualOverride));
+      toggleBtn.title = `Theme: ${theme}`;
+    }
+    // Highlight active theme in menu
+    if (themeMenu) {
+      themeMenu.querySelectorAll('button[data-theme]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-theme') === theme);
+      });
     }
   }
 
@@ -204,6 +216,46 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleBtn.addEventListener('click', () => {
       manualOverride = true;
       cycleTheme();
+  dispatchEvent(new CustomEvent('theme:manual-select'));
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem(LS_KEY);
+      manualOverride = false;
+      // Reconnect scroll observer by reloading (simplest) or manually re-attaching
+      sectionThemeMap.forEach(conf => conf.el && io.observe(conf.el));
+      showToast('Auto theme re-enabled');
+      dispatchEvent(new CustomEvent('theme:auto-reset'));
+    });
+  }
+
+  /* Theme menu logic */
+  if (themeMenuTrigger && themeMenu) {
+    themeMenuTrigger.addEventListener('click', () => {
+      const expanded = themeMenuTrigger.getAttribute('aria-expanded') === 'true';
+      themeMenuTrigger.setAttribute('aria-expanded', String(!expanded));
+      themeMenu.hidden = expanded;
+    });
+    themeMenu.querySelectorAll('button[data-theme]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const th = btn.getAttribute('data-theme');
+        if (!th) return;
+        manualOverride = true;
+        applyTheme(th);
+        localStorage.setItem(LS_KEY, th);
+        themeMenuTrigger.setAttribute('aria-expanded','false');
+        themeMenu.hidden = true;
+        showToast(`Theme set: ${th}`);
+        dispatchEvent(new CustomEvent('theme:manual-select'));
+      });
+    });
+    document.addEventListener('click', (e) => {
+      if (!themeMenu.contains(e.target) && e.target !== themeMenuTrigger) {
+        themeMenuTrigger.setAttribute('aria-expanded','false');
+        themeMenu.hidden = true;
+      }
     });
   }
 
@@ -215,19 +267,25 @@ document.addEventListener('DOMContentLoaded', () => {
     { sel: '#contact', theme: 'theme-4' }
   ];
   const observedSections = [];
-  const options = { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0 };
+  // Improved scroll theme mapping via midpoint calculation fallback (still using observer for perf)
+  const options = { root: null, threshold: 0.25 };
   let activeScrollTheme = null;
   const io = new IntersectionObserver(entries => {
-    if (manualOverride) return; // respect user choice
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const conf = sectionThemeMap.find(c => c.el === entry.target);
-        if (conf && conf.theme !== activeScrollTheme) {
-          activeScrollTheme = conf.theme;
-          applyTheme(conf.theme);
-        }
-      }
+    if (manualOverride) return;
+    // Determine which section midpoint is closest to viewport center
+    const center = window.innerHeight / 2;
+    let best; let bestDelta = Infinity;
+    sectionThemeMap.forEach(conf => {
+      if (!conf.el) return;
+      const rect = conf.el.getBoundingClientRect();
+      const mid = rect.top + rect.height/2;
+      const delta = Math.abs(mid - center);
+      if (delta < bestDelta) { bestDelta = delta; best = conf; }
     });
+    if (best && best.theme !== activeScrollTheme) {
+      activeScrollTheme = best.theme;
+      applyTheme(best.theme);
+    }
   }, options);
   sectionThemeMap.forEach(conf => {
     const el = document.querySelector(conf.sel);
@@ -237,6 +295,117 @@ document.addEventListener('DOMContentLoaded', () => {
   const manualCheckInterval = setInterval(() => {
     if (manualOverride) { io.disconnect(); clearInterval(manualCheckInterval); }
   }, 1000);
+
+  /* ABOUT PANELS STAGGERED REVEAL */
+  const aboutPanels = document.querySelectorAll('.about-panel');
+  if (aboutPanels.length) {
+    const panelObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = Array.from(aboutPanels).indexOf(entry.target);
+          entry.target.style.animationDelay = (idx * 120)+'ms';
+          entry.target.classList.add('revealed');
+          panelObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    aboutPanels.forEach(p => panelObserver.observe(p));
+  }
+
+  // Flip panels keyboard accessibility (Enter/Space toggles by adding a class)
+  aboutPanels.forEach(p => {
+    p.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        p.classList.toggle('force-flip');
+        const inner = p.querySelector('.panel-inner');
+        if (inner) inner.style.transform = p.classList.contains('force-flip') ? 'rotateY(180deg)' : '';
+      }
+    });
+  });
+
+  /* Cursor ring */
+  const cursorRing = document.getElementById('cursor-ring');
+  if (cursorRing) {
+    let xr=0, yr=0, tx=0, ty=0; let raf;
+    const animate = () => { xr += (tx - xr)*0.18; yr += (ty - yr)*0.18; cursorRing.style.transform = `translate(${xr}px,${yr}px) translate(-50%,-50%)`; raf = requestAnimationFrame(animate); };
+    document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; if (!body.classList.contains('cursor-active')) body.classList.add('cursor-active'); });
+    animate();
+    document.addEventListener('mousedown', ()=> cursorRing.style.transform += ' scale(.8)');
+    document.addEventListener('mouseup', ()=> cursorRing.style.transform += '');
+  }
+
+  /* Toast helper */
+  function showToast(msg) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const div = document.createElement('div');
+    div.className = 'toast';
+    div.textContent = msg;
+    container.appendChild(div);
+    setTimeout(()=> div.remove(), 4500);
+  }
+
+  /* Keyboard shortcuts */
+  document.addEventListener('keydown', e => {
+    if (e.target && ['INPUT','TEXTAREA'].includes(e.target.tagName)) return;
+    if (e.key.toLowerCase() === 't' && !e.shiftKey) {
+      manualOverride = true; cycleTheme(); showToast('Theme cycled');
+    } else if (e.key.toLowerCase() === 't' && e.shiftKey) {
+      localStorage.removeItem(LS_KEY); manualOverride = false; showToast('Auto theme re-enabled'); sectionThemeMap.forEach(conf => conf.el && io.observe(conf.el));
+    }
+  });
+
+  /* Project & paper reveal */
+  const cards = document.querySelectorAll('.project-card, .paper-card');
+  if (cards.length) {
+    const cardObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          cardObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    cards.forEach(c => cardObs.observe(c));
+  }
+
+  /* Resume (CV) scroll auto palette cycling (interval sections) */
+  const cvSection = document.getElementById('cv');
+  if (cvSection) {
+    let lastIndex = 0;
+    const autoCycle = () => {
+      if (manualOverride) return; // don't fight manual
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = docH > 0 ? window.scrollY / docH : 0;
+      // Map ratio to 0..(THEMES.length*4 -1) for more frequent shifts
+      const slots = THEMES.length * 4;
+      const idx = Math.min(slots-1, Math.floor(ratio * slots));
+      const themeIndex = Math.floor(idx / 4) % THEMES.length;
+      if (themeIndex !== lastIndex) {
+        lastIndex = themeIndex;
+        applyTheme(THEMES[themeIndex]);
+      }
+      requestAnimationFrame(autoCycle);
+    };
+    requestAnimationFrame(autoCycle);
+  }
+
+  /* Persisted panel reveal avoidance (session) */
+  if (sessionStorage.getItem('panels-revealed')) {
+    aboutPanels.forEach(p => p.classList.add('revealed'));
+  } else {
+    window.addEventListener('beforeunload', () => sessionStorage.setItem('panels-revealed','1'));
+  }
+
+  /* Analytics hook (basic dispatch) */
+  window.addEventListener('theme:manual-select', () => {
+    // placeholder for future analytics integration
+    // console.log('[analytics] manual theme select');
+  });
+  window.addEventListener('theme:auto-reset', () => {
+    // console.log('[analytics] auto theme reset');
+  });
 });
 
 // Expose for sphere.js if needed

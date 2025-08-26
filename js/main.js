@@ -161,6 +161,82 @@ document.addEventListener('DOMContentLoaded', () => {
   initSphere._tries = 0;
   // Two rAFs + timeout to push after layout & potential font loading adjustments
   requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(initSphere, 60)));
+
+  /* THEME TOGGLE + SCROLL-BASED FALLBACK */
+  const THEMES = ['theme-1','theme-2','theme-3','theme-4'];
+  const LS_KEY = 'user-preferred-theme';
+  const body = document.body;
+  const toggleBtn = document.getElementById('theme-toggle-btn');
+  let manualOverride = false;
+
+  function applyTheme(theme) {
+    THEMES.forEach(t => body.classList.remove(t));
+    body.classList.add(theme);
+    // Update icon
+    if (toggleBtn) {
+      const i = toggleBtn.querySelector('i');
+      if (i) {
+        // Simple icon heuristic
+        if (theme === 'theme-2' || theme === 'theme-3') { i.className = 'fa-solid fa-sun'; }
+        else { i.className = 'fa-solid fa-moon'; }
+      }
+    }
+  }
+
+  function cycleTheme() {
+    const current = THEMES.find(t => body.classList.contains(t)) || THEMES[0];
+    const next = THEMES[(THEMES.indexOf(current)+1) % THEMES.length];
+    applyTheme(next);
+    localStorage.setItem(LS_KEY, next);
+  }
+
+  // On load: check saved preference
+  const saved = localStorage.getItem(LS_KEY);
+  if (saved && THEMES.includes(saved)) {
+    manualOverride = true;
+    applyTheme(saved);
+  } else {
+    // Ensure default theme class present for consistency
+    if (!THEMES.some(t => body.classList.contains(t))) body.classList.add(THEMES[0]);
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      manualOverride = true;
+      cycleTheme();
+    });
+  }
+
+  // Scroll based theme (only if no manual override)
+  const sectionThemeMap = [
+    { sel: '#home', theme: 'theme-1' },
+    { sel: '#about', theme: 'theme-2' },
+    { sel: '#projects', theme: 'theme-3' },
+    { sel: '#contact', theme: 'theme-4' }
+  ];
+  const observedSections = [];
+  const options = { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0 };
+  let activeScrollTheme = null;
+  const io = new IntersectionObserver(entries => {
+    if (manualOverride) return; // respect user choice
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const conf = sectionThemeMap.find(c => c.el === entry.target);
+        if (conf && conf.theme !== activeScrollTheme) {
+          activeScrollTheme = conf.theme;
+          applyTheme(conf.theme);
+        }
+      }
+    });
+  }, options);
+  sectionThemeMap.forEach(conf => {
+    const el = document.querySelector(conf.sel);
+    if (el) { conf.el = el; io.observe(el); observedSections.push(el); }
+  });
+  // If manual override happens later, disconnect observer
+  const manualCheckInterval = setInterval(() => {
+    if (manualOverride) { io.disconnect(); clearInterval(manualCheckInterval); }
+  }, 1000);
 });
 
 // Expose for sphere.js if needed

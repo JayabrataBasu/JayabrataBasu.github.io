@@ -116,6 +116,51 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.addEventListener('scroll', onScrollBG, { passive:true });
   onScrollBG();
+
+  /* Skills sphere (delay init to avoid measuring before CSS grid finalizes) */
+  const initSphere = () => {
+    const container = document.getElementById('tech-sphere');
+    if (!container || typeof createIconSphere !== 'function' || typeof techStackIcons === 'undefined') return;
+    // Avoid re-init
+    if (container.__sphereInitialized) return;
+    const rect = container.getBoundingClientRect();
+    // If width still too small, retry (race with layout)
+    if (rect.width < 100 && initSphere._tries < 20) {
+      initSphere._tries++;
+      return setTimeout(initSphere, 50);
+    }
+    // Compute desired size BEFORE creating sphere so internal layout uses final dims
+    const applySizing = () => {
+      const wrapper = container.closest('.sphere-wrapper');
+      const wrapperW = wrapper?.clientWidth || 0;
+      const base = Math.min(wrapperW || 600, window.innerHeight * 0.65, 520);
+      const size = Math.max(340, Math.round(base));
+      container.style.width = size + 'px';
+      container.style.height = size + 'px';
+      if (wrapper && wrapper.classList.contains('orb-left')) {
+        container.style.transform = 'translate(30%,-100%)';
+      } else {
+        container.style.transform = 'translate(-52%, -54%)';
+      }
+    };
+    applySizing();
+    container.__sphereInitialized = true;
+    createIconSphere(container, techStackIcons);
+    // Re-apply sizing on resize (debounced)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      if (!container.__sphereInitialized) return;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        applySizing();
+        // Optional: if sphere.js exposes a resize method, call it here
+        if (typeof container.__sphereResize === 'function') container.__sphereResize();
+      }, 120);
+    });
+  };
+  initSphere._tries = 0;
+  // Two rAFs + timeout to push after layout & potential font loading adjustments
+  requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(initSphere, 60)));
 });
 
 // Expose for sphere.js if needed

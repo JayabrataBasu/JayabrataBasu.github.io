@@ -405,6 +405,134 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('theme:auto-reset', () => {
     // console.log('[analytics] auto theme reset');
   });
+
+  /* --- New Section Enhancements (Hero untouched) --- */
+  /* Skill bar animation */
+  const skillSection = document.getElementById('skills');
+  if (skillSection) {
+    const bars = skillSection.querySelectorAll('.skill-bar');
+    const sbObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          bars.forEach(bar => {
+            const lvl = parseInt(bar.getAttribute('data-level')||'0',10);
+            const fill = bar.querySelector('.fill');
+            if (fill && !fill.dataset.animated) {
+              fill.dataset.animated = '1';
+              requestAnimationFrame(()=> fill.style.width = lvl + '%');
+            }
+          });
+          sbObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.3 });
+    sbObs.observe(skillSection);
+  }
+
+  /* Section background subtle transition */
+  const bgSections = document.querySelectorAll('[data-section-bg]');
+  if (bgSections.length) {
+    bgSections.forEach(sec => {
+      const color = sec.getAttribute('data-section-bg');
+      sec.style.setProperty('--section-bg-color', color);
+    });
+    const secObs = new IntersectionObserver(entries => {
+      let best; let bestDelta = Infinity; const center = window.innerHeight/2;
+      entries.forEach(() => {}); // noop to satisfy observer param usage
+      bgSections.forEach(sec => {
+        const r = sec.getBoundingClientRect();
+        const mid = r.top + r.height/2; const d = Math.abs(mid-center);
+        if (d < bestDelta) { bestDelta = d; best = sec; }
+      });
+      bgSections.forEach(s => s.classList.toggle('active-bg', s === best));
+    }, { threshold:[0.1,0.25,0.5] });
+    bgSections.forEach(s => secObs.observe(s));
+  }
+
+  /* Carousels */
+  const carousels = document.querySelectorAll('[data-carousel]');
+  carousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    if (!track) return;
+    const slides = Array.from(track.children);
+    let index = 0; let animating = false;
+    const prevBtn = carousel.querySelector('.carousel-nav.prev');
+    const nextBtn = carousel.querySelector('.carousel-nav.next');
+    const dotsWrap = carousel.querySelector('.carousel-dots');
+    // Build dots
+    slides.forEach((_,i) => {
+      const b = document.createElement('button');
+      b.type='button'; b.setAttribute('aria-label', 'Go to slide '+(i+1));
+      b.setAttribute('role','tab');
+      if (i===0) b.setAttribute('aria-selected','true');
+      b.addEventListener('click', () => go(i));
+      dotsWrap.appendChild(b);
+    });
+    function update() {
+      track.style.transform = `translateX(-${index*100}%)`;
+      slides.forEach((s,i)=>{ const active = i===index; s.classList.toggle('is-active', active); s.setAttribute('aria-hidden', String(!active)); });
+      dotsWrap.querySelectorAll('button').forEach((d,i)=> d.setAttribute('aria-selected', i===index? 'true':'false'));
+    }
+    function go(i) { if (animating || i===index || i<0 || i>=slides.length) return; animating=true; index=i; update(); setTimeout(()=>animating=false, 950); }
+    prevBtn?.addEventListener('click', () => go((index-1+slides.length)%slides.length));
+    nextBtn?.addEventListener('click', () => go((index+1)%slides.length));
+    // Auto-advance
+    let auto = setInterval(()=> go((index+1)%slides.length), 6000);
+    carousel.addEventListener('mouseenter', ()=> clearInterval(auto));
+    carousel.addEventListener('mouseleave', ()=> auto = setInterval(()=> go((index+1)%slides.length), 6000));
+    update();
+  });
+
+  /* Case study modal */
+  const caseModal = document.getElementById('case-modal');
+  const caseBody = document.getElementById('case-body');
+  const caseTitle = document.getElementById('case-title');
+  function openCase(id) {
+    if (!caseModal || !caseBody || !caseTitle) return;
+    const content = getCaseStudyContent(id);
+    caseTitle.textContent = content.title;
+    caseBody.innerHTML = content.html;
+    caseModal.hidden = false;
+    document.body.style.overflow='hidden';
+    const closeBtn = caseModal.querySelector('[data-case-close]');
+    closeBtn?.focus();
+  }
+  function closeCase() {
+    if (!caseModal) return; caseModal.hidden = true; document.body.style.overflow='';
+  }
+  function getCaseStudyContent(id) {
+    switch(id) {
+      case 'alpha': return { title: 'Project Alpha – Real-time Analytics', html: `<p><strong>Problem:</strong> Teams needed a dashboard that held up under bursty websocket traffic while maintaining smooth visuals.</p><p><strong>Approach:</strong> Virtualized list rendering, frame budget guard (drops non-critical paints when >8ms), adaptive batching of socket messages.</p><p><strong>Outcome:</strong> 42% reduction in main-thread blocking at P95 load; layout thrash near-zero.</p>` };
+      case 'modelforge': return { title: 'Model Forge – Experiment Toolkit', html: `<p><strong>Goal:</strong> Shrink iteration time for structured ML baselines.</p><p><strong>Design:</strong> Declarative YAML run specs, lightweight artifact log (JSONL), pluggable evaluation modules.</p><p><strong>Result:</strong> Repro runs diffable; cold start baseline in &lt; 30s.</p>` };
+      case 'ledgerlite': return { title: 'LedgerLite – Minimal Finance Tool', html: `<p><strong>Need:</strong> Simpler budgeting model for students new to expense tracking.</p><p><strong>Key Ideas:</strong> Envelope buffers, anomaly highlighting, progressive onboarding.</p><p><strong>Impact (beta):</strong> Users reported clearer monthly mental model; churn under 10% in first 4 weeks.</p>` };
+      default: return { title: 'Case Study', html: '<p>Details coming soon.</p>' };
+    }
+  }
+  document.querySelectorAll('[data-case-open]')?.forEach(btn => btn.addEventListener('click', e => {
+    const id = btn.getAttribute('data-case-open'); if (id) openCase(id);
+  }));
+  caseModal?.addEventListener('click', e => { if (e.target instanceof HTMLElement && (e.target.hasAttribute('data-case-close') || e.target === caseModal)) closeCase(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !caseModal?.hidden) closeCase(); });
+
+  /* Contact form (static) – simulate send */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const status = document.getElementById('form-status');
+      const data = new FormData(contactForm);
+      // Simple validation
+      let valid = true;
+      ['name','email','message'].forEach(field => {
+        const val = (data.get(field)||'').toString().trim();
+        const errEl = contactForm.querySelector(`[data-error-for="${field}"]`);
+        if (!val) { valid=false; if(errEl) errEl.textContent='Required'; } else if (field==='email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val)) { valid=false; if(errEl) errEl.textContent='Invalid email'; } else { if(errEl) errEl.textContent=''; }
+      });
+      if (!valid) { status.textContent='Please fix errors.'; return; }
+      status.textContent='Sending...';
+      setTimeout(()=> { status.textContent='Message queued locally (static site).'; contactForm.reset(); }, 900);
+    });
+  }
 });
 
 // Expose for sphere.js if needed

@@ -32,33 +32,6 @@
     }
 }
 
-/* Loader Animation */
-@keyframes loaderFade {
-    0% {
-        opacity: 1;
-        visibility: visible;
-    }
-    100% {
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-/* Apply Animations to Elements */
-.logo a {
-    transition: all 0.3s ease;
-}
-
-.logo a:hover {
-    transform: scale(1.1);
-    color: var(--green);
-}
-
-.nav-links a {
-    position: relative;
-    transition: all 0.3s ease;
-}
-
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -203,7 +176,12 @@
     align-items: center;
     z-index: 9999;
     animation: loaderFade 0.5s ease 2s forwards;
+    pointer-events: none;
+    /* Fallback: forcibly hide after 2.5s if animation fails */
+    transition: opacity 0.5s;
 }
+.loader.force-hide { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; display: none !important; }
+
 
 .loader-content {
     width: 50px;

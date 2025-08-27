@@ -14,22 +14,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Additional typography for redesigned sections (keeps hero untouched) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/animations.css" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+C3vSmZ8yug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Font Awesome (jsdelivr, latest, with fallback) -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script>
+            (function(){
+                var test = document.createElement('i');
+                test.className = 'fa fa-github';
+                document.body.appendChild(test);
+                var style = window.getComputedStyle(test);
+                if (!style.fontFamily.includes('FontAwesome')) {
+                    var s = document.createElement('link');
+                    s.rel = 'stylesheet';
+                    s.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css';
+                    document.head.appendChild(s);
+                }
+                document.body.removeChild(test);
+            })();
+        </script>
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <!-- Background fade layer injected dynamically -->
-    <div id="bg-fader" class="bg-fade-layer" aria-hidden="true"></div>
-    <!-- Loader -->
-    <div class="loader">
-        <div class="loader-content"></div>
-    </div>
 
     <!-- Header (hidden in new design) -->
     <header class="header" role="banner" aria-hidden="true">
@@ -79,8 +90,9 @@
 
     <!-- Main Content -->
     <main id="main" tabindex="-1">
-        <!-- Hero Section with Tech Sphere Side-by-Side -->
-        <section id="home" class="hero-section hero-grid" aria-label="Hero">
+    <div class="main-content-aligner">
+    <!-- Hero Section with Tech Sphere Side-by-Side -->
+    <section id="home" class="hero-section hero-grid" aria-label="Hero">
             <div class="hero-bg-gradient" aria-hidden="true"></div>
             <div class="hero-main">
                 <h1 class="intro small-heading">Hi, I'm</h1>
@@ -107,8 +119,22 @@
             <h2 class="section-heading" id="about-heading"><span>01.</span> About Me</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p><strong></strong> I'm a CS undergraduate at <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener">SRMIST</a> exploring the intersection of machine learning, finance, and simulations.</p>
-                    <p>My current goals: deepen expertise in computer algorithms, scientific computing and Machine Learning.</p>
+                    <div class="about-grid">
+                        <div class="about-copy">
+                            <p><strong></strong> I'm a CS undergraduate at <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener">SRMIST</a> exploring the intersection of machine learning, finance, and simulations.</p>
+                            <p>I love designing lean systems that solve real problems with clarity and measurable impact.</p>
+                            <p>Current focus: deepening expertise in computer algorithms, scientific computing, and applied ML deployment.</p>
+                            <ul class="key-points">
+                                <li>Blend of systems, ML, and product sense</li>
+                                <li>Prioritise observability & feedback loops</li>
+                                <li>Bias toward shipping small incremental wins</li>
+                            </ul>
+                        </div>
+                        <figure class="about-headshot">
+                            <img src="assets/images/headshot-placeholder.svg" alt="Headshot placeholder of Jayabrata Basu" loading="lazy" />
+                            <figcaption>Continuous learner & builder</figcaption>
+                        </figure>
+                    </div>
                         <div class="terminal-stack" aria-label="Key focus areas in terminal layout">
                             <div class="mini-terminal" tabindex="0" data-topic="systems">
                                 <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">systems-scale.sh</span></div>
@@ -152,62 +178,120 @@ observability dashboards · env automation
         </section>
 
         <!-- CV Section -->
-        <section id="cv" class="cv-section" aria-labelledby="cv-heading">
-            <h2 class="section-heading" id="cv-heading"><span>02.</span> Curriculum Vitae</h2>
-            <div class="cv-inner">
-                <p>This is My Resume!</p>
-                <a href="resume.pdf" class="resume-download" download aria-label="Download resume as PDF">
-                    <span class="icon"><i class="fa-solid fa-download"></i></span>
-                    <span>Download Resume</span>
-                </a>
+
+        <!-- Skills Proficiency Section (separate from hero to avoid modification) -->
+        <section id="skills" class="skills-matrix-section" aria-labelledby="skills-heading">
+            <h2 class="section-heading" id="skills-heading"><span>02.</span> Skills & Toolkit</h2>
+            <div class="skills-matrix-grid">
+                <div class="skills-intro">
+                    <p class="lede">A snapshot of where I invest engineering energy. Depth in systems & applied ML, breadth across product delivery.</p>
+                    <div class="skill-cloud" aria-label="Skill cloud">
+                        <span>Systems</span><span>Profiling</span><span>Python</span><span>TypeScript</span><span>React</span><span>PostgreSQL</span><span>Data Pipelines</span><span>API Design</span><span>Docker</span><span>ML Ops</span><span>TensorFlow</span><span>PyTorch</span><span>Unit Testing</span><span>CI/CD</span><span>Latency Budgets</span>
+                    </div>
+                </div>
+                <div class="skills-bars" aria-label="Skill proficiency bars">
+                    <div class="skill-bar" data-skill="Systems Architecture" data-level="88"><span class="label">Systems Architecture</span><div class="bar"><div class="fill"></div></div><span class="value">88%</span></div>
+                    <div class="skill-bar" data-skill="Python / ML" data-level="85"><span class="label">Python / ML</span><div class="bar"><div class="fill"></div></div><span class="value">85%</span></div>
+                    <div class="skill-bar" data-skill="Data Modeling" data-level="78"><span class="label">Data Modeling</span><div class="bar"><div class="fill"></div></div><span class="value">78%</span></div>
+                    <div class="skill-bar" data-skill="Frontend Engineering" data-level="70"><span class="label">Frontend Engineering</span><div class="bar"><div class="fill"></div></div><span class="value">70%</span></div>
+                    <div class="skill-bar" data-skill="Dev Experience / Tooling" data-level="82"><span class="label">Dev Experience / Tooling</span><div class="bar"><div class="fill"></div></div><span class="value">82%</span></div>
+                </div>
             </div>
         </section>
 
-    <!-- Skills (Orb) Section (removed, now in hero) -->
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects-section projects-stack" aria-labelledby="projects-heading" data-dynamic-bg>
-            <h2 class="section-heading" id="projects-heading"><span>03.</span> Selected Projects</h2>
-            <div class="projects-list" id="projects-grid" aria-live="polite">
-                <!-- Full-width stacked project cards. Duplicate & customize -->
-                <article class="project-card project-wide" data-tags="web react" data-accent="#6366f1" data-bg="linear-gradient(120deg,#eef2ff,#e0e7ff)" data-tone="light" tabindex="0">
-                    <div class="project-inner">
-                        <div class="project-media"><div class="media-placeholder" aria-hidden="true">IMG</div></div>
-                        <div class="project-content">
-                            <h3 class="project-title">Project Alpha</h3>
-                            <p class="project-desc">[ Replace ] A performant React + TypeScript dashboard for real-time analytics.</p>
-                            <ul class="project-tags"><li>React</li><li>TypeScript</li><li>Web</li></ul>
-                            <div class="project-links"><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a><a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
-                        </div>
-                    </div>
+        <!-- In-Progress Section -->
+        <section id="in-progress" class="inprogress-section" aria-labelledby="inprogress-heading">
+            <h2 class="section-heading" id="inprogress-heading"><span>03.</span> In Progress</h2>
+            <div class="inprogress-grid">
+                <article class="inprogress-card">
+                    <h3 class="ip-title">StreamSim</h3>
+                    <p class="ip-desc">Real-time event stream simulator for stress testing ingestion & alert pipelines.</p>
+                    <span class="ip-status">Phase: Architecture & baseline benchmarks</span>
                 </article>
-                <article class="project-card project-wide" data-tags="ml python" data-accent="#9333ea" data-bg="linear-gradient(135deg,#1e1b4b,#312e81)" data-tone="dark" tabindex="0">
-                    <div class="project-inner">
-                        <div class="project-media"><div class="media-placeholder" aria-hidden="true">IMG</div></div>
-                        <div class="project-content">
-                            <h3 class="project-title">Model Forge</h3>
-                            <p class="project-desc">[ Replace ] Lightweight model experimentation toolkit for structured tabular data.</p>
-                            <ul class="project-tags"><li>Python</li><li>ML</li><li>Toolkit</li></ul>
-                            <div class="project-links"><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a><a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
-                        </div>
-                    </div>
-                </article>
-                <article class="project-card project-wide" data-tags="fintech web" data-accent="#d97706" data-bg="linear-gradient(135deg,#fffbeb,#fef3c7)" data-tone="light" tabindex="0">
-                    <div class="project-inner">
-                        <div class="project-media"><div class="media-placeholder" aria-hidden="true">IMG</div></div>
-                        <div class="project-content">
-                            <h3 class="project-title">LedgerLite</h3>
-                            <p class="project-desc">[ Replace ] Minimal personal finance tracker with envelope budgeting logic.</p>
-                            <ul class="project-tags"><li>Fintech</li><li>Design</li><li>Web</li></ul>
-                            <div class="project-links"><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a><a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
-                        </div>
-                    </div>
+                <article class="inprogress-card">
+                    <h3 class="ip-title">AlphaQuant Lite</h3>
+                    <p class="ip-desc">Lightweight experimental framework exploring factor research with reproducible notebooks.</p>
+                    <span class="ip-status">Phase: Data connectors & feature store prototype</span>
                 </article>
             </div>
         </section>
 
-        <section id="research" class="research-section" aria-labelledby="research-heading">
-            <h2 class="section-heading" id="research-heading"><span>04.</span> Research & Publications</h2>
+        <!-- Interactive Project Showcase Section -->
+        <section id="projects" class="projects-section showcase" aria-labelledby="projects-heading" data-section-bg="#0f172a">
+            <h2 class="section-heading" id="projects-heading"><span>04.</span> Selected Projects</h2>
+            <div class="project-showcase" id="projects-grid" aria-live="polite">
+                <article class="project interactive" data-project="alpha" tabindex="0">
+                    <div class="project-header">
+                        <h3 class="project-title">Project Alpha</h3>
+                        <div class="project-meta">React • TypeScript • Realtime</div>
+                    </div>
+                    <div class="carousel" data-carousel>
+                        <button class="carousel-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="slide is-active" aria-hidden="false"><div class="slide-inner gradient-a">Dashboard layout wireframe</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-b">Websocket data feed</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-c">Performance panel</div></div>
+                        </div>
+                        <button class="carousel-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="carousel-dots" role="tablist"></div>
+                    </div>
+                    <p class="project-desc">A performant real-time analytics dashboard emphasizing rendering efficiency and graceful degradation under load.</p>
+                    <div class="project-actions">
+                        <button class="btn tertiary" data-case-open="alpha">Case Study</button>
+                        <a href="#" class="btn secondary" aria-label="GitHub repository">Code</a>
+                        <a href="#" class="btn primary" aria-label="Live demo">View Live</a>
+                    </div>
+                </article>
+                <article class="project interactive" data-project="modelforge" tabindex="0">
+                    <div class="project-header">
+                        <h3 class="project-title">Model Forge</h3>
+                        <div class="project-meta">Python • ML • Tooling</div>
+                    </div>
+                    <div class="carousel" data-carousel>
+                        <button class="carousel-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="slide is-active" aria-hidden="false"><div class="slide-inner gradient-d">CLI interface mock</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-e">Experiment registry</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-f">Comparison matrix</div></div>
+                        </div>
+                        <button class="carousel-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="carousel-dots" role="tablist"></div>
+                    </div>
+                    <p class="project-desc">Lightweight experimentation toolkit for structured data: rapid iterations, reproducible configs, artifact tracking.</p>
+                    <div class="project-actions">
+                        <button class="btn tertiary" data-case-open="modelforge">Case Study</button>
+                        <a href="#" class="btn secondary" aria-label="GitHub repository">Code</a>
+                        <a href="#" class="btn primary" aria-label="Live demo">View Live</a>
+                    </div>
+                </article>
+                <article class="project interactive" data-project="ledgerlite" tabindex="0">
+                    <div class="project-header">
+                        <h3 class="project-title">LedgerLite</h3>
+                        <div class="project-meta">Fintech • Web • Design</div>
+                    </div>
+                    <div class="carousel" data-carousel>
+                        <button class="carousel-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="slide is-active" aria-hidden="false"><div class="slide-inner gradient-g">Envelope budgeting</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-h">Transaction view</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-i">Spending insight</div></div>
+                        </div>
+                        <button class="carousel-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="carousel-dots" role="tablist"></div>
+                    </div>
+                    <p class="project-desc">Minimal personal finance tracker built around cash-flow clarity & habit reinforcement.</p>
+                    <div class="project-actions">
+                        <button class="btn tertiary" data-case-open="ledgerlite">Case Study</button>
+                        <a href="#" class="btn secondary" aria-label="GitHub repository">Code</a>
+                        <a href="#" class="btn primary" aria-label="Live demo">View Live</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+        <section id="research" class="research-section" aria-labelledby="research-heading" data-section-bg="#111b2d">
+            <h2 class="section-heading" id="research-heading"><span>05.</span> Research & Publications</h2>
             <div class="research-grid" id="research-grid">
                 <article class="paper-card" data-year="2025">
                     <h3 class="paper-title">[Paper Title Placeholder]</h3>
@@ -222,20 +306,26 @@ observability dashboards · env automation
             </div>
         </section>
 
+        <!-- Download CV Button (moved here) -->
         <!-- Contact Section -->
-        <section id="contact" class="contact-section" aria-labelledby="contact-heading">
-            <h2 class="section-heading" id="contact-heading"><span>05.</span> Contact</h2>
-            <h3 class="contact-title">Let's Build Something</h3>
-            <p class="contact-description">Have an idea, opportunity, or just want to chat about engineering & product? Reach out — I'm always open to thoughtful conversations.</p>
-            <div class="contact-actions">
-                <a class="email-link primary-btn" href="mailto:jayabratabasu@gmail.com">Email Me</a>
-                <div class="social-inline">
-                    <a href="https://github.com/JayabrataBasu" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-                    <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-                </div>
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading" data-section-bg="#101826">
+            
+            <h3 class="contact-title">Let's Connect</h3>
+            <p class="contact-description">Want to collaborate, discuss engineering, or just say hi? Reach out via any of the options below.</p>
+            <div class="contact-options">
+                <a class="contact-btn icon-btn" href="mailto:jayabratabasu@gmail.com" aria-label="Email Jayabrata Basu">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a class="contact-btn icon-btn" href="https://github.com/JayabrataBasu" target="_blank" rel="noopener" aria-label="GitHub profile">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a class="contact-btn icon-btn" href="https://www.linkedin.com/in/jayabratabasu/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
             </div>
         </section>
+        </section>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -257,8 +347,6 @@ observability dashboards · env automation
 
     <!-- Cursor Ring -->
     <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
-    <!-- Noise Overlay -->
-    <div class="noise-overlay" aria-hidden="true"></div>
     <!-- Toast Container -->
     <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
@@ -266,6 +354,14 @@ observability dashboards · env automation
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="js/sphere.js"></script>
     <script src="js/main.js"></script>
+
+        <!-- Loader failsafe: forcibly hide loader after 2.5s if still present -->
+        <script>
+            setTimeout(function(){
+                var l=document.querySelector('.loader');
+                if(l && getComputedStyle(l).opacity!=='0') l.classList.add('force-hide');
+            },2500);
+        </script>
 
 </body>
 </html>

@@ -82,40 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearSpan = document.querySelector('.year');
   if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
 
-  /* Sphere tooltip bridge (icons MUST set data-skill attr from sphere.js) */
-  const tooltip = document.getElementById('skill-tooltip');
-  if (tooltip) {
-    document.addEventListener('mousemove', e => {
-      if (!tooltip.hasAttribute('hidden')) {
-        tooltip.style.left = e.pageX + 'px';
-        tooltip.style.top = e.pageY + 'px';
-      }
-    });
-  }
-  window.__showSkillTooltip = (label, x, y) => {
-    if (!tooltip) return; 
-    tooltip.textContent = label; 
-    tooltip.hidden = false; 
-  };
-  window.__hideSkillTooltip = () => { if (tooltip) tooltip.hidden = true; };
+  // Sphere tooltip bridge removed: disables black label box on hover
+  window.__showSkillTooltip = () => {};
+  window.__hideSkillTooltip = () => {};
 
-  /* Scroll reactive background gradient */
-  const scrollGradient = document.querySelector('.scroll-gradient');
-  let lastShift = -1;
-  const onScrollBG = () => {
-    if (!scrollGradient) return;
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    if (docH <= 0) return;
-    const p = window.scrollY / docH; // 0..1
-    const shift = p < 0.25 ? 0 : p < 0.5 ? 1 : p < 0.75 ? 2 : 3;
-    if (shift !== lastShift) {
-      scrollGradient.classList.remove('shift-1','shift-2','shift-3');
-      if (shift>0) scrollGradient.classList.add(`shift-${shift}`);
-      lastShift = shift;
-    }
-  };
-  document.addEventListener('scroll', onScrollBG, { passive:true });
-  onScrollBG();
+  /* Background crossfade layer */
+  const bgFader = document.getElementById('bg-fader');
 
   /* Skills sphere (delay init to avoid measuring before CSS grid finalizes) */
   const initSphere = () => {
@@ -174,6 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function applyTheme(theme) {
+    // crossfade: duplicate current bg color, then fade out after class swap
+    if (bgFader) {
+      const prev = getComputedStyle(document.body).backgroundColor;
+      bgFader.style.background = prev;
+      bgFader.style.opacity = 1;
+    }
     THEMES.forEach(t => body.classList.remove(t));
     body.classList.add(theme);
     // Update icon
@@ -192,7 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
       themeMenu.querySelectorAll('button[data-theme]').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-theme') === theme);
       });
-    }
+  }
+  if (bgFader) requestAnimationFrame(()=> { bgFader.style.opacity = 0; });
   }
 
   function cycleTheme() {
@@ -297,32 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1000);
 
   /* ABOUT PANELS STAGGERED REVEAL */
-  const aboutPanels = document.querySelectorAll('.about-panel');
-  if (aboutPanels.length) {
-    const panelObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const idx = Array.from(aboutPanels).indexOf(entry.target);
-          entry.target.style.animationDelay = (idx * 120)+'ms';
-          entry.target.classList.add('revealed');
-          panelObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-    aboutPanels.forEach(p => panelObserver.observe(p));
-  }
-
-  // Flip panels keyboard accessibility (Enter/Space toggles by adding a class)
-  aboutPanels.forEach(p => {
-    p.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        p.classList.toggle('force-flip');
-        const inner = p.querySelector('.panel-inner');
-        if (inner) inner.style.transform = p.classList.contains('force-flip') ? 'rotateY(180deg)' : '';
-      }
-    });
-  });
+  // About panels removed; terminal stack static reveal (optional future animation)
+  const aboutPanels = document.querySelectorAll('.mini-terminal');
+  aboutPanels.forEach((p,i)=> { p.style.opacity=0; p.style.transform='translateY(20px)'; setTimeout(()=> { p.style.transition='opacity .8s ease, transform .8s cubic-bezier(.16,.84,.44,1)'; p.style.opacity=1; p.style.transform='translateY(0)'; }, 120 + i*90); });
 
   /* Cursor ring */
   const cursorRing = document.getElementById('cursor-ring');
@@ -368,6 +324,34 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }, { threshold: 0.2 });
     cards.forEach(c => cardObs.observe(c));
+  }
+
+  /* Dynamic stacked project background + contrast */
+  const stackedProjects = document.querySelector('.projects-section.projects-stack');
+  if (stackedProjects) {
+    const projectCards = stackedProjects.querySelectorAll('.project-card.project-wide');
+    const bgObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const card = entry.target;
+            const bg = card.getAttribute('data-bg');
+            const accent = card.getAttribute('data-accent');
+            const tone = card.getAttribute('data-tone');
+            if (bg) stackedProjects.style.setProperty('--dynamic-project-bg', bg);
+            if (tone === 'dark') {
+              stackedProjects.classList.add('dark-surface');
+            } else {
+              stackedProjects.classList.remove('dark-surface');
+            }
+            if (accent) {
+              // Update accent CSS variable temporarily for links inside card
+              card.style.setProperty('--accent', `linear-gradient(120deg, ${accent}, ${accent})`);
+              card.style.setProperty('--accent-solid', accent);
+            }
+        }
+      });
+    }, { threshold: 0.5 });
+    projectCards.forEach(p => bgObserver.observe(p));
   }
 
   /* Resume (CV) scroll auto palette cycling (interval sections) */

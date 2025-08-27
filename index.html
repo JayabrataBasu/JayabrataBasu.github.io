@@ -24,15 +24,15 @@
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <!-- Scroll Reactive Gradient Background -->
-    <div class="scroll-gradient" aria-hidden="true"></div>
+    <!-- Background fade layer injected dynamically -->
+    <div id="bg-fader" class="bg-fade-layer" aria-hidden="true"></div>
     <!-- Loader -->
     <div class="loader">
         <div class="loader-content"></div>
     </div>
 
-    <!-- Header -->
-    <header class="header" role="banner">
+    <!-- Header (hidden in new design) -->
+    <header class="header" role="banner" aria-hidden="true">
         <nav class="nav-container" aria-label="Main navigation">
             <div class="logo" aria-label="Home link">
                 <a href="#home">JB</a>
@@ -70,6 +70,13 @@
         </nav>
     </header>
 
+    <!-- Minimal Floating Quick Nav -->
+    <nav class="quick-nav" aria-label="Section navigation">
+        <a href="#about" class="quick-nav-btn" aria-label="Go to About section">About</a>
+        <a href="#projects" class="quick-nav-btn" aria-label="Go to Projects section">Projects</a>
+        <a href="#contact" class="quick-nav-btn" aria-label="Go to Contact section">Contact</a>
+    </nav>
+
     <!-- Main Content -->
     <main id="main" tabindex="-1">
         <!-- Hero Section with Tech Sphere Side-by-Side -->
@@ -102,57 +109,41 @@
                 <div class="about-text">
                     <p><strong></strong> I'm a CS undergraduate at <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener">SRMIST</a> exploring the intersection of machine learning, finance, and simulations.</p>
                     <p>My current goals: deepen expertise in computer algorithms, scientific computing and Machine Learning.</p>
-                        <div class="about-panels" aria-label="Key focus areas">
-                            <div class="about-panel flip" tabindex="0">
-                                <div class="panel-inner">
-                                    <div class="panel-face panel-front">
-                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-diagram-project"></i></div>
-                                        <h3>Systems & Scale</h3>
-                                        <p>Designing reliable, observable services with performance & resilience focus.</p>
-                                    </div>
-                                    <div class="panel-face panel-back">
-                                        <h4>Focus</h4>
-                                        <p>Tracing, queues, graceful failover, cost-aware design.</p>
-                                    </div>
+                        <div class="terminal-stack" aria-label="Key focus areas in terminal layout">
+                            <div class="mini-terminal" tabindex="0" data-topic="systems">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">systems-scale.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Systems & Scale focus">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat systems.txt
+reliability  •  observability  •  latency budgets
+queues · tracing · graceful failover · cost awareness
+</code></pre>
                                 </div>
                             </div>
-                            <div class="about-panel flip" tabindex="0">
-                                <div class="panel-inner">
-                                    <div class="panel-face panel-front">
-                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></div>
-                                        <h3>Applied ML</h3>
-                                        <p>Rapid experimentation & lean deployment of useful models.</p>
-                                    </div>
-                                    <div class="panel-face panel-back">
-                                        <h4>Themes</h4>
-                                        <p>Monitoring, reproducibility & lightweight inference.</p>
-                                    </div>
+                            <div class="mini-terminal" tabindex="0" data-topic="ml">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">applied-ml.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Applied ML themes">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat ml.txt
+rapid experimentation · lean deployment
+monitoring · reproducibility · lightweight inference
+</code></pre>
                                 </div>
                             </div>
-                            <div class="about-panel flip" tabindex="0">
-                                <div class="panel-inner">
-                                    <div class="panel-face panel-front">
-                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-rocket"></i></div>
-                                        <h3>Product Craft</h3>
-                                        <p>Delight through purposeful micro‑interaction & latency realism.</p>
-                                    </div>
-                                    <div class="panel-face panel-back">
-                                        <h4>Principles</h4>
-                                        <p>Meaningful motion, progressive disclosure, clarity.</p>
-                                    </div>
+                            <div class="mini-terminal" tabindex="0" data-topic="product">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">product-craft.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Product craft principles">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat product.txt
+micro-interactions · progressive disclosure
+clarity · honest performance · tactile latency
+</code></pre>
                                 </div>
                             </div>
-                            <div class="about-panel flip" tabindex="0">
-                                <div class="panel-inner">
-                                    <div class="panel-face panel-front">
-                                        <div class="panel-icon" aria-hidden="true"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-                                        <h3>Developer DX</h3>
-                                        <p>Shortening idea → prod loops through tooling.</p>
-                                    </div>
-                                    <div class="panel-face panel-back">
-                                        <h4>Improvements</h4>
-                                        <p>Quality gates, preview envs, visibility dashboards.</p>
-                                    </div>
+                            <div class="mini-terminal" tabindex="0" data-topic="dx">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">dev-dx.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Developer experience improvements">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat dx.txt
+quality gates · preview envs · fast feedback
+observability dashboards · env automation
+</code></pre>
                                 </div>
                             </div>
                         </div>
@@ -175,64 +166,40 @@
     <!-- Skills (Orb) Section (removed, now in hero) -->
 
         <!-- Projects Section -->
-        <section id="projects" class="projects-section" aria-labelledby="projects-heading">
+        <section id="projects" class="projects-section projects-stack" aria-labelledby="projects-heading" data-dynamic-bg>
             <h2 class="section-heading" id="projects-heading"><span>03.</span> Selected Projects</h2>
-            <div class="projects-controls" role="search">
-                <input type="search" id="project-search" placeholder="Search projects or filter by tag..." aria-label="Search projects" />
-                <div class="filter-tags" aria-label="Quick filters">
-                    <button class="tag-filter active" data-tag="all">All</button>
-                    <button class="tag-filter" data-tag="ml">ML</button>
-                    <button class="tag-filter" data-tag="web">Web</button>
-                    <button class="tag-filter" data-tag="fintech">Fintech</button>
-                </div>
-            </div>
-            <div class="projects-grid" id="projects-grid" aria-live="polite">
-                <!-- Project Card Template (Duplicate & edit) -->
-                <article class="project-card" data-tags="web react" tabindex="0">
-                    <div class="project-media">
-                        <div class="media-placeholder gradient-sheen" aria-hidden="true">IMG</div>
-                    </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Project Alpha</h3>
-                        <p class="project-desc">[ Replace ] A performant React + TypeScript dashboard for real-time analytics.</p>
-                        <ul class="project-tags">
-                            <li>React</li><li>TypeScript</li><li>Web</li>
-                        </ul>
-                        <div class="project-links">
-                            <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-                            <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <div class="projects-list" id="projects-grid" aria-live="polite">
+                <!-- Full-width stacked project cards. Duplicate & customize -->
+                <article class="project-card project-wide" data-tags="web react" data-accent="#6366f1" data-bg="linear-gradient(120deg,#eef2ff,#e0e7ff)" data-tone="light" tabindex="0">
+                    <div class="project-inner">
+                        <div class="project-media"><div class="media-placeholder" aria-hidden="true">IMG</div></div>
+                        <div class="project-content">
+                            <h3 class="project-title">Project Alpha</h3>
+                            <p class="project-desc">[ Replace ] A performant React + TypeScript dashboard for real-time analytics.</p>
+                            <ul class="project-tags"><li>React</li><li>TypeScript</li><li>Web</li></ul>
+                            <div class="project-links"><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a><a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
                         </div>
                     </div>
                 </article>
-                <article class="project-card" data-tags="ml python" tabindex="0">
-                    <div class="project-media">
-                        <div class="media-placeholder gradient-sheen" aria-hidden="true">IMG</div>
-                    </div>
-                    <div class="project-body">
-                        <h3 class="project-title">Model Forge</h3>
-                        <p class="project-desc">[ Replace ] Lightweight model experimentation toolkit for structured tabular data.</p>
-                        <ul class="project-tags">
-                            <li>Python</li><li>ML</li><li>Toolkit</li>
-                        </ul>
-                        <div class="project-links">
-                            <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-                            <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <article class="project-card project-wide" data-tags="ml python" data-accent="#9333ea" data-bg="linear-gradient(135deg,#1e1b4b,#312e81)" data-tone="dark" tabindex="0">
+                    <div class="project-inner">
+                        <div class="project-media"><div class="media-placeholder" aria-hidden="true">IMG</div></div>
+                        <div class="project-content">
+                            <h3 class="project-title">Model Forge</h3>
+                            <p class="project-desc">[ Replace ] Lightweight model experimentation toolkit for structured tabular data.</p>
+                            <ul class="project-tags"><li>Python</li><li>ML</li><li>Toolkit</li></ul>
+                            <div class="project-links"><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a><a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
                         </div>
                     </div>
                 </article>
-                <article class="project-card" data-tags="fintech web" tabindex="0">
-                    <div class="project-media">
-                        <div class="media-placeholder gradient-sheen" aria-hidden="true">IMG</div>
-                    </div>
-                    <div class="project-body">
-                        <h3 class="project-title">LedgerLite</h3>
-                        <p class="project-desc">[ Replace ] Minimal personal finance tracker with envelope budgeting logic.</p>
-                        <ul class="project-tags">
-                            <li>Fintech</li><li>Design</li><li>Web</li>
-                        </ul>
-                        <div class="project-links">
-                            <a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a>
-                            <a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <article class="project-card project-wide" data-tags="fintech web" data-accent="#d97706" data-bg="linear-gradient(135deg,#fffbeb,#fef3c7)" data-tone="light" tabindex="0">
+                    <div class="project-inner">
+                        <div class="project-media"><div class="media-placeholder" aria-hidden="true">IMG</div></div>
+                        <div class="project-content">
+                            <h3 class="project-title">LedgerLite</h3>
+                            <p class="project-desc">[ Replace ] Minimal personal finance tracker with envelope budgeting logic.</p>
+                            <ul class="project-tags"><li>Fintech</li><li>Design</li><li>Web</li></ul>
+                            <div class="project-links"><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i></a><a href="#" aria-label="Live demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
                         </div>
                     </div>
                 </article>

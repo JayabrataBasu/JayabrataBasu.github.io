@@ -40,8 +40,8 @@ function createIconSphere(containerSelector, icons, options = {}) {
     const BASE_ICON_SIZE = 52; // slight bump for clarity
     const SPHERE_MARGIN = 0.11;
     const HOVER_SCALE = 1.22;
-    const IDLE_ROT_SPEED = 0.003;
-    const EASE = 0.08;
+    const IDLE_ROT_SPEED = 2.93;
+    const EASE = 0.9;
 
     // High-DPI texture settings (oversample & mipmaps)
     const DPR = window.devicePixelRatio || 1;
@@ -252,6 +252,12 @@ function createIconSphere(containerSelector, icons, options = {}) {
 
     // --- Mouse interaction state ---
     let mouseX = 0, mouseY = 0, targetRotX = 0, targetRotY = 0;
+    // Drift state
+    let driftAngle = Math.random() * Math.PI * 2;
+    let driftSpeed = 0.002 + Math.random() * 0.002;
+    let driftDX = Math.cos(driftAngle) * driftSpeed;
+    let driftDY = Math.sin(driftAngle) * driftSpeed;
+    let driftTimer = 0;
     let hovered = null;
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
@@ -270,9 +276,19 @@ function createIconSphere(containerSelector, icons, options = {}) {
     function animate() {
         requestAnimationFrame(animate);
 
-        // Smooth rotation
-        targetRotX += (mouseY * 1.1 - targetRotX) * EASE;
-        targetRotY += (mouseX * 1.1 - targetRotY) * EASE;
+        // Smooth random drift
+        driftTimer += 1;
+        if (driftTimer % 180 === 0) { // every ~3s, change drift direction slightly
+            driftAngle += (Math.random() - 0.5) * 0.7;
+            driftSpeed = 0.0015 + Math.random() * 0.0025;
+            driftDX = Math.cos(driftAngle) * driftSpeed;
+            driftDY = Math.sin(driftAngle) * driftSpeed;
+        }
+        targetRotX += driftDX;
+        targetRotY += driftDY;
+        // Mouse influence
+        targetRotX += (mouseY * 3.1 - targetRotX) * EASE * 0.5;
+        targetRotY += (mouseX * 3.1 - targetRotY) * EASE * 0.5;
         group.rotation.x += (targetRotX - group.rotation.x) * EASE + IDLE_ROT_SPEED;
         group.rotation.y += (targetRotY - group.rotation.y) * EASE + IDLE_ROT_SPEED;
 
@@ -351,8 +367,9 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
 
     const BASE_ICON = options.baseIconSize || 52;
     const HOVER_SCALE = 1.22;
-    const IDLE_ROT_SPEED = 0.0009;
-    const EASE = 0.08;
+    const IDLE_ROT_SPEED = 0.099; // base
+    const DRIFT_VARIATION = (Math.random()*0.004)+0.015; // slow global drift
+    const EASE = 0.09;
     const SPHERE_MARGIN = 0.08;
     const DEPTH_FADE = true;
     const perspective = 900; // px
@@ -391,6 +408,12 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
     let rotY = 0;
     let targetRotX = 0;
     let targetRotY = 0;
+    // Drift state
+    let driftAngle = Math.random() * Math.PI * 2;
+    let driftSpeed = 0.002 + Math.random() * 0.002;
+    let driftDX = Math.cos(driftAngle) * driftSpeed;
+    let driftDY = Math.sin(driftAngle) * driftSpeed;
+    let driftTimer = 0;
     let mouseActive = false;
     let lastPointerX = 0;
     let lastPointerY = 0;
@@ -446,8 +469,19 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
 
     function projectAndRender() {
         // Ease rotation
-        rotX += (targetRotX - rotX) * EASE + IDLE_ROT_SPEED;
-        rotY += (targetRotY - rotY) * EASE + IDLE_ROT_SPEED;
+    // Smooth random drift
+    driftTimer += 1;
+    if (driftTimer % 180 === 0) { // every ~3s, change drift direction slightly
+        driftAngle += (Math.random() - 0.5) * 0.7;
+        driftSpeed = 0.0015 + Math.random() * 0.0025;
+        driftDX = Math.cos(driftAngle) * driftSpeed;
+        driftDY = Math.sin(driftAngle) * driftSpeed;
+    }
+    targetRotX += driftDX;
+    targetRotY += driftDY;
+    // Mouse influence
+    rotX += (targetRotX - rotX) * EASE + IDLE_ROT_SPEED + DRIFT_VARIATION*0.2;
+    rotY += (targetRotY - rotY) * EASE + IDLE_ROT_SPEED + DRIFT_VARIATION;
 
         const sinX = Math.sin(rotX), cosX = Math.cos(rotX);
         const sinY = Math.sin(rotY), cosY = Math.cos(rotY);

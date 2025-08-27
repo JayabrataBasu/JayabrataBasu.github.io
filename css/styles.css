@@ -1574,3 +1574,29 @@ section.active-bg::before { opacity:1; }
         width: 36px;
         height: 36px;
     }
+
+@media (max-width: 600px) {
+    /* Adjust hero section layout */
+    .hero-section.hero-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        padding: 0 1rem;
+        text-align: center;
+    }
+    .hero-main {
+        align-items: center;
+        padding: 2rem 0;
+        max-width: 100%;
+    }
+    .hero-sphere,
+    .sphere-wrapper.orb-hero {
+        justify-content: center;
+        align-items: center;
+        margin-top: 10rem; /* Move further down */
+        transform: translate(50%, 0); /* Shift towards the right */
+    }
+    .sphere-wrapper.orb-hero .tech-sphere {
+        width: min(220px, 70vw);
+        height: min(220px, 70vw);
+    }
+}

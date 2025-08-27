@@ -1600,3 +1600,125 @@ section.active-bg::before { opacity:1; }
         height: min(220px, 70vw);
     }
 }
+
+/* =====================================================================
+     HERO & SPHERE RESPONSIVE CONSOLIDATED OVERRIDES (2025-08-27)
+     - Non‑destructive: appended at end; earlier rules remain for reference.
+     - Mobile‑first column layout (content first, sphere below)
+     - Remove rigid min-heights & large transforms causing overflow
+     - Fluid sizing via clamp(); no !important needed
+     - Consolidated breakpoints: 600px, 900px, 1200px (min-width)
+     - Two-column hero only ≥900px (stable for landscape tablets)
+     - Slight sphere shift w/out clipping; centered on small screens
+     - Higher specificity (body + chain) to override prior !important
+===================================================================== */
+
+/* Base ( <600px ): stacked, content first */
+body .hero-section.hero-grid, /* ensure grid version collapses */
+body .hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: clamp(1.2rem, 3.5vh, 2.2rem);
+        min-height: 0; /* override earlier 92vh (auto not widely supported for min-height) */
+        /* Reduced top padding to reclaim unused vertical space above intro */
+        padding: clamp(60px, 10vh, 120px) clamp(1rem, 4vw, 2.2rem) clamp(50px, 9vh, 90px);
+}
+
+body .hero-section.hero-grid .hero-main, /* unify */
+body .hero-section .hero-main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0; /* remove earlier internal large vertical padding */
+    text-align: left;
+}
+
+/* Sphere wrapper: centered & below content */
+body .hero-section .hero-sphere,
+body .hero-section.hero-grid .hero-sphere,
+body .hero-section .sphere-wrapper.orb-hero,
+body .hero-section.hero-grid .sphere-wrapper.orb-hero {
+    order: 2; /* ensure after hero-main */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        min-height: 0; /* strip large fixed min-heights */
+    margin: clamp(1.5rem, 8vh, 5rem) 0 0;
+    padding: 0;
+    transform: none; /* neutralize earlier big translate */
+}
+
+/* Slight comfortable offset of the sphere (translate handled on inner) */
+body .hero-section.hero-grid .sphere-wrapper.orb-hero .tech-sphere,
+body .hero-section .sphere-wrapper.orb-hero .tech-sphere {
+    /* Override earlier fixed + !important sizes */
+    width: clamp(240px, 70vw, 560px);
+    height: clamp(240px, 70vw, 560px);
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: translate(4%, 6%); /* gentle nudge right/down without overflow */
+}
+
+/* Remove any residual transforms on wrapper (higher specificity) */
+body .hero-section.hero-grid .sphere-wrapper.orb-hero { transform: none; }
+
+/* Fine-tune typography scaling inside hero (optional, safe) */
+body .hero-section .hero-name { font-size: clamp(2.2rem, 8vw, 4.1rem); }
+body .hero-section .typewriter { font-size: clamp(1.1rem, 4.5vw, 1.9rem); }
+body .hero-section .hero-description { font-size: clamp(.9rem, 2.2vw, 1.05rem); }
+
+/* >=600px (small tablets / large phones landscape) - keep column, grow sphere smoothly */
+@media (min-width:600px) {
+    body .hero-section .hero-main { text-align: left; }
+    body .hero-section.hero-grid .sphere-wrapper.orb-hero .tech-sphere,
+    body .hero-section .sphere-wrapper.orb-hero .tech-sphere {
+        width: clamp(300px, 55vw, 600px);
+        height: clamp(300px, 55vw, 600px);
+        transform: translate(5%, 8%);
+    }
+}
+
+/* >=900px (landscape tablets & up) - introduce two-column layout */
+@media (min-width:900px) {
+    body .hero-section.hero-grid, body .hero-section {
+        display: grid;
+        grid-template-columns: minmax(340px, 1fr) minmax(320px, clamp(420px, 44vw, 600px));
+        align-items: start; /* top align to eliminate large blank area */
+        gap: clamp(2.2rem, 5.5vw, 4.5rem);
+        min-height: min(100dvh, 820px); /* slightly reduced to pull content upward */
+        padding-top: clamp(40px, 8vh, 100px); /* further tighten on large screens */
+    }
+    body .hero-section .hero-main { margin: 0; align-items: flex-start; }
+    body .hero-section .hero-sphere,
+    body .hero-section .sphere-wrapper.orb-hero { margin-top: clamp(0rem, 2vh, 1.2rem); justify-content: center; }
+    body .hero-section.hero-grid .sphere-wrapper.orb-hero .tech-sphere,
+    body .hero-section .sphere-wrapper.orb-hero .tech-sphere {
+        width: clamp(380px, 40vw, 620px);
+        height: clamp(380px, 40vw, 620px);
+        transform: translate(6%, -2%); /* shift upward slightly to occupy previous blank space */
+    }
+}
+
+/* >=1200px (large desktops) - allow further growth & subtle shift */
+@media (min-width:1200px) {
+    body .hero-section.hero-grid, body .hero-section {
+        grid-template-columns: minmax(420px, 1fr) minmax(420px, clamp(480px, 42vw, 680px));
+        min-height: min(100dvh, 880px);
+        padding-top: clamp(36px, 7vh, 90px);
+    }
+    body .hero-section.hero-grid .sphere-wrapper.orb-hero .tech-sphere,
+    body .hero-section .sphere-wrapper.orb-hero .tech-sphere {
+        width: clamp(460px, 38vw, 680px);
+        height: clamp(460px, 38vw, 680px);
+        transform: translate(8%, -2%); /* upward shift maintains balance */
+    }
+}
+
+/* Defensive: if any earlier leftover inline styles set fixed min-heights, neutralize via utility */
+body .hero-section[data-flex-fallback] { min-height: 0 !important; }
+
+/* End consolidated hero overrides */

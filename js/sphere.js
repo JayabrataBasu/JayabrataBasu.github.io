@@ -2,30 +2,33 @@
 // Usage: Place <div id="tech-sphere"></div> in HTML, ensure THREE.js is loaded, and icons array below is correct.
 
 const techStackIcons = [
-        { url: 'assets/images/android-icon.svg', label: 'Android' },
-        { url: 'assets/images/arduino.svg', label: 'Arduino' },
-        { url: 'assets/images/c.svg', label: 'C' },
-        { url: 'assets/images/c-plusplus.svg', label: 'C++' },
-        { url: 'assets/images/css-3.svg', label: 'CSS3' },
-        { url: 'assets/images/django-icon.svg', label: 'Django' },
-        { url: 'assets/images/git-icon.svg', label: 'Git' },
-        { url: 'assets/images/github-icon.svg', label: 'GitHub' },
-        { url: 'assets/images/html-5.svg', label: 'HTML5' },
-        { url: 'assets/images/intellij-idea.svg', label: 'IntelliJ IDEA' },
-        { url: 'assets/images/java.svg', label: 'Java' },
-        { url: 'assets/images/javascript.svg', label: 'JavaScript' },
-        { url: 'assets/images/jupyter.svg', label: 'Jupyter' },
-        { url: 'assets/images/kotlin-icon.svg', label: 'Kotlin' },
-        { url: 'assets/images/linux-mint.svg', label: 'Linux' },
-        { url: 'assets/images/mysql.svg', label: 'MySQL' },
-        { url: 'assets/images/postgresql.svg', label: 'PostgreSQL' },
-        { url: 'assets/images/pycharm.svg', label: 'PyCharm' },
-        { url: 'assets/images/python.svg', label: 'Python' },
-        { url: 'assets/images/pytorch-icon.svg', label: 'PyTorch' },
-        { url: 'assets/images/react.svg', label: 'React' },
-        { url: 'assets/images/tailwindcss-icon.svg', label: 'Tailwind CSS' },
-        { url: 'assets/images/typescript-icon.svg', label: 'TypeScript' },
-        { url: 'assets/images/visual-studio-code.svg', label: 'VS Code' }
+    { url: 'assets/images/icons8-android-studio.svg', label: 'Android Studio' },
+    { url: 'assets/images/icons8-dart.svg', label: 'Dart' },
+    { url: 'assets/images/icons8-r-project.svg', label: 'R Project' },
+    { url: 'assets/images/icons8-tensorflow.svg', label: 'TensorFlow' },
+    { url: 'assets/images/icons8-c-programming.svg', label: 'C' },
+    { url: 'assets/images/rust-svgrepo-com.svg', label: 'Rust' },
+    { url: 'assets/images/c-plusplus.svg', label: 'C++' },
+    { url: 'assets/images/css-3.svg', label: 'CSS3' },
+    { url: 'assets/images/django-icon.svg', label: 'Django' },
+    { url: 'assets/images/git-icon.svg', label: 'Git' },
+    { url: 'assets/images/github-icon.svg', label: 'GitHub' },
+    { url: 'assets/images/html-5.svg', label: 'HTML5' },
+    { url: 'assets/images/intellij-idea.svg', label: 'IntelliJ IDEA' },
+    { url: 'assets/images/java.svg', label: 'Java' },
+    { url: 'assets/images/javascript.svg', label: 'JavaScript' },
+    { url: 'assets/images/jupyter.svg', label: 'Jupyter' },
+    { url: 'assets/images/kotlin-icon.svg', label: 'Kotlin' },
+    { url: 'assets/images/linux-mint.svg', label: 'Linux' },
+    { url: 'assets/images/mysql.svg', label: 'MySQL' },
+    { url: 'assets/images/postgresql.svg', label: 'PostgreSQL' },
+    { url: 'assets/images/pycharm.svg', label: 'PyCharm' },
+    { url: 'assets/images/python.svg', label: 'Python' },
+    { url: 'assets/images/pytorch-icon.svg', label: 'PyTorch' },
+    { url: 'assets/images/react.svg', label: 'React' },
+    { url: 'assets/images/tailwindcss-icon.svg', label: 'Tailwind CSS' },
+    { url: 'assets/images/typescript-icon.svg', label: 'TypeScript' },
+    { url: 'assets/images/visual-studio-code.svg', label: 'VS Code' }
 ];
 
 function createIconSphere(containerSelector, icons, options = {}) {
@@ -258,25 +261,29 @@ function createIconSphere(containerSelector, icons, options = {}) {
     let driftDX = Math.cos(driftAngle) * driftSpeed;
     let driftDY = Math.sin(driftAngle) * driftSpeed;
     let driftTimer = 0;
+    let mouseActive = false;
     let hovered = null;
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
 
     // --- Mouse move handler ---
     function onMouseMove(e) {
+        mouseActive = true;
         const rect = container.getBoundingClientRect();
         mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
         mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
         pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     }
+    function onMouseLeave() { mouseActive = false; }
     container.addEventListener('mousemove', onMouseMove);
+    container.addEventListener('mouseleave', onMouseLeave);
 
     // --- Animation loop ---
     function animate() {
         requestAnimationFrame(animate);
 
-        // Smooth random drift
+        // Always drift, but mouse adds influence
         driftTimer += 1;
         if (driftTimer % 180 === 0) { // every ~3s, change drift direction slightly
             driftAngle += (Math.random() - 0.5) * 0.7;
@@ -286,9 +293,11 @@ function createIconSphere(containerSelector, icons, options = {}) {
         }
         targetRotX += driftDX;
         targetRotY += driftDY;
-        // Mouse influence
-        targetRotX += (mouseY * 3.1 - targetRotX) * EASE * 0.5;
-        targetRotY += (mouseX * 3.1 - targetRotY) * EASE * 0.5;
+        if (mouseActive) {
+            // Move in the opposite direction of mouse
+            targetRotX += (-mouseY * 3.1 - targetRotX) * EASE;
+            targetRotY += (-mouseX * 3.1 - targetRotY) * EASE;
+        }
         group.rotation.x += (targetRotX - group.rotation.x) * EASE + IDLE_ROT_SPEED;
         group.rotation.y += (targetRotY - group.rotation.y) * EASE + IDLE_ROT_SPEED;
 
@@ -414,6 +423,7 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
     let driftDX = Math.cos(driftAngle) * driftSpeed;
     let driftDY = Math.sin(driftAngle) * driftSpeed;
     let driftTimer = 0;
+    // mouseActive declared only once per function scope
     let mouseActive = false;
     let lastPointerX = 0;
     let lastPointerY = 0;
@@ -427,7 +437,7 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
     window.addEventListener('resize', resize);
 
     function onPointerDown(e) {
-        mouseActive = true;
+    mouseActive = true;
         lastPointerX = e.clientX;
         lastPointerY = e.clientY;
     }
@@ -440,13 +450,6 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
             lastPointerY = e.clientY;
             targetRotY += dx * 0.003;
             targetRotX += dy * 0.003;
-        } else {
-            // Passive pointer influences target gently
-            const rect = container.getBoundingClientRect();
-            const mx = (e.clientX - rect.left) / rect.width - 0.5;
-            const my = (e.clientY - rect.top) / rect.height - 0.5;
-            targetRotY = mx * 0.9;
-            targetRotX = my * 0.9;
         }
     }
     container.addEventListener('pointerdown', onPointerDown);
@@ -469,7 +472,7 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
 
     function projectAndRender() {
         // Ease rotation
-    // Smooth random drift
+    // Always drift, but mouse adds influence
     driftTimer += 1;
     if (driftTimer % 180 === 0) { // every ~3s, change drift direction slightly
         driftAngle += (Math.random() - 0.5) * 0.7;
@@ -480,6 +483,11 @@ function createIconSphereDOM(containerSelector, icons, options = {}) {
     targetRotX += driftDX;
     targetRotY += driftDY;
     // Mouse influence
+    if (mouseActive) {
+        // Move in the opposite direction of mouse
+        targetRotX += (lastPointerY ? -((lastPointerY / height) - 0.5) * 1.8 : 0) - targetRotX * EASE;
+        targetRotY += (lastPointerX ? -((lastPointerX / width) - 0.5) * 1.8 : 0) - targetRotY * EASE;
+    }
     rotX += (targetRotX - rotX) * EASE + IDLE_ROT_SPEED + DRIFT_VARIATION*0.2;
     rotY += (targetRotY - rotY) * EASE + IDLE_ROT_SPEED + DRIFT_VARIATION;
 

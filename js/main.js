@@ -326,30 +326,45 @@ document.addEventListener('DOMContentLoaded', () => {
     cards.forEach(c => cardObs.observe(c));
   }
 
-  /* Dynamic stacked project background + contrast */
+  /* Dynamic stacked project background: only two color schemes (light/dark) with slow transitions */
   const stackedProjects = document.querySelector('.projects-section.projects-stack');
   if (stackedProjects) {
     const projectCards = stackedProjects.querySelectorAll('.project-card.project-wide');
+    let lastActive = null;
+    // Define two color schemes
+    const schemes = {
+      dark: {
+        bg: '#18181b',
+        text: '#f8fafc',
+        accent: '#6366f1'
+      },
+      light: {
+        bg: '#f8fafc',
+        text: '#18181b',
+        accent: '#6366f1'
+      }
+    };
     const bgObserver = new IntersectionObserver(entries => {
+      let found = false;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          found = true;
           const card = entry.target;
-            const bg = card.getAttribute('data-bg');
-            const accent = card.getAttribute('data-accent');
-            const tone = card.getAttribute('data-tone');
-            if (bg) stackedProjects.style.setProperty('--dynamic-project-bg', bg);
-            if (tone === 'dark') {
-              stackedProjects.classList.add('dark-surface');
-            } else {
-              stackedProjects.classList.remove('dark-surface');
-            }
-            if (accent) {
-              // Update accent CSS variable temporarily for links inside card
-              card.style.setProperty('--accent', `linear-gradient(120deg, ${accent}, ${accent})`);
-              card.style.setProperty('--accent-solid', accent);
-            }
+          const tone = card.getAttribute('data-tone');
+          const scheme = tone === 'dark' ? schemes.dark : schemes.light;
+          document.body.style.setProperty('--dynamic-bg', scheme.bg);
+          document.body.style.setProperty('--dynamic-text', scheme.text);
+          document.body.style.setProperty('--dynamic-accent', scheme.accent);
+          lastActive = card;
         }
       });
+      // If no card is active, restore theme defaults
+      if (!found && lastActive) {
+        document.body.style.removeProperty('--dynamic-bg');
+        document.body.style.removeProperty('--dynamic-text');
+        document.body.style.removeProperty('--dynamic-accent');
+        lastActive = null;
+      }
     }, { threshold: 0.5 });
     projectCards.forEach(p => bgObserver.observe(p));
   }

@@ -4,7 +4,7 @@
 const techStackIcons = [
     { url: 'assets/images/icons8-android-studio.svg', label: 'Android Studio' },
     { url: 'assets/images/icons8-dart.svg', label: 'Dart' },
-    { url: 'assets/images/icons8-r-project.svg', label: 'R Project' },
+    { url: 'assets/images/icons8-r-project.svg', label: 'R' },
     { url: 'assets/images/icons8-tensorflow.svg', label: 'TensorFlow' },
     { url: 'assets/images/icons8-c-programming.svg', label: 'C' },
     { url: 'assets/images/rust-svgrepo-com.svg', label: 'Rust' },

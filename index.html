@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Jayabrata Basu - Software Engineer & Builder" />
+    <meta name="keywords" content="Jayabrata Basu, software engineer, portfolio, projects" />
+    <title>Jayabrata Basu | Portfolio</title>
+
+    <!-- Favicon (placeholder) -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/react.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Additional typography for redesigned sections (keeps hero untouched) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+
+        <!-- Font Awesome (jsdelivr, latest, with fallback) -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script>
+            (function(){
+                var test = document.createElement('i');
+                test.className = 'fa fa-github';
+                document.body.appendChild(test);
+                var style = window.getComputedStyle(test);
+                if (!style.fontFamily.includes('FontAwesome')) {
+                    var s = document.createElement('link');
+                    s.rel = 'stylesheet';
+                    s.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css';
+                    document.head.appendChild(s);
+                }
+                document.body.removeChild(test);
+            })();
+        </script>
+  <link rel="stylesheet" crossorigin href="/assets/index-HV7fyNBk.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- Header (hidden in new design) -->
+    <header class="header" role="banner" aria-hidden="true">
+        <nav class="nav-container" aria-label="Main navigation">
+            <div class="logo" aria-label="Home link">
+                <a href="#home">JB</a>
+            </div>
+            <div class="nav-links">
+                <a href="#about"><span>01.</span> About</a>
+                <a href="#cv"><span>02.</span> CV</a>
+                <a href="#projects"><span>03.</span> Projects</a>
+                <a href="#research"><span>04.</span> Research</a>
+                <a href="#contact"><span>05.</span> Contact</a>
+                <a href="resume.pdf" class="resume-button" download>Resume</a>
+                <button id="theme-toggle-btn" class="theme-toggle-btn" type="button" aria-label="Cycle color theme" title="Change theme" aria-pressed="false">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button id="theme-reset-btn" class="theme-reset-btn" type="button" aria-label="Reset theme to auto" title="Reset to auto theme">
+                    <i class="fa-solid fa-rotate-left"></i>
+                </button>
+                <div class="theme-menu-wrapper">
+                    <button id="theme-menu-trigger" class="theme-menu-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="theme-menu" title="Select theme" type="button">
+                        <i class="fa-solid fa-palette"></i>
+                    </button>
+                    <ul id="theme-menu" class="theme-menu" role="menu" hidden>
+                        <li role="menuitem"><button type="button" data-theme="theme-1"><span class="swatch swatch-1"></span><span class="label">Indigo / Amber</span></button></li>
+                        <li role="menuitem"><button type="button" data-theme="theme-2"><span class="swatch swatch-2"></span><span class="label">Deep Night</span></button></li>
+                        <li role="menuitem"><button type="button" data-theme="theme-3"><span class="swatch swatch-3"></span><span class="label">Aurora</span></button></li>
+                        <li role="menuitem"><button type="button" data-theme="theme-4"><span class="swatch swatch-4"></span><span class="label">Sunrise</span></button></li>
+                    </ul>
+                </div>
+            </div>
+            <button class="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Minimal Floating Quick Nav -->
+    <nav class="quick-nav" aria-label="Section navigation">
+        <a href="#about" class="quick-nav-btn" aria-label="Go to About section">About</a>
+        <a href="#projects" class="quick-nav-btn" aria-label="Go to Projects section">Projects</a>
+        <a href="#contact" class="quick-nav-btn" aria-label="Go to Contact section">Contact</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main" tabindex="-1">
+    <div class="main-content-aligner">
+    <!-- Hero Section with Tech Sphere Side-by-Side -->
+    <section id="home" class="hero-section hero-grid" aria-label="Hero">
+            <div class="hero-bg-gradient" aria-hidden="true"></div>
+            <div class="hero-main">
+                <h1 class="intro small-heading">Hi, I'm</h1>
+                <h2 class="hero-name gradient-text">Jayabrata Basu</h2>
+                <h3 class="typewriter" aria-live="polite"><span id="typewriter-text"></span><span class="cursor" aria-hidden="true">▌</span></h3>
+                <p class="hero-description">
+                    <strong></strong> I'm a CS student and I love intersecting <em>systems thinking</em>, <em>ML</em>, and <em>fintech</em> to build cool, crazy projects.
+                </p>
+                <div class="cta-button">
+                    <a href="#projects" class="primary-btn">See my work</a>
+                    <a href="resume.pdf" class="secondary-btn" download>Download CV</a>
+                </div>
+            </div>
+            <div class="hero-sphere">
+                <div class="sphere-wrapper orb-hero">
+                    <div id="tech-sphere" class="tech-sphere" aria-label="Interactive rotating sphere of skill icons"></div>
+                    <div id="skill-tooltip" class="skill-tooltip" role="tooltip" hidden></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section" aria-labelledby="about-heading">
+            <h2 class="section-heading" id="about-heading"><span>01.</span> About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-grid">
+                        <div class="about-copy">
+                            <p><strong></strong> I'm a CS undergraduate at <a href="https://www.srmist.edu.in/" target="_blank" rel="noopener">SRMIST</a> exploring the intersection of machine learning, finance, and simulations.</p>
+                            <p>I love designing lean systems that solve real problems with clarity and measurable impact.</p>
+                            <p>Current focus: deepening expertise in computer algorithms, scientific computing, and applied ML deployment.</p>
+                            <ul class="key-points">
+                                <li>Blend of systems, ML, and product sense</li>
+                                <li>Prioritise observability & feedback loops</li>
+                                <li>Bias toward shipping small incremental wins</li>
+                            </ul>
+                        </div>
+                        <figure class="about-headshot">
+                            <img src="assets/images/headshot-placeholder.svg" alt="Headshot placeholder of Jayabrata Basu" loading="lazy" />
+                            <figcaption>Continuous learner & builder</figcaption>
+                        </figure>
+                    </div>
+                        <div class="terminal-stack" aria-label="Key focus areas in terminal layout">
+                            <div class="mini-terminal" tabindex="0" data-topic="systems">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">systems-scale.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Systems & Scale focus">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat systems.txt
+reliability  •  observability  •  latency budgets
+queues · tracing · graceful failover · cost awareness
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mini-terminal" tabindex="0" data-topic="ml">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">applied-ml.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Applied ML themes">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat ml.txt
+rapid experimentation · lean deployment
+monitoring · reproducibility · lightweight inference
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mini-terminal" tabindex="0" data-topic="product">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">product-craft.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Product craft principles">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat product.txt
+micro-interactions · progressive disclosure
+clarity · honest performance · tactile latency
+</code></pre>
+                                </div>
+                            </div>
+                            <div class="mini-terminal" tabindex="0" data-topic="dx">
+                                <div class="term-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="term-title">dev-dx.sh</span></div>
+                                <div class="term-body" role="group" aria-label="Developer experience improvements">
+<pre><code><span class="prompt">jb@portfolio</span>:<span class="path">~/focus</span>$ cat dx.txt
+quality gates · preview envs · fast feedback
+observability dashboards · env automation
+</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CV Section -->
+
+        <!-- Skills Proficiency Section (separate from hero to avoid modification) -->
+        <section id="skills" class="skills-matrix-section" aria-labelledby="skills-heading">
+            <h2 class="section-heading" id="skills-heading"><span>02.</span> Skills & Toolkit</h2>
+            <div class="skills-matrix-grid">
+                <div class="skills-intro">
+                    <p class="lede">A snapshot of where I invest engineering energy. Depth in systems & applied ML, breadth across product delivery.</p>
+                    <div class="skill-cloud" aria-label="Skill cloud">
+                        <span>Systems</span><span>Profiling</span><span>Python</span><span>TypeScript</span><span>React</span><span>PostgreSQL</span><span>Data Pipelines</span><span>API Design</span><span>Docker</span><span>ML Ops</span><span>TensorFlow</span><span>PyTorch</span><span>Unit Testing</span><span>CI/CD</span><span>Latency Budgets</span>
+                    </div>
+                </div>
+                <div class="skills-bars" aria-label="Skill proficiency bars">
+                    <div class="skill-bar" data-skill="Systems Architecture" data-level="88"><span class="label">Systems Architecture</span><div class="bar"><div class="fill"></div></div><span class="value">88%</span></div>
+                    <div class="skill-bar" data-skill="Python / ML" data-level="85"><span class="label">Python / ML</span><div class="bar"><div class="fill"></div></div><span class="value">85%</span></div>
+                    <div class="skill-bar" data-skill="Data Modeling" data-level="78"><span class="label">Data Modeling</span><div class="bar"><div class="fill"></div></div><span class="value">78%</span></div>
+                    <div class="skill-bar" data-skill="Frontend Engineering" data-level="70"><span class="label">Frontend Engineering</span><div class="bar"><div class="fill"></div></div><span class="value">70%</span></div>
+                    <div class="skill-bar" data-skill="Dev Experience / Tooling" data-level="82"><span class="label">Dev Experience / Tooling</span><div class="bar"><div class="fill"></div></div><span class="value">82%</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- In-Progress Section -->
+        <section id="in-progress" class="inprogress-section" aria-labelledby="inprogress-heading">
+            <h2 class="section-heading" id="inprogress-heading"><span>03.</span> In Progress</h2>
+            <div class="inprogress-grid">
+                <article class="inprogress-card">
+                    <h3 class="ip-title">StreamSim</h3>
+                    <p class="ip-desc">Real-time event stream simulator for stress testing ingestion & alert pipelines.</p>
+                    <span class="ip-status">Phase: Architecture & baseline benchmarks</span>
+                </article>
+                <article class="inprogress-card">
+                    <h3 class="ip-title">AlphaQuant Lite</h3>
+                    <p class="ip-desc">Lightweight experimental framework exploring factor research with reproducible notebooks.</p>
+                    <span class="ip-status">Phase: Data connectors & feature store prototype</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- Interactive Project Showcase Section -->
+        <section id="projects" class="projects-section showcase" aria-labelledby="projects-heading" data-section-bg="#0f172a">
+            <h2 class="section-heading" id="projects-heading"><span>04.</span> Selected Projects</h2>
+            <div class="project-showcase" id="projects-grid" aria-live="polite">
+                <article class="project interactive" data-project="alpha" tabindex="0">
+                    <div class="project-header">
+                        <h3 class="project-title">Project Alpha</h3>
+                        <div class="project-meta">React • TypeScript • Realtime</div>
+                    </div>
+                    <div class="carousel" data-carousel>
+                        <button class="carousel-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="slide is-active" aria-hidden="false"><div class="slide-inner gradient-a">Dashboard layout wireframe</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-b">Websocket data feed</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-c">Performance panel</div></div>
+                        </div>
+                        <button class="carousel-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="carousel-dots" role="tablist"></div>
+                    </div>
+                    <p class="project-desc">A performant real-time analytics dashboard emphasizing rendering efficiency and graceful degradation under load.</p>
+                    <div class="project-actions">
+                        <button class="btn tertiary" data-case-open="alpha">Case Study</button>
+                        <a href="#" class="btn secondary" aria-label="GitHub repository">Code</a>
+                        <a href="#" class="btn primary" aria-label="Live demo">View Live</a>
+                    </div>
+                </article>
+                <article class="project interactive" data-project="modelforge" tabindex="0">
+                    <div class="project-header">
+                        <h3 class="project-title">Model Forge</h3>
+                        <div class="project-meta">Python • ML • Tooling</div>
+                    </div>
+                    <div class="carousel" data-carousel>
+                        <button class="carousel-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="slide is-active" aria-hidden="false"><div class="slide-inner gradient-d">CLI interface mock</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-e">Experiment registry</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-f">Comparison matrix</div></div>
+                        </div>
+                        <button class="carousel-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="carousel-dots" role="tablist"></div>
+                    </div>
+                    <p class="project-desc">Lightweight experimentation toolkit for structured data: rapid iterations, reproducible configs, artifact tracking.</p>
+                    <div class="project-actions">
+                        <button class="btn tertiary" data-case-open="modelforge">Case Study</button>
+                        <a href="#" class="btn secondary" aria-label="GitHub repository">Code</a>
+                        <a href="#" class="btn primary" aria-label="Live demo">View Live</a>
+                    </div>
+                </article>
+                <article class="project interactive" data-project="ledgerlite" tabindex="0">
+                    <div class="project-header">
+                        <h3 class="project-title">LedgerLite</h3>
+                        <div class="project-meta">Fintech • Web • Design</div>
+                    </div>
+                    <div class="carousel" data-carousel>
+                        <button class="carousel-nav prev" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div class="carousel-track">
+                            <div class="slide is-active" aria-hidden="false"><div class="slide-inner gradient-g">Envelope budgeting</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-h">Transaction view</div></div>
+                            <div class="slide" aria-hidden="true"><div class="slide-inner gradient-i">Spending insight</div></div>
+                        </div>
+                        <button class="carousel-nav next" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+                        <div class="carousel-dots" role="tablist"></div>
+                    </div>
+                    <p class="project-desc">Minimal personal finance tracker built around cash-flow clarity & habit reinforcement.</p>
+                    <div class="project-actions">
+                        <button class="btn tertiary" data-case-open="ledgerlite">Case Study</button>
+                        <a href="#" class="btn secondary" aria-label="GitHub repository">Code</a>
+                        <a href="#" class="btn primary" aria-label="Live demo">View Live</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+
+        <section id="research" class="research-section" aria-labelledby="research-heading" data-section-bg="#111b2d">
+            <h2 class="section-heading" id="research-heading"><span>05.</span> Research & Publications</h2>
+            <div class="research-grid" id="research-grid">
+                <article class="paper-card" data-year="2025">
+                    <h3 class="paper-title">[Paper Title Placeholder]</h3>
+                    <p class="paper-meta">Conference / Journal • 2025</p>
+                    <p class="paper-summary">Short abstract or one-liner about contribution goes here.</p>
+                    <div class="paper-links">
+                        <a href="#" aria-label="PDF"><i class="fa-solid fa-file-pdf"></i></a>
+                        <a href="#" aria-label="DOI"><i class="fa-solid fa-link"></i></a>
+                        <a href="#" aria-label="Code"><i class="fab fa-github"></i></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Download CV Button (moved here) -->
+        <!-- Contact Section -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading" data-section-bg="#101826">
+            
+            <h3 class="contact-title">Let's Connect</h3>
+            <p class="contact-description">Want to collaborate, discuss engineering, or just say hi? Reach out via any of the options below.</p>
+            <div class="contact-options">
+                <a class="contact-btn icon-btn" href="mailto:jayabratabasu@gmail.com" aria-label="Email Jayabrata Basu">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a class="contact-btn icon-btn" href="https://github.com/JayabrataBasu" target="_blank" rel="noopener" aria-label="GitHub profile">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a class="contact-btn icon-btn" href="https://www.linkedin.com/in/jayabratabasu/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+            </div>
+        </section>
+        </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <p>Designed & Built by Jayabrata Basu • <span class="year"></span></p>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu" hidden>
+        <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+            <a href="#about"><span>01.</span> About</a>
+            <a href="#cv"><span>02.</span> CV</a>
+            <a href="#projects"><span>03.</span> Projects</a>
+            <a href="#research"><span>04.</span> Research</a>
+            <a href="#contact"><span>05.</span> Contact</a>
+            <a href="resume.pdf" class="resume-button" download>Resume</a>
+        </nav>
+    </div>
+
+    <!-- Cursor Ring -->
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="js/sphere.js"></script>
+    <script src="js/main.js"></script>
+
+        <!-- Loader failsafe: forcibly hide loader after 2.5s if still present -->
+        <script>
+            setTimeout(function(){
+                var l=document.querySelector('.loader');
+                if(l && getComputedStyle(l).opacity!=='0') l.classList.add('force-hide');
+            },2500);
+        </script>
+
+</body>
+</html>

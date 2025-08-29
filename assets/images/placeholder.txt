@@ -1,0 +1,1 @@
+Images copied from root assets/images should be placed here. (Copy operation to be done manually or via tooling outside this patch if not already.)

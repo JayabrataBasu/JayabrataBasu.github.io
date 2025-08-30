@@ -1,3 +1,81 @@
+/* Hero + Sphere Flex Layout */
+.hero-flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: clamp(2.5rem, 7vw, 7rem);
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+.hero-section.hero-grid {
+    flex: 1 1 600px;
+    min-width: 0;
+    max-width: 800px;
+}
+/* Overlapping sphere-section, sphere-wrapper.orb-hero, and canvas */
+/* Overlap all sphere elements perfectly in a fixed aspect-ratio box */
+.sphere-section {
+    flex: 0 1 600px;
+    min-width: 0;
+    position: relative;
+    aspect-ratio: 1/1;
+    width: 100%;
+    max-width: 700px;
+    min-width: 220px;
+    min-height: 220px;
+    max-height: 80vh;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+.sphere-section .sphere-wrapper.orb-hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 1;
+}
+.sphere-section .tech-sphere {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+    z-index: 2;
+}
+.sphere-section .tech-sphere canvas {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    z-index: 3;
+    pointer-events: auto;
+}
+@media (max-width: 900px) {
+    .hero-flex-row {
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(2rem, 8vw, 4rem);
+    }
+    .sphere-section {
+        width: 100vw;
+        max-width: 98vw;
+        min-width: 180px;
+        min-height: 180px;
+        aspect-ratio: 1/1;
+        margin-top: 2.5rem;
+        position: relative;
+    }
+}
 /* Unified layout rail */
 :root { --content-max: 1250px; --rail-pad: clamp(20px,4vw,56px); }
 .main-content-aligner { max-width: var(--content-max); margin: 0 auto; }

@@ -1,0 +1,80 @@
+/* --- Section Titles --- */
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+/* --- About Section --- */
+#about h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+#about p {
+    font-size: 1.2rem;
+    max-width: 60ch;
+    margin: 0 auto;
+    line-height: 1.7;
+    color: var(--secondary-color);
+}
+/* --- Projects Section --- */
+.project-card {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.project-header h3 { font-size: 1.5rem; }
+.project-tags span {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    background-color: rgba(255,255,255,0.1);
+    color: var(--secondary-color);
+}
+.project-showcase { margin-bottom: 1rem; }
+.project-showcase img {
+    width: 100%;
+    border-radius: 10px;
+}
+.project-description { margin-bottom: 2rem; color: var(--secondary-color); }
+.project-links { display: flex; gap: 1rem; }
+
+/* --- Contact Section --- */
+.contact-layout { text-align: center; }
+.contact-layout h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.contact-layout p { max-width: 50ch; margin: 0 auto 2rem auto; }
+.contact-links a {
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    position: relative;
+}
+.contact-links a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+.contact-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}

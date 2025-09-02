@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     function updatePositions() {
-        if (!isDragging) { targetRotationY += 0.0005; }
+        if (!isDragging) { targetRotationY += 0.003; }
         rotationX += (targetRotationX - rotationX) * EASE_FACTOR;
         rotationY += (targetRotationY - rotationY) * EASE_FACTOR;
         const sinX = Math.sin(rotationX), cosX = Math.cos(rotationX);
@@ -83,7 +83,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function setupInteraction() {
         const stopDragging = () => { isDragging = false; };
-        sphereContainer.addEventListener('mousedown', (e) => { isDragging = true; lastMouseX = e.clientX; lastMouseY = e.clientY; });
+        // Mouse events
+        sphereContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+        });
         window.addEventListener('mouseup', stopDragging);
         window.addEventListener('mouseleave', stopDragging);
         window.addEventListener('mousemove', (e) => {
@@ -96,6 +101,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 lastMouseY = e.clientY;
             }
         });
+        // Touch events
+        sphereContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                isDragging = true;
+                lastMouseX = e.touches[0].clientX;
+                lastMouseY = e.touches[0].clientY;
+            }
+        }, { passive: true });
+        window.addEventListener('touchend', stopDragging, { passive: true });
+        window.addEventListener('touchcancel', stopDragging, { passive: true });
+        window.addEventListener('touchmove', (e) => {
+            if (isDragging && e.touches.length === 1) {
+                const dx = e.touches[0].clientX - lastMouseX;
+                const dy = e.touches[0].clientY - lastMouseY;
+                targetRotationY += dx * 0.005;
+                targetRotationX -= dy * 0.005;
+                lastMouseX = e.touches[0].clientX;
+                lastMouseY = e.touches[0].clientY;
+            }
+        }, { passive: true });
         wrapper.addEventListener('mouseover', (e) => {
             const target = e.target.closest('.sphere-icon');
             if (target) {
@@ -105,8 +130,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip.style.transform = 'scale(1)';
             }
         });
-        wrapper.addEventListener('mousemove', (e) => { tooltip.style.left = `${e.clientX + 15}px`; tooltip.style.top = `${e.clientY}px`; });
-        wrapper.addEventListener('mouseout', () => { tooltip.style.opacity = '0'; tooltip.style.transform = 'scale(0.9)'; });
+        wrapper.addEventListener('mousemove', (e) => {
+            tooltip.style.left = `${e.clientX + 15}px`;
+            tooltip.style.top = `${e.clientY}px`;
+        });
+        wrapper.addEventListener('mouseout', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'scale(0.9)';
+        });
+        // Touch tooltip support
+        wrapper.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            const target = document.elementFromPoint(touch.clientX, touch.clientY)?.closest('.sphere-icon');
+            if (target) {
+                const index = Array.from(wrapper.children).indexOf(target);
+                tooltip.innerText = iconElements[index].label;
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'scale(1)';
+                tooltip.style.left = `${touch.clientX + 15}px`;
+                tooltip.style.top = `${touch.clientY}px`;
+            }
+        }, { passive: true });
+        wrapper.addEventListener('touchend', () => {
+            tooltip.style.opacity = '0';
+            tooltip.style.transform = 'scale(0.9)';
+        }, { passive: true });
     }
     function setupResponsiveness() {
         const observer = new ResizeObserver(() => {

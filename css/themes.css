@@ -1,30 +1,18 @@
-/* Default theme variables */
+/* Mono red-black and gold theme with fire & gold accents */
 :root {
     --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1);
-}
-
-body {
-    background-color: var(--background-color, #111111);
-    color: var(--primary-color, #ffd700);
-    font-family: var(--font-family);
-    transition: background-color 0.8s var(--ease-out-cubic), color 0.8s var(--ease-out-cubic);
-}
-
-/* Black-gold with fire accents (start theme) */
-body[data-theme="lightning"], body[data-theme="fire"], body:not([data-theme]) {
     --primary-color: #ffd700; /* gold */
     --background-color: #111111; /* black */
     --accent-color: #ff4500; /* fire red */
     --secondary-color: #e5c100;
 }
 
-/* Blue-green with white accents (scroll theme) */
-body[data-theme="aqua"] {
-    --primary-color: #ffffff; /* white */
-    --background-color: #0a2239; /* deep blue-green */
-    --accent-color: #00e6d3; /* aqua accent */
-    --secondary-color: #7fffd4;
+body {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-family: var(--font-family);
+    transition: background-color 0.8s var(--ease-out-cubic), color 0.8s var(--ease-out-cubic);
 }
 
 .section-title, .btn {

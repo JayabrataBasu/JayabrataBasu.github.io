@@ -17,11 +17,10 @@
 }
 
 #skills .divider {
-  width: 140px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-color), #00e0ff88, transparent);
-  margin: 1.2rem auto 2.5rem auto;
-  border-radius: 2px;
+  display: none !important;
+  height: 0 !important;
+  background: none !important;
+  margin: 0 !important;
 }
 
 #skills .auto-grid {

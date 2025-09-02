@@ -6,6 +6,7 @@
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
+	background: var(--background-color);
 }
 
 /* Glassmorphic quick access panel */
@@ -105,10 +106,12 @@
 	margin-top: -2.5rem;
 	padding-top: 0.5rem;
 	padding-bottom: 1.5rem;
+	background: var(--background-color);
 }
 
 #about {
 	margin-top: -1.5rem;
+	background: var(--background-color);
 }
 /* Carousel styles */
 .carousel {
@@ -119,7 +122,7 @@
 	aspect-ratio: 16/9;
 	overflow: hidden;
 	border-radius: 16px;
-	background: rgba(0,0,0,0.08);
+	background: var(--background-color);
 	box-shadow: 0 4px 18px -4px rgba(0,0,0,0.18);
 	display: flex;
 	align-items: center;
@@ -180,6 +183,10 @@
 .text-center { text-align:center; }
 .max-content { max-width:var(--max-content-width,68ch); }
 .fade-in { opacity:0; animation:fadeIn .8s var(--ease-out-cubic) forwards; }
+section {
+	background: var(--background-color) !important;
+	transition: background-color 0.8s var(--ease-out-cubic);
+}
 @keyframes fadeIn { to { opacity:1; } }
 /* Stagger helpers */
 .delay-1 { animation-delay:.05s !important; }
@@ -191,13 +198,26 @@
 /* Typography helpers */
 .hero-intro { font-size:clamp(.95rem,1.2vw,1.05rem); opacity:.9; }
 
-.card-pad { padding:1.25rem; }
+.card-pad {
+	padding: 1.25rem;
+	color: var(--primary-color);
+}
 .stack-lg { --stack-gap:2rem; }
 .stack-xl { --stack-gap:2.5rem; }
 /* Divider */
-.divider { width:120px; height:3px; background:linear-gradient(90deg,var(--accent-color),transparent); margin:.75rem auto 0; border-radius:2px; }
+.divider {
+	display: none !important;
+	height: 0 !important;
+	background: none !important;
+}
 /* Glass card */
-.glass { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); border-radius:18px; box-shadow:0 4px 24px -4px rgba(0,0,0,.4); }
+.glass {
+	background: #111111 !important;
+	border: 2px solid var(--primary-color) !important;
+	border-radius: 18px;
+	box-shadow: 0 4px 24px -4px var(--primary-color) !important;
+	color: var(--primary-color) !important;
+}
 /* Grid */
 .auto-grid { display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(var(--min-col-size,220px),1fr)); }
 /* Buttons enhancement */

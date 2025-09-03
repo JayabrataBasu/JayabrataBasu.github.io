@@ -1,0 +1,181 @@
+/* Tech Skills heading style to match site */
+.tech-skills-section h2 {
+  font-family: 'Montserrat', 'Lato', Arial, sans-serif;
+  font-size: 2.5em;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #ffe066;
+  text-shadow: 0 0 18px #ff9900, 0 0 2px #ffe066;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+/* Tooltip and icon effect for TECH SKILLS section */
+.tooltip-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 10px;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.profile {
+  background: #3b5998;
+  border-radius: 10px 15px;
+  padding: 10px;
+  border: 1px solid #29487d;
+}
+
+.tooltip-container:hover .tooltip {
+  top: -150px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.icon .layer {
+  width: 60px;
+  height: 60px;
+  border: none !important;
+  border-radius: 50%;
+  transition: transform 0.3s, border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: none !important;
+  background: #222;
+  margin: 0 auto;
+}
+
+.icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+  box-shadow: 0 0 30px rgba(24, 119, 242, 1), 0 0 40px rgba(24, 119, 242, 0.7);
+}
+
+.layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.layer span,
+.text {
+  color: #1877f2;
+  border-color: transparent
+}
+
+.icon:hover .layer span {
+  box-shadow: -1px 1px 3px #1877f2;
+}
+
+.icon .text {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+
+.icon:hover .text {
+  bottom: -35px;
+  opacity: 1;
+}
+
+.icon:hover .layer span:nth-child(1) {
+  opacity: 0.2;
+}
+
+.icon:hover .layer span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+
+.icon:hover .layer span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+
+.icon:hover .layer span:nth-child(4) {
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+
+.icon:hover .layer span:nth-child(5) {
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+
+.jsSVG {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.js-icon-svg {
+  width: 28px;
+  height: 28px;
+}
+
+.user {
+  display: flex;
+  gap: 10px;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 700;
+  border: 1px solid #1877f2;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1877f2;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #fff;
+}
+
+.about {
+  color: #ccc;
+  padding-top: 5px;
+}

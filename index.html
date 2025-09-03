@@ -52,34 +52,7 @@
     </section>
 
     <!-- TECH STACK AND SKILLSET SECTION -->
-    <section id="skills" class="fullscreen-section" data-theme="aqua">
-        <div class="content-wrapper stack stack-xl">
-            <div class="fade-in delay-2">
-                <h2 class="section-title">Tech Stack & Skillset</h2>
-                <div class="divider"></div>
-            </div>
-            <!-- Constellation Tech Stack Section -->
-                        <!-- Removed starfield-bg div to eliminate white crescent artifact -->
-                        <div id="galaxy" class="solar-system-flex">
-                            <div class="solar-syst">
-                                <div class="sun"></div>
-                                <div class="mercury planet" data-planet="Mercury"></div>
-                                <div class="venus planet" data-planet="Venus"></div>
-                                <div class="earth planet" data-planet="Earth"></div>
-                                <div class="mars planet" data-planet="Mars"></div>
-                                <!-- Outer planets removed -->
-                                <div class="asteroids-belt"></div>
-                                <!-- Pluto removed -->
-                            </div>
-                        </div>
-                </div>
-                <!-- Planet Info Panel -->
-                <div id="planet-panel" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#222;padding:2rem 2.5rem;border-radius:1rem;z-index:9999;color:#fff;box-shadow:0 8px 32px #000a;min-width:300px;max-width:90vw;max-height:80vh;overflow:auto;">
-                    <button id="close-planet-panel" style="position:absolute;top:1rem;right:1rem;background:transparent;border:none;color:#fff;font-size:1.5rem;cursor:pointer;">&times;</button>
-                    <h2 id="planet-panel-title"></h2>
-                    <div id="planet-panel-content"></div>
-                </div>
-    </section>
+    <!-- ...existing code... -->
 
     <!-- PROJECTS SECTION -->
     <section id="projects" class="fullscreen-section" data-theme="aqua">
@@ -139,16 +112,36 @@
 
     <!-- GET IN TOUCH SECTION -->
     <footer id="contact" class="fullscreen-section" data-theme="lightning">
-        <div class="content-wrapper contact-layout">
-            <h2>Get In Touch</h2>
-            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.</p>
-            <div class="contact-links">
-                <a href="mailto:jayabratabasu@gmail.com">Email</a>
-                <a href="https://github.com/jayabratabasu" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://linkedin.com/in/jayabratabasu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            </div>
-        </div>
-    </footer>
+                <div class="content-wrapper contact-layout">
+                        <h2>Get In Touch</h2>
+                        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.</p>
+                        <div class="contact-links">
+                                <a href="mailto:jayabratabasu@gmail.com">Email</a>
+                                <a href="https://github.com/jayabratabasu" target="_blank" rel="noopener noreferrer">GitHub</a>
+                                <a href="https://linkedin.com/in/jayabratabasu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        </div>
+                </div>
+        </footer>
+
+        <!-- Solar System Footer -->
+        <footer id="solar-footer">
+                    <div class="solar-system-flex">
+                        <div class="solar-syst">
+                            <div class="sun"></div>
+                            <div class="mercury planet"></div>
+                            <div class="venus planet"></div>
+                            <div class="earth planet"></div>
+                            <div class="mars planet"></div>
+                            <div class="jupiter planet"></div>
+                            <div class="saturn planet">
+                                <span class="saturn-ring"></span>
+                            </div>
+                            <div class="uranus planet"></div>
+                            <div class="neptune planet"></div>
+                            <div class="asteroids-belt"></div>
+                        </div>
+                    </div>
+        </footer>
     
         <div id="tooltip"></div>
         <div id="custom-cursor"></div>

@@ -1,3 +1,25 @@
+@media (max-width: 500px) {
+  .solar-syst {
+    width: 100vw !important;
+    height: 100vw !important;
+    max-width: 100vw !important;
+    max-height: 100vw !important;
+    min-width: 180px;
+    min-height: 180px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .sun { height: 6vw !important; width: 6vw !important; margin-top: -3vw !important; margin-left: -3vw !important; }
+  .mercury { height: 8vw !important; width: 8vw !important; margin-top: -4vw !important; margin-left: -4vw !important; }
+  .venus { height: 12vw !important; width: 12vw !important; margin-top: -6vw !important; margin-left: -6vw !important; }
+  .earth { height: 16vw !important; width: 16vw !important; margin-top: -8vw !important; margin-left: -8vw !important; }
+  .mars { height: 20vw !important; width: 20vw !important; margin-top: -10vw !important; margin-left: -10vw !important; }
+  .jupiter { height: 32vw !important; width: 32vw !important; margin-top: -16vw !important; margin-left: -16vw !important; }
+  .saturn { height: 40vw !important; width: 40vw !important; margin-top: -20vw !important; margin-left: -20vw !important; }
+  .uranus { height: 48vw !important; width: 48vw !important; margin-top: -24vw !important; margin-left: -24vw !important; }
+  .neptune { height: 56vw !important; width: 56vw !important; margin-top: -28vw !important; margin-left: -28vw !important; }
+  .asteroids-belt { height: 25vw !important; width: 25vw !important; margin-top: -12.5vw !important; margin-left: -12.5vw !important; }
+}
 *, *:before, *:after {
   padding: 0;
   margin: 0;
@@ -88,7 +110,20 @@ code {
   position: relative;
   width: 700px;
   height: 700px;
+  max-width: 95vw;
+  max-height: 95vw;
   margin: 0 auto;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .solar-syst {
+    width: 98vw;
+    height: 98vw;
+    max-width: 98vw;
+    max-height: 98vw;
+    min-width: 320px;
+    min-height: 320px;
+  }
 }
 .solar-syst:after {
   /* Removed: singular white dot */

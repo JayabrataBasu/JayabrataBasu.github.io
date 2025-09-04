@@ -9,6 +9,41 @@
   margin-bottom: 1.5rem;
   text-align: center;
 }
+/* Layout wrapper for skills */
+.tech-skills-section {
+  padding: 4rem 1rem 8rem;
+  position: relative;
+  overflow: visible;
+}
+
+.tech-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+  gap: 2.2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  place-items: start center;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.tech-skills-grid .tooltip-container {
+  width: 95px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@media (min-width: 1400px) {
+  .tech-skills-grid { grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); }
+  .tech-skills-grid .tooltip-container { width: 105px; }
+}
+
+@media (max-width: 640px) {
+  .tech-skills-grid { gap: 2.5rem 1.25rem; }
+}
 /* Tooltip and icon effect for TECH SKILLS section */
 .tooltip-container {
   position: relative;
@@ -42,10 +77,11 @@
 }
 
 .tooltip-container:hover .tooltip {
-  top: -150px;
+  top: -155px;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  z-index: 20;
 }
 
 .icon {
@@ -144,6 +180,16 @@
   height: 28px;
 }
 
+/* Allow different icon intrinsic sizes to normalize */
+.tech-skills-grid img.js-icon-svg {
+  max-width: 32px;
+  max-height: 32px;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
+}
+
 .user {
   display: flex;
   gap: 10px;
@@ -179,3 +225,8 @@
   color: #ccc;
   padding-top: 5px;
 }
+
+/* Improve stacking of multiple tooltips so they don't get hidden */
+.tech-skills-grid .tooltip { z-index: 10; }
+.tech-skills-grid .tooltip-container:hover { z-index: 25; }
+

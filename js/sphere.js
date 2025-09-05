@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { url: 'assets/icons/typescript-icon.svg', label: 'TypeScript' },
     { url: 'assets/icons/visual-studio-code.svg', label: 'VS Code' },
     
+
     ];
     const wrapper = sphereContainer.querySelector('.sphere-wrapper');
     const tooltip = document.getElementById('tooltip');

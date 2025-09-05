@@ -93,7 +93,7 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
-	text-fill-color: transparent;
+	color: transparent;
 	animation: heroTextGradient 5s linear infinite alternate;
 	filter: drop-shadow(0 2px 16px var(--accent-color));
 }
@@ -267,9 +267,11 @@ section {
 .p-compact, .hero-intro { font-weight: 400; letter-spacing: .01em; }
 
 /* Custom scrollbars */
-html {
-	scrollbar-width: thin;
-	scrollbar-color: var(--accent-color) var(--background-color);
+@supports (scrollbar-width: thin) {
+	html {
+		scrollbar-width: thin;
+		scrollbar-color: var(--accent-color) var(--background-color);
+	}
 }
 ::-webkit-scrollbar {
 	width: 10px;

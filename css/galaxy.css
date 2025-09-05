@@ -125,9 +125,7 @@ code {
     min-height: 320px;
   }
 }
-.solar-syst:after {
-  /* Removed: singular white dot */
-}
+
 .solar-syst div {
   border-radius: 1000px;
   top: 50%;

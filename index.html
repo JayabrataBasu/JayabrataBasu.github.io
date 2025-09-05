@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/themes.css">
     <link rel="stylesheet" href="css/projects.css">
+    <!-- Premium fonts for Projects section -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/sphere.css">
     <link rel="stylesheet" href="css/utilities.css">
     <link rel="stylesheet" href="css/skills-section.css">
@@ -147,40 +149,105 @@
                         <span>Python</span><span>Pygame</span></span>
                     </div>
                 </div>
+                <div class="gold-divider" aria-hidden="true"></div>
                 <div class="project-showcase">
-                    <div class="carousel" id="zeldaa-carousel">
+                    <div class="carousel" id="zeldaa-carousel" data-tilt>
                         <img src="assets/images/Zeldaa-1.png" alt="Zeldaa Screenshot 1" class="carousel-img active">
                         <img src="assets/images/Zeldaa-2.png" alt="Zeldaa Screenshot 2" class="carousel-img">
                         <img src="assets/images/Zeldaa-3.png" alt="Zeldaa Screenshot 3" class="carousel-img">
                         <button class="carousel-btn prev bouncy-btn" aria-label="Previous image">&#8592;</button>
                         <button class="carousel-btn next bouncy-btn" aria-label="Next image">&#8594;</button>
+                        <div class="carousel-dots" role="tablist" aria-label="Carousel Dots"></div>
                     </div>
                 </div>
-                <p class="project-description">
-                    A performant real-time analytics dashboard emphasizing rendering efficiency and graceful degradation under load.
+                <p class="project-description" id="zeldaa-desc">
+                    A 2D adventure game inspired by classic titles, built using Python and Pygame. Features include a rich storyline, puzzle-solving elements, and an immersive pixel-art world. Inspired By The Legend of Zelda series.
                 </p>
                 <div class="project-links">
-                    <a href="#" class="btn bouncy-btn">Case Study</a>
+                    
                     <a href="#" class="btn bouncy-btn">Code</a>
                     <a href="#" class="btn btn-primary bouncy-btn">View Live</a>
                 </div>
             </div>
         </div>
         <script>
-        // Zeldaa carousel logic
-        (function() {
-          const carousel = document.getElementById('zeldaa-carousel');
-          if (!carousel) return;
-          const imgs = carousel.querySelectorAll('.carousel-img');
-          let idx = 0;
-          function show(i) {
-            imgs.forEach((img, j) => img.classList.toggle('active', j === i));
-          }
-          carousel.querySelector('.prev').onclick = () => { idx = (idx+imgs.length-1)%imgs.length; show(idx); };
-          carousel.querySelector('.next').onclick = () => { idx = (idx+1)%imgs.length; show(idx); };
-          // Auto-advance
-          setInterval(() => { idx = (idx+1)%imgs.length; show(idx); }, 3500);
-        })();
+                // Enhanced Zeldaa carousel logic + effects
+                (function() {
+                    const carousel = document.getElementById('zeldaa-carousel');
+                    if (!carousel) return;
+                    const imgs = [...carousel.querySelectorAll('.carousel-img')];
+                    const prevBtn = carousel.querySelector('.prev');
+                    const nextBtn = carousel.querySelector('.next');
+                    const dotsWrap = carousel.querySelector('.carousel-dots');
+                    const desc = document.getElementById('zeldaa-desc');
+                    let idx = 0; let autoTimer; const interval = 4500;
+
+                    // Build dots
+                    imgs.forEach((_, i) => {
+                        const b = document.createElement('button');
+                        b.type = 'button';
+                        b.setAttribute('role','tab');
+                        b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+                        b.addEventListener('click', () => { setIndex(i, true); restartAuto(); });
+                        dotsWrap.appendChild(b);
+                    });
+                    const dots = [...dotsWrap.children];
+
+                    function setIndex(newIdx, user=false){
+                        idx = (newIdx + imgs.length) % imgs.length;
+                        imgs.forEach((img,i)=>{
+                            img.classList.toggle('active', i===idx);
+                            if(i===idx){ // restart flash animation
+                                void img.offsetWidth; // reflow
+                            }
+                        });
+                        dots.forEach((d,i)=>{ d.classList.toggle('active', i===idx); d.setAttribute('aria-selected', i===idx); });
+                    }
+
+                    prevBtn.addEventListener('click', ()=>{ setIndex(idx-1,true); restartAuto(); });
+                        nextBtn.addEventListener('click', ()=>{ setIndex(idx+1,true); restartAuto(); });
+
+                    function autoAdvance(){ setIndex(idx+1); }
+                    function restartAuto(){ clearInterval(autoTimer); autoTimer = setInterval(autoAdvance, interval); }
+                    restartAuto();
+
+                    // Parallax tilt (lightweight)
+                    if (carousel.dataset.tilt !== undefined) {
+                        let req = null;
+                        const bounds = () => carousel.getBoundingClientRect();
+                        function onMove(e){
+                            if(req) return; req = requestAnimationFrame(()=>{
+                                const r = bounds();
+                                const x = (e.clientX - r.left)/r.width - .5;
+                                const y = (e.clientY - r.top)/r.height - .5;
+                                const rotX = (y * -6).toFixed(2);
+                                const rotY = (x * 6).toFixed(2);
+                                carousel.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+                                req = null;
+                            });
+                        }
+                        function resetTilt(){ carousel.style.transform='rotateX(0deg) rotateY(0deg)'; }
+                        carousel.addEventListener('mousemove', onMove);
+                        carousel.addEventListener('mouseleave', resetTilt);
+                    }
+
+                    // Reveal description when in view
+                    const io = new IntersectionObserver(entries => {
+                        entries.forEach(en => { if(en.isIntersecting){ desc.classList.add('revealed'); io.disconnect(); } });
+                    }, { threshold:.4 });
+                    io.observe(desc);
+
+                    // Button glow trail on click
+                    document.querySelectorAll('#projects .project-links .btn').forEach(btn => {
+                        btn.addEventListener('click', e => {
+                            btn.classList.remove('glow-trail');
+                            void btn.offsetWidth; // reflow to restart animation
+                            btn.classList.add('glow-trail');
+                        });
+                    });
+
+                    setIndex(0);
+                })();
         </script>
         
 

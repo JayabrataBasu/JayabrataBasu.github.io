@@ -1,3 +1,8 @@
+body, .skills-card-grid, .skill-card, .card-icons, .tooltip-container, .tooltip, .profile, .user, .about, .icon, .text {
+  font-family: 'Inter', 'Roboto', Arial, sans-serif;
+  font-weight: 400;
+  color: #eaeaea;
+}
 /* Skill Category Cards (modular layer) */
 :root {
   --skill-card-radius: 14px;
@@ -15,6 +20,7 @@
   padding: 0 0 2rem;
   position: relative;
   overflow: visible;
+  margin-top: 5.8rem; /* Added margin-top to move cards below the title */
 }
 
 /* Accent theme modifiers */

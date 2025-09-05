@@ -1,3 +1,8 @@
+body, .card, .fullscreen-section, .content-wrapper {
+    font-family: 'Inter', 'Roboto', Arial, sans-serif;
+    font-weight: 400;
+    color: #eaeaea;
+}
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }

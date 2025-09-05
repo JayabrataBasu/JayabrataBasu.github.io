@@ -292,8 +292,15 @@
                     </div>
         </footer>
     
-        <div id="tooltip"></div>
-        <div id="custom-cursor"></div>
+                <div id="tooltip"></div>
+                <div id="custom-cursor"></div>
+
+                <script>
+                // Prevent scroll-to-top for skill card icons
+                document.querySelectorAll('a.icon[href="#"]').forEach(function(el) {
+                    el.addEventListener('click', function(e) { e.preventDefault(); });
+                });
+                </script>
 
                 <script src="js/sphere.js"></script>
                 <script src="js/scroll-theme.js"></script>

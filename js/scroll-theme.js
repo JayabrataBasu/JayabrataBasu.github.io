@@ -1,1 +1,0 @@
-// Theme switching removed. Mono theme only.

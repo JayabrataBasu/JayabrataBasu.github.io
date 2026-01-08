@@ -1,383 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/tech-skills.css">
-    <!-- Playfair Display font for About card -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/skill-cards.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jayabrata Basu | Portfolio</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/themes.css">
-    <link rel="stylesheet" href="css/projects.css">
-    <!-- Premium fonts for Projects section -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sphere.css">
-    <link rel="stylesheet" href="css/utilities.css">
-    <link rel="stylesheet" href="css/skills-section.css">
-    <link rel="stylesheet" href="css/galaxy.css">
-    <link rel="stylesheet" href="css/about.css"
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body data-theme="lightning">
-        <!-- Quick Access Panel -->
-        <nav class="quick-access-panel">
-            <a href="#hero">Home</a>
-            <a href="#sphere-section">Skills</a>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-    <!-- HERO SECTION -->
-    <section id="hero" class="fullscreen-section" data-theme="lightning">
-        <div class="content-wrapper stack stack-gap-sm">
-                        <h1 class="fade-in delay-1 hero-title">Jayabrata Basu</h1>
-                        <p class="max-content center-inline fade-in delay-3 hero-intro">A passionate computer science student focused on the intersection of systems thinking, machine learning, and fintech. My goal is to build performant, scalable, and impactful software solutions.</p>
+<body data-page="home">
+    <div class="page-shell">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <div class="brand-mark">JB</div>
+                    <span>Jayabrata</span>
                 </div>
-        
-                <div class="scroll-cue">SCROLL</div>
-        </section>
-
-    <!-- SPHERE SECTION -->
-    <section id="sphere-section" class="fullscreen-section" data-theme="aqua">
-        <div class="content-wrapper">
-            <div id="sphere-container">
-                <div class="sphere-wrapper"></div>
             </div>
-        </div>
-    </section>
 
-    <!-- ABOUT ME SECTION -->
-    <section id="about" class="fullscreen-section" data-theme="lightning">
-        <div class="content-wrapper stack stack-lg">
-            <div class="fade-in delay-2">
-                <h2 class="section-title">About Me</h2>
-                <div class="divider"></div>
-                <div class="about-tilt-card lava-card">
-                    <div class="about-card-content">
-                        <h3 class="about-card-title">Who am I?</h3>
-                        <p class="about-card-text">
-                            I am Jayabrata Basu. I like to learn about new things and technologies. I believe that learning is an eternal journey and you can never get too old for it. I like playing games, reading and drinking coffee. I spend my time trying to create and simulate concepts I have learned about. I love cool and crazy ideas
-                        </p>
-                    </div>
-                    <div class="about-card-image">
-                        <div class="image-placeholder">
-                            <span>Image<br>Placeholder</span>
+            <div class="sidebar-profile">
+                <div class="profile-name">Jayabrata Basu</div>
+                <div class="profile-title">v1.0 • Systems/ML</div>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Main">
+                <a class="nav-link active" href="index.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <a class="nav-link" href="about.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    <span>About</span>
+                </a>
+                <a class="nav-link" href="cv.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <span>CV</span>
+                </a>
+                <a class="nav-link" href="projects.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                    <span>Projects</span>
+                </a>
+                <a class="nav-link" href="contact.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span>Contact</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Stage -->
+        <main class="main-stage">
+            <div class="home-layout">
+                <div class="welcome-column">
+                    <!-- Profile + Headline -->
+                    <div class="profile-headline-flex">
+                        <div class="profile-photo-wrapper">
+                            <img src="assets/profile/jayabratabasu.jpg" alt="Jayabrata Basu" class="profile-photo">
+                        </div>
+                        <div class="headline-text">
+                            <h1>Building scalable software at the edge of possibility</h1>
+                            <p class="text-large">Systems engineer and ML practitioner working on high-performance infrastructure, algorithmic trading systems, and intelligent automation.</p>
                         </div>
                     </div>
-                    <div class="lava-accent"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TECH SKILLS section starts here -->
-    <section id="tech-skills" class="tech-skills-section">
-        <h2>Tech Skills</h2>
-        <div class="skills-card-grid">
-            <!-- Programming Languages Card -->
-            <section class="skill-card accent-warm" data-category="languages" aria-labelledby="card-languages-heading">
-                <h3 id="card-languages-heading" class="card-heading">Programming Languages</h3>
-                <div class="card-lines">
-                    <p class="card-line">Core syntax & paradigms</p>
-                    <p class="card-line">Performance & safety tradeoffs</p>
-                </div>
-                <div class="card-icons">
-                    <!-- Icons: JS, TS, Python, Java, Kotlin, C, C++, Rust, R -->
-                    <!-- Reusing existing tooltip structure; assigning stagger index via inline style -->
-                    <div class="tooltip-container stagger-0"><div class="tooltip"><div class="profile"><div class="user"><div class="img">JS</div><div class="details"><div class="name">JavaScript</div><div class="username">@javascript</div></div></div><div class="about">ES6+, DOM APIs, Async patterns</div></div></div><a class="icon" href="#" aria-label="JavaScript"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/javascript.svg" alt="JavaScript" class="js-icon-svg" /></span></div><div class="text">JavaScript</div></a></div>
-                    <div class="tooltip-container stagger-1"><div class="tooltip"><div class="profile"><div class="user"><div class="img">TS</div><div class="details"><div class="name">TypeScript</div><div class="username">@typescript</div></div></div><div class="about">Static typing, interfaces, generics</div></div></div><a class="icon" href="#" aria-label="TypeScript"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/typescript-icon.svg" alt="TypeScript" class="js-icon-svg" /></span></div><div class="text">TypeScript</div></a></div>
-                    <div class="tooltip-container stagger-2"><div class="tooltip"><div class="profile"><div class="user"><div class="img">PY</div><div class="details"><div class="name">Python</div><div class="username">@python</div></div></div><div class="about">Data, scripting, backends</div></div></div><a class="icon" href="#" aria-label="Python"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/python.svg" alt="Python" class="js-icon-svg" /></span></div><div class="text">Python</div></a></div>
-                    <div class="tooltip-container stagger-3"><div class="tooltip"><div class="profile"><div class="user"><div class="img">JV</div><div class="details"><div class="name">Java</div><div class="username">@java</div></div></div><div class="about">JVM, OOP, concurrency basics</div></div></div><a class="icon" href="#" aria-label="Java"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/java.svg" alt="Java" class="js-icon-svg" /></span></div><div class="text">Java</div></a></div>
-                    <div class="tooltip-container stagger-4"><div class="tooltip"><div class="profile"><div class="user"><div class="img">KT</div><div class="details"><div class="name">Kotlin</div><div class="username">@kotlin</div></div></div><div class="about">Null safety, coroutines</div></div></div><a class="icon" href="#" aria-label="Kotlin"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/kotlin-icon.svg" alt="Kotlin" class="js-icon-svg" /></span></div><div class="text">Kotlin</div></a></div>
-                    <div class="tooltip-container stagger-5"><div class="tooltip"><div class="profile"><div class="user"><div class="img">C</div><div class="details"><div class="name">C</div><div class="username">@clang</div></div></div><div class="about">Pointers, memory mgmt</div></div></div><a class="icon" href="#" aria-label="C"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/c.svg" alt="C" class="js-icon-svg" /></span></div><div class="text">C</div></a></div>
-                    <div class="tooltip-container stagger-6"><div class="tooltip"><div class="profile"><div class="user"><div class="img">C++</div><div class="details"><div class="name">C++</div><div class="username">@cpp</div></div></div><div class="about">STL, RAII, templates</div></div></div><a class="icon" href="#" aria-label="C++"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/c-plusplus.svg" alt="C++" class="js-icon-svg" /></span></div><div class="text">C++</div></a></div>
-                    <div class="tooltip-container stagger-7"><div class="tooltip"><div class="profile"><div class="user"><div class="img">RS</div><div class="details"><div class="name">Rust</div><div class="username">@rust</div></div></div><div class="about">Ownership & safety</div></div></div><a class="icon" href="#" aria-label="Rust"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/rust-svgrepo-com.svg" alt="Rust" class="js-icon-svg" /></span></div><div class="text">Rust</div></a></div>
-                    <div class="tooltip-container stagger-8"><div class="tooltip"><div class="profile"><div class="user"><div class="img">R</div><div class="details"><div class="name">R</div><div class="username">@rstats</div></div></div><div class="about">Statistical computing</div></div></div><a class="icon" href="#" aria-label="R"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/icons8-r-project.svg" alt="R" class="js-icon-svg" /></span></div><div class="text">R</div></a></div>
-                </div>
-            </section>
-
-            <!-- Frameworks & Libraries Card -->
-            <section class="skill-card accent-cool" data-category="frameworks" aria-labelledby="card-frameworks-heading">
-                <h3 id="card-frameworks-heading" class="card-heading">Frameworks & Libraries</h3>
-                <div class="card-lines">
-                    <p class="card-line">UI, backend & ML stacks</p>
-                    <p class="card-line">Productive abstractions</p>
-                </div>
-                <div class="card-icons">
-                    <div class="tooltip-container stagger-0"><div class="tooltip"><div class="profile"><div class="user"><div class="img">RE</div><div class="details"><div class="name">React</div><div class="username">@react</div></div></div><div class="about">Components, hooks, reconciliation</div></div></div><a class="icon" href="#" aria-label="React"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/react.svg" alt="React" class="js-icon-svg" /></span></div><div class="text">React</div></a></div>
-                    <div class="tooltip-container stagger-1"><div class="tooltip"><div class="profile"><div class="user"><div class="img">DJ</div><div class="details"><div class="name">Django</div><div class="username">@django</div></div></div><div class="about">MTV architecture, ORM</div></div></div><a class="icon" href="#" aria-label="Django"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/django-icon.svg" alt="Django" class="js-icon-svg" /></span></div><div class="text">Django</div></a></div>
-                    <div class="tooltip-container stagger-2"><div class="tooltip"><div class="profile"><div class="user"><div class="img">TW</div><div class="details"><div class="name">Tailwind</div><div class="username">@tailwind</div></div></div><div class="about">Utility-first responsive design</div></div></div><a class="icon" href="#" aria-label="Tailwind CSS"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/tailwindcss-icon.svg" alt="TailwindCSS" class="js-icon-svg" /></span></div><div class="text">Tailwind</div></a></div>
-                    <div class="tooltip-container stagger-3"><div class="tooltip"><div class="profile"><div class="user"><div class="img">PT</div><div class="details"><div class="name">PyTorch</div><div class="username">@pytorch</div></div></div><div class="about">Autograd & deep learning</div></div></div><a class="icon" href="#" aria-label="PyTorch"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/pytorch-icon.svg" alt="PyTorch" class="js-icon-svg" /></span></div><div class="text">PyTorch</div></a></div>
-                    <div class="tooltip-container stagger-4"><div class="tooltip"><div class="profile"><div class="user"><div class="img">TF</div><div class="details"><div class="name">TensorFlow</div><div class="username">@tensorflow</div></div></div><div class="about">Model graphs & training</div></div></div><a class="icon" href="#" aria-label="TensorFlow"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/icons8-tensorflow.svg" alt="TensorFlow" class="js-icon-svg" /></span></div><div class="text">TensorFlow</div></a></div>
-                </div>
-            </section>
-
-            <!-- Tools & Environments Card -->
-            <section class="skill-card accent-green" data-category="tools" aria-labelledby="card-tools-heading">
-                <h3 id="card-tools-heading" class="card-heading">Tools & Environments</h3>
-                <div class="card-lines">
-                    <p class="card-line">Dev productivity & workflow</p>
-                    <p class="card-line">Environment & version control</p>
-                </div>
-                <div class="card-icons">
-                    <div class="tooltip-container stagger-0"><div class="tooltip"><div class="profile"><div class="user"><div class="img">GT</div><div class="details"><div class="name">Git</div><div class="username">@git</div></div></div><div class="about">Branching & version control</div></div></div><a class="icon" href="#" aria-label="Git"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/git-icon.svg" alt="Git" class="js-icon-svg" /></span></div><div class="text">Git</div></a></div>
-                    <div class="tooltip-container stagger-1"><div class="tooltip"><div class="profile"><div class="user"><div class="img">GH</div><div class="details"><div class="name">GitHub</div><div class="username">@github</div></div></div><div class="about">Collaboration & workflows</div></div></div><a class="icon" href="#" aria-label="GitHub"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/github-icon.svg" alt="GitHub" class="js-icon-svg" /></span></div><div class="text">GitHub</div></a></div>
-                    <div class="tooltip-container stagger-2"><div class="tooltip"><div class="profile"><div class="user"><div class="img">CD</div><div class="details"><div class="name">Conda</div><div class="username">@conda</div></div></div><div class="about">Env & package mgmt</div></div></div><a class="icon" href="#" aria-label="Conda"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/conda.svg" alt="Conda" class="js-icon-svg" /></span></div><div class="text">Conda</div></a></div>
-                    <div class="tooltip-container stagger-3"><div class="tooltip"><div class="profile"><div class="user"><div class="img">JP</div><div class="details"><div class="name">Jupyter</div><div class="username">@jupyter</div></div></div><div class="about">Interactive data notebooks</div></div></div><a class="icon" href="#" aria-label="Jupyter"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/jupyter.svg" alt="Jupyter" class="js-icon-svg" /></span></div><div class="text">Jupyter</div></a></div>
-                    <div class="tooltip-container stagger-4"><div class="tooltip"><div class="profile"><div class="user"><div class="img">PC</div><div class="details"><div class="name">PyCharm</div><div class="username">@pycharm</div></div></div><div class="about">Python IDE productivity</div></div></div><a class="icon" href="#" aria-label="PyCharm"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/pycharm.svg" alt="PyCharm" class="js-icon-svg" /></span></div><div class="text">PyCharm</div></a></div>
-                    <div class="tooltip-container stagger-5"><div class="tooltip"><div class="profile"><div class="user"><div class="img">IJ</div><div class="details"><div class="name">IntelliJ</div><div class="username">@intellij</div></div></div><div class="about">JVM dev tooling</div></div></div><a class="icon" href="#" aria-label="IntelliJ IDEA"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/intellij-idea.svg" alt="IntelliJ IDEA" class="js-icon-svg" /></span></div><div class="text">IntelliJ</div></a></div>
-                    <div class="tooltip-container stagger-6"><div class="tooltip"><div class="profile"><div class="user"><div class="img">VS</div><div class="details"><div class="name">VS Code</div><div class="username">@vscode</div></div></div><div class="about">Extensions, debugging</div></div></div><a class="icon" href="#" aria-label="VS Code"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/visual-studio-code.svg" alt="VS Code" class="js-icon-svg" /></span></div><div class="text">VS Code</div></a></div>
-                    <div class="tooltip-container stagger-7"><div class="tooltip"><div class="profile"><div class="user"><div class="img">LN</div><div class="details"><div class="name">Linux</div><div class="username">@linux</div></div></div><div class="about">CLI tools & shell basics</div></div></div><a class="icon" href="#" aria-label="Linux"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/linux-mint.svg" alt="Linux" class="js-icon-svg" /></span></div><div class="text">Linux</div></a></div>
-                    <div class="tooltip-container stagger-8"><div class="tooltip"><div class="profile"><div class="user"><div class="img">Sta</div><div class="details"><div class="name">Stata</div><div class="username">@stata</div></div></div><div class="about">Statistical analysis</div></div></div><a class="icon" href="#" aria-label="Stata"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/stata.svg" alt="Stata" class="js-icon-svg" /></span></div><div class="text">Stata</div></a></div>
-                </div>
-            </section>
-
-            <!-- Platforms / DB / Hardware Card -->
-            <section class="skill-card accent-purple" data-category="platforms" aria-labelledby="card-platforms-heading">
-                <h3 id="card-platforms-heading" class="card-heading">Platforms & Databases</h3>
-                <div class="card-lines">
-                    <p class="card-line">Storage, runtime & devices</p>
-                    <p class="card-line">Ecosystem integration</p>
-                </div>
-                <div class="card-icons">
-                    <div class="tooltip-container stagger-0"><div class="tooltip"><div class="profile"><div class="user"><div class="img">MY</div><div class="details"><div class="name">MySQL</div><div class="username">@mysql</div></div></div><div class="about">Relational schema design</div></div></div><a class="icon" href="#" aria-label="MySQL"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/mysql.svg" alt="MySQL" class="js-icon-svg" /></span></div><div class="text">MySQL</div></a></div>
-                    <div class="tooltip-container stagger-1"><div class="tooltip"><div class="profile"><div class="user"><div class="img">PG</div><div class="details"><div class="name">PostgreSQL</div><div class="username">@postgresql</div></div></div><div class="about">Advanced SQL & indexing</div></div></div><a class="icon" href="#" aria-label="PostgreSQL"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/postgresql.svg" alt="PostgreSQL" class="js-icon-svg" /></span></div><div class="text">PostgreSQL</div></a></div>
-                    <div class="tooltip-container stagger-3"><div class="tooltip"><div class="profile"><div class="user"><div class="img">AR</div><div class="details"><div class="name">Arduino</div><div class="username">@arduino</div></div></div><div class="about">Embedded prototyping</div></div></div><a class="icon" href="#" aria-label="Arduino"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/arduino.svg" alt="Arduino" class="js-icon-svg" /></span></div><div class="text">Arduino</div></a></div>
-                    <div class="tooltip-container stagger-4"><div class="tooltip"><div class="profile"><div class="user"><div class="img">AS</div><div class="details"><div class="name">Android Studio</div><div class="username">@androidstudio</div></div></div><div class="about">Gradle builds, UI layouts</div></div></div><a class="icon" href="#" aria-label="Android Studio"><div class="layer"><span></span><span></span><span></span><span></span><span class="jsSVG"><img src="assets/icons/icons8-android-studio.svg" alt="Android Studio" class="js-icon-svg" /></span></div><div class="text">Android Studio</div></a></div>
-                </div>
-            </section>
-        </div>
-    </section>
-
-    <!-- TECH STACK AND SKILLSET SECTION -->
-    <!-- ...existing code... -->
-
-    <!-- PROJECTS SECTION -->
-    <section id="projects" class="fullscreen-section" data-theme="aqua">
-        <div class="content-wrapper">
-            <h2 class="section-title">Projects</h2>
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>Zeldaa</h3>
-                    <div class="project-tags">
-                        <span>Python</span><span>Pygame</span></span>
-                    </div>
-                </div>
-                <div class="gold-divider" aria-hidden="true"></div>
-                <div class="project-showcase">
-                    <div class="carousel" id="zeldaa-carousel" data-tilt>
-                        <img src="assets/images/Zeldaa-1.png" alt="Zeldaa Screenshot 1" class="carousel-img active">
-                        <img src="assets/images/Zeldaa-2.png" alt="Zeldaa Screenshot 2" class="carousel-img">
-                        <img src="assets/images/Zeldaa-3.png" alt="Zeldaa Screenshot 3" class="carousel-img">
-                        <button class="carousel-btn prev bouncy-btn" aria-label="Previous image">&#8592;</button>
-                        <button class="carousel-btn next bouncy-btn" aria-label="Next image">&#8594;</button>
-                        <div class="carousel-dots" role="tablist" aria-label="Carousel Dots"></div>
-                    </div>
-                </div>
-                <p class="project-description" id="zeldaa-desc">
-                    A 2D adventure game inspired by classic titles, built using Python and Pygame. Features include a rich storyline, puzzle-solving elements, and an immersive pixel-art world. Inspired By The Legend of Zelda series.
-                </p>
-                <div class="project-links">
                     
-                    <a href="#" class="btn bouncy-btn">Code</a>
-                    <a href="#" class="btn btn-primary bouncy-btn">View Live</a>
-                </div>
-            </div>
-        </div>
-        <script>
-                // Enhanced Zeldaa carousel logic + effects
-                (function() {
-                    const carousel = document.getElementById('zeldaa-carousel');
-                    if (!carousel) return;
-                    const imgs = [...carousel.querySelectorAll('.carousel-img')];
-                    const prevBtn = carousel.querySelector('.prev');
-                    const nextBtn = carousel.querySelector('.next');
-                    const dotsWrap = carousel.querySelector('.carousel-dots');
-                    const desc = document.getElementById('zeldaa-desc');
-                    let idx = 0; let autoTimer; const interval = 4500;
+                    <div class="cta-row">
+                        <a class="btn primary" href="projects.html">View Projects</a>
+                        <a class="btn secondary" href="cv.html">Download CV</a>
+                    </div>
 
-                    // Build dots
-                    imgs.forEach((_, i) => {
-                        const b = document.createElement('button');
-                        b.type = 'button';
-                        b.setAttribute('role','tab');
-                        b.setAttribute('aria-label', 'Go to slide ' + (i+1));
-                        b.addEventListener('click', () => { setIndex(i, true); restartAuto(); });
-                        dotsWrap.appendChild(b);
-                    });
-                    const dots = [...dotsWrap.children];
-
-                    function setIndex(newIdx, user=false){
-                        idx = (newIdx + imgs.length) % imgs.length;
-                        imgs.forEach((img,i)=>{
-                            img.classList.toggle('active', i===idx);
-                            if(i===idx){ // restart flash animation
-                                void img.offsetWidth; // reflow
-                            }
-                        });
-                        dots.forEach((d,i)=>{ d.classList.toggle('active', i===idx); d.setAttribute('aria-selected', i===idx); });
-                    }
-
-                    prevBtn.addEventListener('click', ()=>{ setIndex(idx-1,true); restartAuto(); });
-                        nextBtn.addEventListener('click', ()=>{ setIndex(idx+1,true); restartAuto(); });
-
-                    function autoAdvance(){ setIndex(idx+1); }
-                    function restartAuto(){ clearInterval(autoTimer); autoTimer = setInterval(autoAdvance, interval); }
-                    restartAuto();
-
-                    // Parallax tilt (lightweight)
-                    if (carousel.dataset.tilt !== undefined) {
-                        let req = null;
-                        const bounds = () => carousel.getBoundingClientRect();
-                        function onMove(e){
-                            if(req) return; req = requestAnimationFrame(()=>{
-                                const r = bounds();
-                                const x = (e.clientX - r.left)/r.width - .5;
-                                const y = (e.clientY - r.top)/r.height - .5;
-                                const rotX = (y * -6).toFixed(2);
-                                const rotY = (x * 6).toFixed(2);
-                                carousel.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-                                req = null;
-                            });
-                        }
-                        function resetTilt(){ carousel.style.transform='rotateX(0deg) rotateY(0deg)'; }
-                        carousel.addEventListener('mousemove', onMove);
-                        carousel.addEventListener('mouseleave', resetTilt);
-                    }
-
-                    // Reveal description when in view
-                    const io = new IntersectionObserver(entries => {
-                        entries.forEach(en => { if(en.isIntersecting){ desc.classList.add('revealed'); io.disconnect(); } });
-                    }, { threshold:.4 });
-                    io.observe(desc);
-
-                    // Button glow trail on click
-                    document.querySelectorAll('#projects .project-links .btn').forEach(btn => {
-                        btn.addEventListener('click', e => {
-                            btn.classList.remove('glow-trail');
-                            void btn.offsetWidth; // reflow to restart animation
-                            btn.classList.add('glow-trail');
-                        });
-                    });
-
-                    setIndex(0);
-                })();
-        </script>
-        
-
-    <!-- RESEARCH SECTION -->
-    <section id="research" class="fullscreen-section" data-theme="fire">
-        <div class="content-wrapper">
-            <h2 class="section-title">Research</h2>
-            <p>Details about my research publications and areas of interest will be featured here soon.</p>
-        </div>
-    </section>
-
-    <!-- GET IN TOUCH SECTION -->
-    <footer id="contact" class="fullscreen-section" data-theme="lightning">
-                <div class="content-wrapper contact-layout">
-                        <h2>Get In Touch</h2>
-                        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious vision.</p>
-                        <div class="contact-links">
-                                <a href="mailto:jayabratabasu@gmail.com">Email</a>
-                                <a href="https://github.com/jayabratabasu" target="_blank" rel="noopener noreferrer">GitHub</a>
-                                <a href="https://linkedin.com/in/jayabratabasu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                        </div>
-                </div>
-        </footer>
-
-        <!-- Solar System Footer -->
-        <footer id="solar-footer">
-                    <div class="solar-system-flex">
-                        <div class="solar-syst">
-                            <div class="sun"></div>
-                            <div class="mercury planet"></div>
-                            <div class="venus planet"></div>
-                            <div class="earth planet"></div>
-                            <div class="mars planet"></div>
-                            <div class="jupiter planet"></div>
-                            <div class="saturn planet">
-                                <span class="saturn-ring"></span>
+                    <!-- The Field Log: Timeline Component -->
+                    <div class="timeline-panel">
+                        <h2 class="timeline-title">The Field Log</h2>
+                        <div class="timeline-container">
+                            <div class="timeline-entry">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">2025 — Present</div>
+                                    <h3 class="timeline-title-entry">VeridicalDB</h3>
+                                    <p class="timeline-description">Building a high-performance distributed database engine. Focus: Raft consensus, low-latency queries, horizontal scalability.</p>
+                                </div>
                             </div>
-                            <div class="uranus planet"></div>
-                            <div class="neptune planet"></div>
-                            <div class="asteroids-belt"></div>
+
+                            <div class="timeline-entry">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">Late 2024</div>
+                                    <h3 class="timeline-title-entry">HarvestForGood</h3>
+                                    <p class="timeline-description">Geospatial data platform for agricultural insights. Focus: Real-time telemetry pipelines, spatial indexing, and anomaly detection.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-entry">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">Mid 2024</div>
+                                    <h3 class="timeline-title-entry">Research Fellowship</h3>
+                                    <p class="timeline-description">Graph neural networks for molecular property prediction. Focus: Model efficiency, interpretability, and empirical validation.</p>
+                                </div>
+                            </div>
+
+                            <div class="timeline-entry">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date">2023</div>
+                                    <h3 class="timeline-title-entry">The Hello World Moment</h3>
+                                    <p class="timeline-description">First deep dive into machine learning and systems engineering. Learned fundamentals of deep learning, distributed systems, and building at scale.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-        </footer>
-    
-                <div id="tooltip"></div>
-                <div id="custom-cursor"></div>
+                </div>
 
-                <script>
-                // Prevent scroll-to-top for skill card icons
-                document.querySelectorAll('a.icon[href="#"]').forEach(function(el) {
-                    el.addEventListener('click', function(e) { e.preventDefault(); });
-                });
-                </script>
+                <div class="globe-column">
+                    <div class="globe-card">
+                        <div id="sphere-container">
+                            <div class="sphere-wrapper"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
-                <script src="js/sphere.js"></script>
-                <script src="js/scroll-theme.js"></script>
-                <script src="js/galaxy.js"></script>
-                <script src="js/about-effects.js"></script>
-                <script>
-                // Glassmorphic Carousel Logic
-                const panels = document.querySelectorAll('.glass-panel');
-                const dots = document.querySelectorAll('.carousel-dot');
-                let current = 0;
-                function showPanel(idx) {
-                    panels.forEach((p, i) => {
-                        p.classList.toggle('active', i === idx);
-                        p.classList.toggle('inactive', i !== idx);
-                    });
-                    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-                    current = idx;
-                }
-                dots.forEach(dot => {
-                    dot.addEventListener('click', () => showPanel(Number(dot.dataset.index)));
-                });
-                let autoCarousel = setInterval(() => {
-                    showPanel((current + 1) % panels.length);
-                }, 3500);
-                panels.forEach(panel => {
-                    panel.addEventListener('mouseenter', () => clearInterval(autoCarousel));
-                    panel.addEventListener('mouseleave', () => {
-                        autoCarousel = setInterval(() => {
-                            showPanel((current + 1) % panels.length);
-                        }, 3500);
-                    });
-                });
-                // Smooth scroll for quick access panel
-                document.querySelectorAll('.quick-access-panel a').forEach(link => {
-                    link.addEventListener('click', function(e) {
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            e.preventDefault();
-                            window.scrollTo({
-                                top: target.offsetTop - 60,
-                                behavior: 'smooth'
-                            });
-                        }
-                    });
-                });
-                // Custom animated circle cursor
-                const cursor = document.getElementById('custom-cursor');
-                document.addEventListener('mousemove', e => {
-                        cursor.style.left = e.clientX + 'px';
-                        cursor.style.top = e.clientY + 'px';
-                });
-                document.addEventListener('mousedown', () => cursor.classList.add('active'));
-                document.addEventListener('mouseup', () => cursor.classList.remove('active'));
-                document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-                document.addEventListener('mouseenter', () => cursor.style.opacity = '0.85');
-                ['a','button','input','textarea'].forEach(sel => {
-                        document.querySelectorAll(sel).forEach(el => {
-                                el.addEventListener('mouseenter',()=>cursor.classList.add('active'));
-                                el.addEventListener('mouseleave',()=>cursor.classList.remove('active'));
-                        });
-                });
-                </script>
+    <div id="tooltip"></div>
+
+    <script src="js/site.js" defer></script>
+    <script src="js/sphere.js" defer></script>
 </body>
 </html>

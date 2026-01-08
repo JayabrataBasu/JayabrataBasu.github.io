@@ -77,7 +77,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #ff6a00 0%, #ffb347 100%);
+    background: var(--accent-color);
     min-width: 180px;
     max-width: 240px;
     position: relative;

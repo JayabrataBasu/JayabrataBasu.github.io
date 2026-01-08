@@ -3,7 +3,7 @@
 #skills {
   padding-top: 3.5rem;
   padding-bottom: 4rem;
-  background: linear-gradient(120deg, #0a2233 0%, #0e2233 100%);
+  background: var(--surface-color);
 }
 
 #skills .section-title {
@@ -29,7 +29,7 @@
 }
 
 #skills .glass {
-  background: linear-gradient(135deg, rgba(20,40,60,0.92) 60%, rgba(0,255,255,0.08) 100%);
+  background: var(--surface-color);
   border: 1.5px solid rgba(0,255,255,0.13);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   backdrop-filter: blur(14px) saturate(160%);
@@ -48,7 +48,7 @@
   position: absolute;
   top: 0; left: 0; right: 0; height: 7px;
   border-radius: 2.3rem 2.3rem 0 0;
-  background: linear-gradient(90deg, var(--accent-color), #00e0ff88, transparent);
+  background: var(--accent-color);
   opacity: 0.85;
   z-index: 2;
 }
@@ -66,7 +66,7 @@
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-color) 60%, #00e0ff 100%);
+  background: var(--accent-color);
   box-shadow: 0 2px 16px #00e0ff55;
   display: flex;
   align-items: center;

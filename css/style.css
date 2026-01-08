@@ -1,0 +1,420 @@
+/* Modern Naturalist's Journal — Overrides */
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+
+:root {
+  --journal-heading: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --journal-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+  --journal-heading-color: #2F3E46; /* Dark Slate */
+  --journal-body-color: #52796F;   /* Muted greenish grey */
+
+  --journal-card-bg: #F9F7F1;      /* Cream */
+  --journal-card-border: #B7B7A4;  /* Earthy grey */
+  --journal-shadow-color: #354F52; /* Hard shadow color */
+  --journal-sage: #CAD2C5;         /* Soft Sage Green */
+}
+
+/* Typography */
+body {
+  font-family: var(--journal-body);
+  color: var(--journal-body-color);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  font-size: 2.25rem;
+  line-height: 1.08;
+  margin: 0 0 0.6rem 0;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+h2 {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  font-size: 1.5rem;
+  line-height: 1.12;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+}
+
+h3 {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  font-size: 1.125rem;
+  line-height: 1.2;
+  margin: 0 0 0.5rem 0;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  font-style: normal;
+} 
+
+/* Index Card effect for cards */
+.card,
+.project-card,
+.globe-card,
+.contact-card {
+  background: var(--journal-card-bg) !important;
+  border: 1px solid var(--journal-card-border) !important;
+  box-shadow: 4px 4px 0 var(--journal-shadow-color) !important;
+  transition: transform 180ms cubic-bezier(.2,.7,.2,1), box-shadow 180ms cubic-bezier(.2,.7,.2,1);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.card .card-title,
+.project-card .card-title {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  margin-top: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.125rem;
+}
+
+.card .card-description {
+  color: var(--journal-body-color);
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.card:hover,
+.project-card:hover,
+.globe-card:hover,
+.contact-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--journal-shadow-color);
+  z-index: 3;
+} 
+
+/* Project thumbnails — Graph paper with diagonal micro-stripes */
+.project-image,
+.card-placeholder {
+  position: relative; /* enable ::after overlay */
+  background-color: var(--journal-card-bg) !important;
+  /* Graph paper lines */
+  background-image:
+    linear-gradient(0deg, rgba(202,210,197,0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(202,210,197,0.5) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+  border-radius: inherit;
+  border: 1px solid rgba(183,183,164,0.6);
+  overflow: hidden;
+}
+
+/* Diagonal micro-stripe overlay for subtle texture */
+.project-image::after,
+.card-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(135deg, rgba(202,210,197,0.18) 0, rgba(202,210,197,0.18) 1px, transparent 1px, transparent 6px);
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
+/* Buttons — Stamp effect */
+a.button,
+.button,
+.button-primary,
+.btn,
+.btn-primary,
+.cta-row .button {
+  background: #354F52; /* Dark Green */
+  color: #ffffff !important;
+  border-radius: 9999px;
+  border: 1px solid #2B3F43;
+  padding: 8px 18px;
+  line-height: 1;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 2px 2px 0 #2B3F43;
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+} 
+
+/* Hover/Active interactions */
+a.button:hover,
+.button:hover,
+.button-primary:hover,
+.btn:hover,
+.btn-primary:hover,
+.cta-row .button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #2B3F43;
+  filter: saturate(1.02);
+}
+
+a.button:active,
+.button:active,
+.button-primary:active,
+.btn:active,
+.btn-primary:active,
+.cta-row .button:active {
+  transform: translate(0, 0);
+  box-shadow: 1px 1px 0 #2B3F43;
+}
+
+/* ============================================
+   TIMELINE: The Field Log
+   ============================================ */
+.timeline-panel {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--journal-card-border);
+}
+
+.timeline-title {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.timeline-container {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 8px;
+  position: relative;
+  padding-left: 24px;
+}
+
+/* Dashed border-left for the timeline line */
+.timeline-container {
+  border-left: 2px dashed var(--journal-card-border);
+}
+
+.timeline-entry {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 16px;
+}
+
+/* Timeline dot */
+.timeline-dot {
+  position: absolute;
+  left: -16px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--journal-card-border);
+  border: 2px solid var(--journal-card-bg);
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+  flex-shrink: 0;
+}
+
+.timeline-entry:hover .timeline-dot {
+  background-color: var(--journal-heading-color);
+  box-shadow: 0 0 0 6px rgba(47, 62, 70, 0.08);
+}
+
+.timeline-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--journal-heading-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.timeline-title-entry {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  font-size: 1.1rem;
+  margin: 0 0 0.4rem 0;
+  font-weight: 700;
+}
+
+.timeline-description {
+  color: var(--journal-body-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================
+   ABOUT PAGE: Gallery & Hero Section
+   ============================================ */
+.about-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+}
+
+.profile-image-wrapper {
+  margin-bottom: 2rem;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--journal-card-border);
+  filter: sepia(0.2);
+  box-shadow: 0 8px 16px rgba(47, 62, 70, 0.1);
+}
+
+.bio-section {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bio-section h1 {
+  margin-bottom: 0.4rem;
+}
+
+.bio-subtitle {
+  font-family: var(--journal-heading);
+  color: var(--journal-heading-color);
+  font-size: 1.25rem;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.bio-text {
+  color: var(--journal-body-color);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Gallery Section */
+.about-gallery {
+  margin-top: 3rem;
+}
+
+.about-gallery h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--journal-heading-color);
+}
+
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+/* Polaroid Card Style */
+.polaroid-card {
+  width: 140px;
+  aspect-ratio: 3 / 4;
+  background: #F9F7F1;
+  border: 8px solid white;
+  box-shadow: 0 10px 24px rgba(47, 62, 70, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 200ms ease;
+  cursor: pointer;
+}
+
+.polaroid-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(47, 62, 70, 0.2);
+}
+
+.polaroid-image {
+  flex: 1;
+  background-color: var(--journal-card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.polaroid-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--journal-heading-color);
+  opacity: 0.7;
+}
+
+.polaroid-label {
+  padding: 8px 10px;
+  background: #F9F7F1;
+  font-family: var(--journal-body);
+  font-size: 0.8rem;
+  color: var(--journal-heading-color);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  border-top: 1px solid rgba(183, 183, 164, 0.2);
+}
+
+/* ============================================
+   UTILITY: Scrollbar Styling
+   ============================================ */
+.timeline-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background: var(--journal-card-border);
+  border-radius: 3px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb:hover {
+  background: var(--journal-heading-color);
+}
+
+/* ============================================
+   HOME PAGE: Profile + Headline Flex
+   ============================================ */
+.profile-headline-flex {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.profile-photo-wrapper {
+  flex-shrink: 0;
+  background: var(--journal-card-bg);
+  border: 1px solid var(--journal-card-border);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(47, 62, 70, 0.08);
+}
+
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+.headline-text {
+  flex: 1;
+}
+
+.headline-text h1 {
+  margin-top: 0;
+}
+
+.headline-text .text-large {
+  margin-top: 0.8rem;
+}
+

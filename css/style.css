@@ -120,17 +120,15 @@ h3 {
   opacity: 0.4;
 }
 
-/* Buttons — Stamp effect */
+/* Buttons — Stamp effect (shared size & movement) */
 a.button,
 .button,
 .button-primary,
-.btn.primary,
+.btn,
 .btn-primary,
 .cta-row .button {
-  background: #354F52; /* Dark Green */
-  color: #ffffff;
+  /* Shared stamp geometry and interaction behavior */
   border-radius: 9999px;
-  border: 1px solid #2B3F43;
   padding: 8px 18px;
   line-height: 1;
   font-weight: 700;
@@ -141,35 +139,61 @@ a.button,
   overflow: hidden;
   box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 2px 2px 0 #2B3F43;
   transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
-} 
+}
 
-/* Hover/Active interactions */
+/* Primary button color (keeps the original stamp look) */
+.btn.primary,
+.btn-primary,
+a.button {
+  background: #354F52; /* Dark Green */
+  color: #ffffff;
+  border: 1px solid #2B3F43;
+}
+
+/* Hover/Active interactions (consistent movement for all .btn) */
+.btn:hover,
+.cta-row .button:hover,
 a.button:hover,
 .button:hover,
-.button-primary:hover,
-.btn.primary:hover,
-.btn-primary:hover,
-.cta-row .button:hover {
+.button-primary:hover {
   transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0 #2B3F43;
   filter: saturate(1.02);
 }
 
+.btn:active,
+.btn:active,
+.cta-row .button:active,
 a.button:active,
 .button:active,
-.button-primary:active,
-.btn.primary:active,
-.btn-primary:active,
-.cta-row .button:active {
+.button-primary:active {
   transform: translate(0, 0);
+}
+
+/* Primary specific shadow states */
+.btn.primary:hover,
+.btn-primary:hover {
+  box-shadow: 4px 4px 0 #2B3F43;
+}
+
+.btn.primary:active,
+.btn-primary:active {
   box-shadow: 1px 1px 0 #2B3F43;
 }
 
-/* Ensure secondary buttons remain high-contrast on light surfaces */
+/* Ensure secondary buttons remain high-contrast on light surfaces and keep a subtler stamp */
 .btn.secondary {
   background: #ffffff;
   color: var(--text-main) !important;
   border: 1px solid var(--border-subtle);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06) inset, 2px 2px 0 rgba(47,62,70,0.18);
+}
+
+.btn.secondary:hover {
+  box-shadow: 4px 4px 0 rgba(47,62,70,0.18);
+}
+
+.btn.secondary:active {
+  box-shadow: 1px 1px 0 rgba(47,62,70,0.18);
 }
 
 /* ============================================

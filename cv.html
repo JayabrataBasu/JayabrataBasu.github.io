@@ -75,14 +75,24 @@
                         <a class="btn secondary" href="assets/cv.pdf" download>Download</a>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="tech-pill">Tip</div>
-                    <h3 class="card-title">Keep it updated</h3>
-                    <p class="card-description">Drop in a new <strong>assets/cv.pdf</strong> to refresh the link—no HTML edits needed.</p>
+                <!-- BIG PLAYGROUND: Interactive Particle Field -->
+                <div class="card playground">
+                    <div class="playground-container">
+                        <div class="info" id="pg-info">Move your cursor to interact • Click to attract particles</div>
+                        <canvas id="particleCanvas" class="playground-canvas" aria-label="Interactive particle field"></canvas>
+
+                        <div class="controls" role="region" aria-label="Playground controls">
+                            <button id="modeBtn" class="btn primary">Attract Mode</button>
+                            <div class="mode-indicator" id="modeText">Hover to Explore</div>
+                            <button id="resetBtn" class="btn secondary">Reset</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <script src="js/cv-playground.js" defer></script>
 
     <script src="js/site.js" defer></script>
 </body>

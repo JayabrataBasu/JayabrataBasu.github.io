@@ -124,11 +124,11 @@ h3 {
 a.button,
 .button,
 .button-primary,
-.btn,
+.btn.primary,
 .btn-primary,
 .cta-row .button {
   background: #354F52; /* Dark Green */
-  color: #ffffff !important;
+  color: #ffffff;
   border-radius: 9999px;
   border: 1px solid #2B3F43;
   padding: 8px 18px;
@@ -147,7 +147,7 @@ a.button,
 a.button:hover,
 .button:hover,
 .button-primary:hover,
-.btn:hover,
+.btn.primary:hover,
 .btn-primary:hover,
 .cta-row .button:hover {
   transform: translate(-1px, -1px);
@@ -158,11 +158,18 @@ a.button:hover,
 a.button:active,
 .button:active,
 .button-primary:active,
-.btn:active,
+.btn.primary:active,
 .btn-primary:active,
 .cta-row .button:active {
   transform: translate(0, 0);
   box-shadow: 1px 1px 0 #2B3F43;
+}
+
+/* Ensure secondary buttons remain high-contrast on light surfaces */
+.btn.secondary {
+  background: #ffffff;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-subtle);
 }
 
 /* ============================================

@@ -61,39 +61,42 @@ class ParticleRing {
             // Speed & Randomness - INCREASED VARIANCE
             const speedVar = (rng.next() * 2.0 + 0.5); // Much wider speed range (0.5x to 2.5x)
             const sizeVar = rng.next() * 1.5;
-            const randomDriftPhase = rng.next() * Math.PI * 2;
-            const randomDriftFreq = (rng.next() * 0.5 + 0.5); // Random frequency for drift
+            const phaseX = rng.next() * Math.PI * 2; // Random phase for sway
 
-            // MOVEMENT: "Entropic Swarm" (No Clockwise Rotation)
-            // Particles stay in their periphery sector but "swarm" chaotically
-            
-            // Base Position (Static Ring Distribution)
-            // We do NOT add tick to this angle, so the ring itself doesn't rotate.
-            const baseX = centerX + Math.cos(angleOffset) * baseRadius;
-            const baseY = centerY + Math.sin(angleOffset) * baseRadius;
-            
-            // Local Chaos (Lissajous-like movement)
-            // Unique frequencies and phases for every particle
-            const freqX = speedVar * 1.5;
-            const freqY = speedVar * 1.2;
-            const phaseX = randomDriftPhase;
-            const phaseY = randomDriftPhase * 2;
-            const amp = 40 + (rng.next() * 30); // Amplitude of swarm
+            // MOVEMENT: "Tidal Pulse" (Waves & Tides)
+            // No continuous rotation. Rhythmic expansion/contraction (Tides) and Sway (Waves).
 
-            // Displacement
-            const dx = Math.sin(tick * freqX + phaseX) * amp;
-            const dy = Math.cos(tick * freqY + phaseY) * amp;
+            // 1. TIDE (Radial Pulse)
+            // Particles move In and Out from center.
+            // Phase depends on angle -> Creates a "Wave" traveling around the ring
+            const tideFreq = 1.5; 
+            const tidePhase = angleOffset * 4; // 4 wave crests around the ring
+            const tideAmp = 60 + (rng.next() * 40); // Variance in pulse distance
             
-            const x = baseX + dx;
-            const y = baseY + dy;
+            const tideOffset = Math.sin(tick * tideFreq + tidePhase) * tideAmp;
+            
+            // 2. SWAY (Tangential Wave)
+            // Particles rock left/right relative to their sector
+            const swayFreq = 1.0;
+            const swayAmp = 0.1; // Radians
+            const swayOffset = Math.cos(tick * swayFreq + phaseX) * swayAmp;
 
-            // VELOCITY for Rotation
-            // We want pills to face where they are going, not the center.
-            // Derivative of sin is cos, etc.
-            const vx = Math.cos(tick * freqX + phaseX) * freqX * amp;
-            const vy = -Math.sin(tick * freqY + phaseY) * freqY * amp;
+            // Apply Motions
+            const currentRadius = baseRadius + tideOffset;
+            const currentAngle = angleOffset + swayOffset;
+
+            // Position
+            const x = centerX + Math.cos(currentAngle) * currentRadius;
+            const y = centerY + Math.sin(currentAngle) * currentRadius;
+
+            // VELOCITY for Orientation
+            // Derivative of Position for alignment
+            const dr_dt = tideFreq * Math.cos(tick * tideFreq + tidePhase) * tideAmp;
+            const da_dt = -swayFreq * Math.sin(tick * swayFreq + phaseX) * swayAmp;
             
-            // Orientation: Aligned with velocity
+            const vx = (dr_dt * Math.cos(currentAngle)) - (currentRadius * Math.sin(currentAngle) * da_dt);
+            const vy = (dr_dt * Math.sin(currentAngle)) + (currentRadius * Math.cos(currentAngle) * da_dt);
+
             const moveAngle = Math.atan2(vy, vx);
 
             // --- RADIAL ALPHA MASK ---
@@ -133,7 +136,7 @@ class ParticleRing {
             // --- DRAWING ---
             ctx.save();
             ctx.translate(x, y);
-            ctx.rotate(moveAngle); // Rotate to match movement direction
+            ctx.rotate(moveAngle); 
             
             const currentSize = particleSizeBase + sizeVar;
             

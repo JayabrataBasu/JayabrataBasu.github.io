@@ -85,6 +85,26 @@
             links: [
                 { label: 'Technical Write-up', url: '#', primary: true }
             ]
+        },
+        harvestforgood: {
+            title: 'HarvestForGood',
+            category: 'Website Development',
+            description: 'Lightweight, observable ingestion path for telemetry with budgeted latency and simple replay capabilities. Built for real-time data processing.',
+            overview: 'A high-throughput event ingestion pipeline designed to handle millions of events per second with predictable latency. Implements backpressure handling, circuit breakers, and automatic retries.',
+            features: [
+                'Sub-millisecond p99 latency at scale',
+                'Automatic batching and compression',
+                'Circuit breaker pattern for fault tolerance',
+                'Structured logging with correlation IDs',
+                'Replay functionality for debugging',
+                'Schema validation and evolution support',
+                'Grafana dashboards for monitoring'
+            ],
+            techStack: ['Go', 'Kafka', 'Prometheus', 'Docker'],
+            challenges: 'Achieving consistent sub-millisecond latency under heavy load required careful profiling and optimization, including lock-free data structures and memory pooling to reduce GC pressure.',
+            links: [
+                { label: 'Technical Write-up', url: '#', primary: true }
+            ]
         }
     };
 

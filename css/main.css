@@ -780,3 +780,18 @@ p {
 @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation-duration: 0.001ms !important; }
 }
+/* ========================
+   PARTICLE BACKGROUND (Houdini)
+   ======================== */
+#particle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    background-image: paint(ring-particles);
+    will-change: transform;
+}
+

@@ -58,71 +58,88 @@ class ParticleRing {
             const radiusVar = (rng.next() - 0.5) * 900; 
             const baseRadius = 550 + radiusVar;
 
-            // Speed & Randomness
-            const speedVar = (rng.next() * 0.8 + 0.8); 
+            // Speed & Randomness - INCREASED VARIANCE
+            const speedVar = (rng.next() * 2.0 + 0.5); // Much wider speed range (0.5x to 2.5x)
             const sizeVar = rng.next() * 1.5;
             const randomDriftPhase = rng.next() * Math.PI * 2;
+            const randomDriftFreq = (rng.next() * 0.5 + 0.5); // Random frequency for drift
 
-            // MOVEMENT: "Ripple / Random"
-            let currentAngle = angleOffset + (tick * 0.1 * speedVar);
+            // MOVEMENT: "Entropic Swarm" (No Clockwise Rotation)
+            // Particles stay in their periphery sector but "swarm" chaotically
             
-            // Sine wave ripple
-            const ripple = Math.sin((tick * 2) - (baseRadius * 0.05)); 
-            const rippleAmp = 20;
+            // Base Position (Static Ring Distribution)
+            // We do NOT add tick to this angle, so the ring itself doesn't rotate.
+            const baseX = centerX + Math.cos(angleOffset) * baseRadius;
+            const baseY = centerY + Math.sin(angleOffset) * baseRadius;
             
-            const drift = Math.sin(tick * 1.0 + randomDriftPhase) * 15;
-            
-            const currentRadius = baseRadius + (ripple * rippleAmp) + drift;
+            // Local Chaos (Lissajous-like movement)
+            // Unique frequencies and phases for every particle
+            const freqX = speedVar * 1.5;
+            const freqY = speedVar * 1.2;
+            const phaseX = randomDriftPhase;
+            const phaseY = randomDriftPhase * 2;
+            const amp = 40 + (rng.next() * 30); // Amplitude of swarm
 
-            // Position
-            const x = centerX + Math.cos(currentAngle) * currentRadius;
-            const y = centerY + Math.sin(currentAngle) * currentRadius;
+            // Displacement
+            const dx = Math.sin(tick * freqX + phaseX) * amp;
+            const dy = Math.cos(tick * freqY + phaseY) * amp;
+            
+            const x = baseX + dx;
+            const y = baseY + dy;
+
+            // VELOCITY for Rotation
+            // We want pills to face where they are going, not the center.
+            // Derivative of sin is cos, etc.
+            const vx = Math.cos(tick * freqX + phaseX) * freqX * amp;
+            const vy = -Math.sin(tick * freqY + phaseY) * freqY * amp;
+            
+            // Orientation: Aligned with velocity
+            const moveAngle = Math.atan2(vy, vx);
 
             // --- RADIAL ALPHA MASK ---
             const distFromCenter = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-            const fadeStart = 200; // Reduced further to allow inner particles
+            const fadeStart = 200; 
             const fadeEnd = 400;   
             
             let alpha = (distFromCenter - fadeStart) / (fadeEnd - fadeStart);
             alpha = Math.max(0, Math.min(1, alpha));
-            
-            // Distance falloff logic:
-            // We want particles far away (on the left side) to be visible.
-            // But we don't want strict ring.
-            
             alpha *= 0.7; 
 
             // --- COLOR ---
             const normalizedX = x / size.width;
+            const normalizedY = y / size.height;
             let r, g, b;
             const lerp = (start, end, t) => start + (end - start) * t;
 
-            if (normalizedX < 0.4) {
-               const localT = Math.max(0, Math.min(1, normalizedX / 0.4));
-               r = 255;
-               g = lerp(255, 0, localT);
-               b = lerp(0, 255, localT);
-            } else {
-               const localT = Math.max(0, Math.min(1, (normalizedX - 0.4) / 0.6));
-               r = lerp(255, 66, localT);
-               g = lerp(0, 133, localT);
-               b = lerp(255, 244, localT);
+            // Base Gradient: Red (Left) -> Blue (Right)
+            let baseR = lerp(252, 49, normalizedX);
+            let baseG = lerp(65, 134, normalizedX);
+            let baseB = lerp(61, 255, normalizedX);
+
+            // Green at Bottom
+            if (normalizedY > 0.6) {
+                 const tY = (normalizedY - 0.6) / 0.4; 
+                 const mix = tY * tY; 
+                 
+                 baseR = lerp(baseR, 0, mix);
+                 baseG = lerp(baseG, 185, mix);
+                 baseB = lerp(baseB, 92, mix);
             }
+            
+            r = baseR;
+            g = baseG;
+            b = baseB;
 
             // --- DRAWING ---
-            const angle = Math.atan2(y - centerY, x - centerX);
-            const wobble = Math.sin(tick * 2 + randomDriftPhase) * 0.2;
-            
             ctx.save();
             ctx.translate(x, y);
-            ctx.rotate(angle + Math.PI / 2 + wobble); 
+            ctx.rotate(moveAngle); // Rotate to match movement direction
             
             const currentSize = particleSizeBase + sizeVar;
             
-            // Morphing - SHORT PILLS
+            // Morphing
             const minW = currentSize * 0.6; 
             const minH = currentSize * 0.6;
-            
             const maxW = currentSize * 1.5; 
             const maxH = currentSize * 0.9; 
             
@@ -173,24 +190,22 @@ if ('paintWorklet' in CSS) {
     }, { passive: true });
 
     function animate() {
-        STATE.tick += 0.02; // FASTER global tick
+        STATE.tick += 0.02; 
 
         const sidebarWidth = 260; 
         const windowWidth = window.innerWidth;
         const visualCenterX = sidebarWidth + ((windowWidth - sidebarWidth) / 2);
         const visualCenterXPercent = (visualCenterX / windowWidth) * 100;
 
-        const damp = 0.05;
+        const damp = 0.08; // More responsive dampening (was 0.05)
         STATE.mouseX += (STATE.targetMouseX - STATE.mouseX) * damp;
         STATE.mouseY += (STATE.targetMouseY - STATE.mouseY) * damp;
 
-        const driftX = Math.cos(STATE.tick * 0.5) * 5; // Faster drift
-        const driftY = Math.sin(STATE.tick * 0.7) * 5;
+        // Increased Mouse Influence significantly (-3 -> -12)
+        const finalX = visualCenterXPercent + (STATE.mouseX * -12);
+        const finalY = 40 + (STATE.mouseY * -12); 
 
-        const finalX = visualCenterXPercent + driftX + (STATE.mouseX * -3);
-        const finalY = 40 + driftY + (STATE.mouseY * -3);
-
-        const breathing = Math.sin(STATE.tick * 2.0) * 20; // Faster breathing
+        const breathing = Math.sin(STATE.tick * 2.0) * 20; 
         
         container.style.setProperty('--ring-radius', STATE.radiusBase + breathing);
         container.style.setProperty('--ring-x', finalX);

@@ -57,8 +57,9 @@ img {
   flex-direction: column;
   padding: 1.75rem 0;
   overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  border-left: 4px solid var(--accent-primary);
+  backdrop-filter: blur(8px);
 }
 
 .sidebar-header {
@@ -135,6 +136,7 @@ img {
   background: var(--accent-primary);
   color: white;
   font-weight: 600;
+  box-shadow: 0 4px 12px rgba(53, 79, 82, 0.3);
 }
 
 .nav-icon {
@@ -250,6 +252,7 @@ img {
   background: var(--accent-primary);
   color: white;
   border-color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(53, 79, 82, 0.25);
 }
 
 .btn.primary:hover {

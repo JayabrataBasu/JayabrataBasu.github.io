@@ -43,6 +43,11 @@
             links: [
                 { label: 'View Code', url: '#', primary: true },
                 { label: 'Play Demo', url: '#', primary: false }
+            ],
+            images: [
+                'assets/images/Zeldaa-1.png',
+                'assets/images/Zeldaa-2.png',
+                'assets/images/Zeldaa-3.png'
             ]
         },
         veridical: {
@@ -158,6 +163,17 @@
             `<li>${feature}</li>`
         ).join('');
 
+        const imagesHTML = project.images ? `
+            <div class="project-gallery">
+                <h3>Gallery</h3>
+                <div class="gallery-grid">
+                    ${project.images.map(img => `
+                        <img src="${img}" alt="${project.title} screenshot" class="project-detail-image" loading="lazy">
+                    `).join('')}
+                </div>
+            </div>
+        ` : '';
+
         modalContent.innerHTML = `
             <div class="modal-header">
                 <div class="tech-pill">${project.category}</div>
@@ -171,6 +187,8 @@
             <div class="modal-body">
                 <h3>Overview</h3>
                 <p>${project.overview}</p>
+
+                ${imagesHTML}
 
                 <h3>Key Features</h3>
                 <ul>

@@ -243,3 +243,36 @@ body {
     transform: scale(1.02);
     box-shadow: var(--shadow-card);
 }
+
+/* --- Project Card Slideshow --- */
+.card-slideshow {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Fixed height matching original placeholder */
+    overflow: hidden;
+    border-radius: var(--radius-md); /* Match original placeholder radius */
+    background-color: var(--bg-card-secondary);
+    margin-bottom: 1rem; /* Match original placeholder margin */
+}
+
+/* Inherit border from placeholder style if needed, or keeping it clean */
+.card-slideshow {
+    border: 1px solid rgba(47,62,70,0.04);
+}
+
+.card-slideshow img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.card-slideshow img.active {
+    opacity: 1;
+    z-index: 2;
+}

@@ -204,4 +204,55 @@
             </div>
         `;
     }
+    // Initialize Card Slideshows
+    function initCardSlideshows() {
+        // Find all project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        projectCards.forEach(card => {
+            const projectId = card.dataset.project;
+            const project = projectData[projectId];
+            
+            // Only proceed if project exists and has images
+            if (project && project.images && project.images.length > 0) {
+                const imageContainer = card.querySelector('.card-image');
+                
+                // If there's a placeholder container, replace it or populate it
+                if (imageContainer) {
+                    // Create slideshow container
+                    const slideshowDiv = document.createElement('div');
+                    slideshowDiv.className = 'card-slideshow';
+                    
+                    // Create image elements
+                    project.images.forEach((imgSrc, index) => {
+                        const img = document.createElement('img');
+                        img.src = imgSrc;
+                        img.alt = `${project.title} preview ${index + 1}`;
+                        if (index === 0) img.classList.add('active');
+                        slideshowDiv.appendChild(img);
+                    });
+                    
+                    // Insert slideshow and remove placeholder
+                    imageContainer.parentNode.insertBefore(slideshowDiv, imageContainer);
+                    imageContainer.remove();
+                    
+                    // Start slideshow interval (only if multiple images)
+                    if (project.images.length > 1) {
+                        let currentIndex = 0;
+                        const images = slideshowDiv.querySelectorAll('img');
+                        
+                        setInterval(() => {
+                            images[currentIndex].classList.remove('active');
+                            currentIndex = (currentIndex + 1) % images.length;
+                            images[currentIndex].classList.add('active');
+                        }, 3000); // Change every 3 seconds
+                    }
+                }
+            }
+        });
+    }
+
+    // Initialize slideshows on load
+    initCardSlideshows();
+
 })();

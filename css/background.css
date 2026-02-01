@@ -38,6 +38,10 @@
         radial-gradient(ellipse 60% 55% at 80% 75%, rgba(127, 187, 179, 0.35) 0%, rgba(127, 187, 179, 0.10) 40%, transparent 70%),
         /* Base cream background */
         #FDF6E3;
+        
+    /* CHROMIUM ONLY: Override static gradients with Paint Worklet */
+    /* Browsers that don't support paint() (Safari, Firefox) will ignore this line */
+    background-image: paint(ring-particles);
 }
 
 /* Hide pseudo-elements and JS orbs - we don't need them anymore */

@@ -223,6 +223,23 @@ if ('paintWorklet' in CSS) {
     animate();
     console.log('Ripple Flow Particle Worklet initialized.');
 } else {
+    // Firefox/Safari: Add animated orb elements for background effect
     document.body.classList.add('no-paint-worklet');
-    console.log('PaintWorklet not supported - using CSS fallback.');
+    
+    // Get or create the particle-bg container
+    let container = document.getElementById('particle-bg');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'particle-bg';
+        document.body.insertBefore(container, document.body.firstChild);
+    }
+    
+    // Add the floating orb elements
+    for (let i = 1; i <= 3; i++) {
+        const orb = document.createElement('div');
+        orb.className = `firefox-orb-${i}`;
+        container.appendChild(orb);
+    }
+    
+    console.log('Firefox fallback: Animated orbs initialized.');
 }

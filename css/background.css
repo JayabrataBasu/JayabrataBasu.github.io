@@ -1,15 +1,19 @@
 /* ================================================
    CSS HOUDINI RING PARTICLES BACKGROUND
-   with EVERFOREST-themed Firefox Fallback
+   with STATIC Firefox Fallback (No Animation - Accessibility Safe)
    ================================================ */
 
-/* --- REQUIRED: Register custom properties --- */
+/* --- REQUIRED: Register custom properties (Chromium only) --- */
 @property --animation-tick { syntax: "<number>"; inherits: false; initial-value: 0; }
 @property --ring-radius { syntax: "<number>"; inherits: false; initial-value: 200; }
 @property --ring-x { syntax: "<number>"; inherits: false; initial-value: 50; }
 @property --ring-y { syntax: "<number>"; inherits: false; initial-value: 50; }
-@property --particle-color { syntax: "<color>"; inherits: false; initial-value: #83C092; }
+@property --particle-color { syntax: "<color>"; inherits: false; initial-value: #7FBBB3; }
 
+/* ================================================
+   BASE CONTAINER - STATIC GRADIENT FALLBACK
+   Beautiful ambient gradients without any animation
+   ================================================ */
 #particle-bg {
     position: fixed;
     top: 0;
@@ -19,92 +23,54 @@
     z-index: -2;
     pointer-events: none;
     overflow: hidden;
-
-    /* --- BASE CONFIGURATION (JS overrides these) --- */
-    --ring-thickness: 900;
-    --particle-count: 140;
-    --particle-rows: 40;
-    --particle-size: 3;
-    --particle-min-alpha: 0.3;
-    --particle-max-alpha: 1.0;
-    --seed: 123;
-
-    /* Main Effect: Houdini Paint Worklet (Chromium only) */
-    background-color: #FDF6E3; /* Everforest bg0 */
-    background-image: paint(ring-particles);
-    background-attachment: fixed;
-}
-
-/* ================================================
-   FIREFOX / NON-CHROMIUM FALLBACK
-   Uses @supports to reliably detect lack of paint() support
-   ================================================ */
-
-/* Default fallback styles for ALL browsers first */
-#particle-bg {
-    /* Fallback gradient - will be overridden by paint() in Chromium */
+    
+    /* Static layered radial gradients - Everforest palette */
     background: 
-        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(131, 192, 146, 0.18) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 70% at 80% 55%, rgba(58, 148, 197, 0.14) 0%, transparent 50%),
-        radial-gradient(ellipse 70% 50% at 55% 75%, rgba(53, 167, 124, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 50% 50% at 25% 25%, rgba(223, 160, 0, 0.08) 0%, transparent 45%),
+        /* Teal orb - top right */
+        radial-gradient(ellipse 70% 60% at 75% 15%, rgba(127, 187, 179, 0.45) 0%, rgba(127, 187, 179, 0.15) 40%, transparent 70%),
+        /* Blue orb - center right */
+        radial-gradient(ellipse 55% 65% at 85% 45%, rgba(58, 148, 197, 0.40) 0%, rgba(58, 148, 197, 0.12) 40%, transparent 70%),
+        /* Green orb - bottom center */
+        radial-gradient(ellipse 65% 50% at 55% 85%, rgba(53, 167, 124, 0.38) 0%, rgba(53, 167, 124, 0.10) 40%, transparent 70%),
+        /* Yellow orb - top left */
+        radial-gradient(ellipse 45% 45% at 20% 20%, rgba(223, 160, 0, 0.30) 0%, rgba(223, 160, 0, 0.08) 40%, transparent 65%),
+        /* Teal orb - bottom right */
+        radial-gradient(ellipse 60% 55% at 80% 75%, rgba(127, 187, 179, 0.35) 0%, rgba(127, 187, 179, 0.10) 40%, transparent 70%),
+        /* Base cream background */
         #FDF6E3;
 }
 
-/* Chromium browsers that support paint() */
-@supports (background: paint(id)) {
-    #particle-bg {
-        background-color: #FDF6E3;
-        background-image: paint(ring-particles);
-    }
+/* Hide pseudo-elements and JS orbs - we don't need them anymore */
+#particle-bg::before,
+#particle-bg::after,
+.firefox-orb-1,
+.firefox-orb-2,
+.firefox-orb-3 {
+    display: none;
 }
 
-/* Non-Chromium browsers - animated fallback */
-@supports not (background: paint(id)) {
-    #particle-bg {
-        background: 
-            radial-gradient(ellipse 80% 60% at 70% 30%, rgba(131, 192, 146, 0.20) 0%, transparent 55%),
-            radial-gradient(ellipse 60% 70% at 80% 55%, rgba(58, 148, 197, 0.16) 0%, transparent 50%),
-            radial-gradient(ellipse 70% 50% at 55% 75%, rgba(53, 167, 124, 0.14) 0%, transparent 50%),
-            radial-gradient(ellipse 50% 50% at 25% 25%, rgba(223, 160, 0, 0.10) 0%, transparent 45%),
-            #FDF6E3;
-        background-size: 120% 120%, 110% 110%, 130% 130%, 100% 100%, 100% 100%;
-        animation: firefox-drift 20s ease-in-out infinite;
-    }
-    
-    @keyframes firefox-drift {
-        0%, 100% {
-            background-position: 0% 0%, 10% 0%, 0% 10%, 0% 0%, 0 0;
-        }
-        25% {
-            background-position: 5% -5%, 0% 5%, 5% 0%, -3% 3%, 0 0;
-        }
-        50% {
-            background-position: -5% 5%, 5% -5%, -5% 5%, 5% -3%, 0 0;
-        }
-        75% {
-            background-position: 3% 0%, -5% 3%, 3% -5%, -5% 5%, 0 0;
-        }
-    }
-}
-
-/* Page content layering */
+/* ================================================
+   PAGE CONTENT LAYERING
+   ================================================ */
 .page-shell { position: relative; z-index: 1; }
+
 .sidebar { 
-    background: rgba(244, 240, 217, 0.95); /* Everforest bg1 - more opaque for pop */
+    background: rgba(244, 240, 217, 0.96);
     backdrop-filter: blur(12px); 
     -webkit-backdrop-filter: blur(12px);
-    /* Enhanced shadow for more depth/pop */
     box-shadow: 
         0 8px 32px rgba(92, 106, 114, 0.15),
         0 2px 8px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(131, 192, 146, 0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(127, 187, 179, 0.25);
 }
+
 .main-stage { position: relative; z-index: 1; }
+
 .card, .project-card, .globe-card, .contact-card {
-    background: rgba(244, 240, 217, 0.90) !important;
+    background: rgba(244, 240, 217, 0.92) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
+
 .globe-card { background: rgba(239, 235, 212, 0.95) !important; }

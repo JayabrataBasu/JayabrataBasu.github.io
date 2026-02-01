@@ -43,11 +43,11 @@ img {
   min-height: 100vh;
 }
 
-/* Sidebar Navigation (260px fixed) */
+/* Sidebar Navigation (260px fixed) - Pop-out Panel Style */
 .sidebar {
   width: var(--sidebar-width);
-  background: var(--bg-card);
-  border: 1px solid rgba(131, 192, 146, 0.25);
+  background: linear-gradient(180deg, #F6F3E7 0%, #F0EDE0 100%);
+  border: 1.5px solid rgba(127, 187, 179, 0.35);
   border-radius: var(--radius-l);
   position: fixed;
   top: 24px;
@@ -57,12 +57,13 @@ img {
   flex-direction: column;
   padding: 1.75rem 0;
   overflow-y: auto;
-  /* Enhanced depth with layered shadows */
+  /* Strong pop-out shadow effect */
   box-shadow: 
-    0 12px 40px rgba(92, 106, 114, 0.12),
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6),
-    inset 4px 0 16px -8px rgba(131, 192, 146, 0.15);
+    0 16px 48px rgba(92, 106, 114, 0.18),
+    0 6px 16px rgba(0, 0, 0, 0.10),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
   backdrop-filter: blur(8px);
 }
 
@@ -137,10 +138,16 @@ img {
 }
 
 .nav-link.active {
-  background: var(--accent-primary);
+  background: #5C8A82; /* Darker teal for pop */
   color: white;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(53, 79, 82, 0.3);
+  border-radius: 999px; /* Pill shape */
+  box-shadow: 
+    0 4px 12px rgba(92, 138, 130, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid #4A7A72;
+  transform: translateY(-1px);
 }
 
 .nav-icon {
@@ -253,27 +260,45 @@ img {
 }
 
 .btn.primary {
-  background: var(--accent-primary);
+  background: linear-gradient(180deg, #5C8A82 0%, #4A7A72 100%);
   color: white;
-  border-color: var(--accent-primary);
-  box-shadow: 0 4px 12px rgba(53, 79, 82, 0.25);
+  border: 1.5px solid #3D6A62;
+  border-radius: 999px;
+  box-shadow: 
+    0 4px 14px rgba(74, 122, 114, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn.primary:hover {
-  background: var(--accent-hover);
-  border-color: var(--accent-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-soft);
+  background: linear-gradient(180deg, #6A9890 0%, #5C8A82 100%);
+  border-color: #4A7A72;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(74, 122, 114, 0.45),
+    0 3px 6px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
+
 .btn.secondary {
-  background: white;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F3EA 100%);
   color: var(--text-main);
-  border-color: var(--border-subtle);
+  border: 1.5px solid rgba(127, 187, 179, 0.4);
+  border-radius: 999px;
+  box-shadow: 
+    0 3px 10px rgba(92, 106, 114, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .btn.secondary:hover {
-  border-color: var(--accent-primary);
-  background: var(--bg-body);
+  border-color: rgba(127, 187, 179, 0.6);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F0EDE0 100%);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 5px 15px rgba(92, 106, 114, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 /* ========================

@@ -5,13 +5,13 @@
 :root {
   --journal-heading: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   --journal-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
-  --journal-heading-color: #2F3E46; /* Dark Slate */
-  --journal-body-color: #52796F;   /* Muted greenish grey */
+  --journal-heading-color: #5C6A72; /* Everforest fg */
+  --journal-body-color: #708089;   /* Slightly muted fg */
 
-  --journal-card-bg: #F9F7F1;      /* Cream */
-  --journal-card-border: #B7B7A4;  /* Earthy grey */
-  --journal-shadow-color: #354F52; /* Hard shadow color */
-  --journal-sage: #CAD2C5;         /* Soft Sage Green */
+  --journal-card-bg: #F4F0D9;      /* bg1 - parchment */
+  --journal-card-border: #E6E2CC;  /* bg4 - soft border */
+  --journal-shadow-color: #5C6A72; /* Softer shadow */
+  --journal-sage: #A6B0A0;         /* grey0 */
 }
 
 /* Typography */

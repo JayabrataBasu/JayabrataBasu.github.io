@@ -1,5 +1,6 @@
 /* ================================================
    CSS HOUDINI RING PARTICLES BACKGROUND
+   with EVERFOREST-themed Firefox Fallback
    ================================================ */
 
 /* --- REQUIRED: Register custom properties --- */
@@ -7,7 +8,7 @@
 @property --ring-radius { syntax: "<number>"; inherits: false; initial-value: 200; }
 @property --ring-x { syntax: "<number>"; inherits: false; initial-value: 50; }
 @property --ring-y { syntax: "<number>"; inherits: false; initial-value: 50; }
-@property --particle-color { syntax: "<color>"; inherits: false; initial-value: #4285F4; }
+@property --particle-color { syntax: "<color>"; inherits: false; initial-value: #83C092; }
 
 #particle-bg {
     position: fixed;
@@ -20,34 +21,90 @@
     overflow: hidden;
 
     /* --- BASE CONFIGURATION (JS overrides these) --- */
-    --ring-thickness: 900;    /* Spread width */
-    --particle-count: 140;    /* More particles */
-    --particle-rows: 40;      /* Denser field */
-    --particle-size: 3;       /* Slightly larger for visibility */
-    --particle-min-alpha: 0.3; /* More visible (less transparent) */
-    --particle-max-alpha: 1.0; /* Fully opaque max */
+    --ring-thickness: 900;
+    --particle-count: 140;
+    --particle-rows: 40;
+    --particle-size: 3;
+    --particle-min-alpha: 0.3;
+    --particle-max-alpha: 1.0;
     --seed: 123;
 
-    /* --- RENDERING --- */
-    /* Fallback for non-Chromium */
-    background-color: #eff1d7;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-    background-attachment: fixed;
-
-    /* Main Effect (JS drives the values now) */
+    /* Main Effect: Houdini Paint Worklet (Chromium only) */
+    background-color: #FDF6E3; /* Everforest bg0 */
     background-image: paint(ring-particles);
+    background-attachment: fixed;
+}
+
+/* ================================================
+   FIREFOX / NON-CHROMIUM FALLBACK
+   Uses @supports to reliably detect lack of paint() support
+   ================================================ */
+
+/* Default fallback styles for ALL browsers first */
+#particle-bg {
+    /* Fallback gradient - will be overridden by paint() in Chromium */
+    background: 
+        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(131, 192, 146, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 70% at 80% 55%, rgba(58, 148, 197, 0.14) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 50% at 55% 75%, rgba(53, 167, 124, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 50% at 25% 25%, rgba(223, 160, 0, 0.08) 0%, transparent 45%),
+        #FDF6E3;
+}
+
+/* Chromium browsers that support paint() */
+@supports (background: paint(id)) {
+    #particle-bg {
+        background-color: #FDF6E3;
+        background-image: paint(ring-particles);
+    }
+}
+
+/* Non-Chromium browsers - animated fallback */
+@supports not (background: paint(id)) {
+    #particle-bg {
+        background: 
+            radial-gradient(ellipse 80% 60% at 70% 30%, rgba(131, 192, 146, 0.20) 0%, transparent 55%),
+            radial-gradient(ellipse 60% 70% at 80% 55%, rgba(58, 148, 197, 0.16) 0%, transparent 50%),
+            radial-gradient(ellipse 70% 50% at 55% 75%, rgba(53, 167, 124, 0.14) 0%, transparent 50%),
+            radial-gradient(ellipse 50% 50% at 25% 25%, rgba(223, 160, 0, 0.10) 0%, transparent 45%),
+            #FDF6E3;
+        background-size: 120% 120%, 110% 110%, 130% 130%, 100% 100%, 100% 100%;
+        animation: firefox-drift 20s ease-in-out infinite;
+    }
     
-    /* Remove CSS transition since JS does linear interpolation (lerp) for us */
-    /* transition: none; */
+    @keyframes firefox-drift {
+        0%, 100% {
+            background-position: 0% 0%, 10% 0%, 0% 10%, 0% 0%, 0 0;
+        }
+        25% {
+            background-position: 5% -5%, 0% 5%, 5% 0%, -3% 3%, 0 0;
+        }
+        50% {
+            background-position: -5% 5%, 5% -5%, -5% 5%, 5% -3%, 0 0;
+        }
+        75% {
+            background-position: 3% 0%, -5% 3%, 3% -5%, -5% 5%, 0 0;
+        }
+    }
 }
 
 /* Page content layering */
 .page-shell { position: relative; z-index: 1; }
-.sidebar { background: rgba(249, 247, 241, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.sidebar { 
+    background: rgba(244, 240, 217, 0.95); /* Everforest bg1 - more opaque for pop */
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    /* Enhanced shadow for more depth/pop */
+    box-shadow: 
+        0 8px 32px rgba(92, 106, 114, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(131, 192, 146, 0.2);
+}
 .main-stage { position: relative; z-index: 1; }
 .card, .project-card, .globe-card, .contact-card {
-    background: rgba(249, 247, 241, 0.90) !important;
+    background: rgba(244, 240, 217, 0.90) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
-.globe-card { background: rgba(235, 233, 223, 0.95) !important; }
+.globe-card { background: rgba(239, 235, 212, 0.95) !important; }

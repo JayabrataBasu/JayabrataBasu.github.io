@@ -47,7 +47,7 @@ img {
 .sidebar {
   width: var(--sidebar-width);
   background: var(--bg-card);
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(131, 192, 146, 0.25);
   border-radius: var(--radius-l);
   position: fixed;
   top: 24px;
@@ -57,8 +57,12 @@ img {
   flex-direction: column;
   padding: 1.75rem 0;
   overflow-y: auto;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-  border-left: 4px solid var(--accent-primary);
+  /* Enhanced depth with layered shadows */
+  box-shadow: 
+    0 12px 40px rgba(92, 106, 114, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 4px 0 16px -8px rgba(131, 192, 146, 0.15);
   backdrop-filter: blur(8px);
 }
 

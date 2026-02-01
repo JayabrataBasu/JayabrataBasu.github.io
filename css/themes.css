@@ -8,27 +8,35 @@
   --font-display: 'Inter', 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
 
-  /* Warm Material Palette */
-  --m3-bg-background: #F2F0E6; /* warm linen */
-  --m3-surface: #F9F7F1;      /* cream */
-  --m3-primary: #354F52;      /* deep charcoal green */
-  --m3-secondary: #CAD2C5;    /* sage */
-  --m3-tertiary: #D4A373;     /* paper tan */
-  --text-primary: #2F3E46;    /* dark slate */
+  /* Everforest Light Medium Palette */
+  --m3-bg-background: #FDF6E3; /* bg0 - warm cream */
+  --m3-surface: #F4F0D9;       /* bg1 - soft parchment */
+  --m3-primary: #7FBBB3;       /* aqua - primary accent */
+  --m3-secondary: #A6B0A0;     /* grey0 - muted sage */
+  --m3-tertiary: #DFA000;      /* yellow - warm accent */
+  --text-primary: #5C6A72;     /* fg - slate green */
+
+  /* Everforest accent colors */
+  --ef-green: #83C092;
+  --ef-aqua: #35A77C;
+  --ef-blue: #3A94C5;
+  --ef-red: #F85552;
+  --ef-orange: #F57D26;
+  --ef-purple: #DF69BA;
 
   /* Map to existing tokens for components */
   --bg-body: var(--m3-bg-background);
   --bg-card: var(--m3-surface);
   --text-main: var(--text-primary);
-  --text-muted: #5A6B71;
-  --border-subtle: rgba(47, 62, 70, 0.14);
+  --text-muted: #939F91;       /* grey1 */
+  --border-subtle: rgba(92, 106, 114, 0.12);
   --accent-primary: var(--m3-primary);
-  --accent-hover: #2d4347;
+  --accent-hover: #6BAA7D;     /* darker aqua for hover */
 
-  /* Shadows & Radius */
-  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.06);
-  --shadow-hover: 0 10px 26px rgba(0, 0, 0, 0.08);
+  /* Shadows & Radius - softer for Everforest aesthetic */
+  --shadow-soft: 0 4px 20px rgba(92, 106, 114, 0.08);
+  --shadow-card: 0 6px 18px rgba(92, 106, 114, 0.10);
+  --shadow-hover: 0 10px 26px rgba(92, 106, 114, 0.14);
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 18px;

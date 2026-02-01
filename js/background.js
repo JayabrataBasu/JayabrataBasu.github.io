@@ -108,25 +108,27 @@ class ParticleRing {
             alpha = Math.max(0, Math.min(1, alpha));
             alpha *= 0.7; 
 
-            // --- COLOR ---
+            // --- COLOR (Everforest Palette) ---
             const normalizedX = x / size.width;
             const normalizedY = y / size.height;
             let r, g, b;
             const lerp = (start, end, t) => start + (end - start) * t;
 
-            // Base Gradient: Red (Left) -> Blue (Right)
-            let baseR = lerp(252, 49, normalizedX);
-            let baseG = lerp(65, 134, normalizedX);
-            let baseB = lerp(61, 255, normalizedX);
+            // Base Gradient: Everforest Aqua (Left) -> Blue (Right)
+            // Aqua #83C092 = rgb(131, 192, 146)
+            // Blue #3A94C5 = rgb(58, 148, 197)
+            let baseR = lerp(131, 58, normalizedX);
+            let baseG = lerp(192, 148, normalizedX);
+            let baseB = lerp(146, 197, normalizedX);
 
-            // Green at Bottom
+            // Aqua at Bottom: #35A77C = rgb(53, 167, 124)
             if (normalizedY > 0.6) {
                  const tY = (normalizedY - 0.6) / 0.4; 
                  const mix = tY * tY; 
                  
-                 baseR = lerp(baseR, 0, mix);
-                 baseG = lerp(baseG, 185, mix);
-                 baseB = lerp(baseB, 92, mix);
+                 baseR = lerp(baseR, 53, mix);
+                 baseG = lerp(baseG, 167, mix);
+                 baseB = lerp(baseB, 124, mix);
             }
             
             r = baseR;
@@ -221,5 +223,6 @@ if ('paintWorklet' in CSS) {
     animate();
     console.log('Ripple Flow Particle Worklet initialized.');
 } else {
-    console.log('PaintWorklet not supported.');
+    document.body.classList.add('no-paint-worklet');
+    console.log('PaintWorklet not supported - using CSS fallback.');
 }

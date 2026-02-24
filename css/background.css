@@ -5,10 +5,11 @@
 
 /* --- REQUIRED: Register custom properties (Chromium only) --- */
 @property --animation-tick { syntax: "<number>"; inherits: false; initial-value: 0; }
-@property --ring-radius { syntax: "<number>"; inherits: false; initial-value: 200; }
-@property --ring-x { syntax: "<number>"; inherits: false; initial-value: 50; }
-@property --ring-y { syntax: "<number>"; inherits: false; initial-value: 50; }
-@property --particle-color { syntax: "<color>"; inherits: false; initial-value: #7FBBB3; }
+@property --ring-radius    { syntax: "<number>"; inherits: false; initial-value: 200; }
+@property --ring-x         { syntax: "<number>"; inherits: false; initial-value: 50; }
+@property --ring-y         { syntax: "<number>"; inherits: false; initial-value: 50; }
+/* --particle-data is a raw string (pre-baked particle array passed each frame) */
+@property --particle-data  { syntax: "*"; inherits: false; initial-value: ""; }
 
 /* ================================================
    BASE CONTAINER - STATIC GRADIENT FALLBACK

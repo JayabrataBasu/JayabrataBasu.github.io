@@ -508,3 +508,73 @@ a.button:active,
   margin-top: 0.8rem;
 }
 
+@media (max-width: 640px) {
+  .welcome-column {
+    padding-top: 0;
+  }
+
+  .profile-headline-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .headline-text {
+    text-align: center;
+  }
+
+  .timeline-panel {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .timeline-container {
+    max-height: none;
+    padding-left: 18px;
+  }
+
+  .about-hero {
+    margin-bottom: 2.5rem;
+    padding: 1rem 0 0;
+  }
+
+  .bio-subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-photo {
+    width: 88px;
+    height: 88px;
+  }
+
+  .globe-card {
+    min-height: 340px;
+    padding: 1.25rem;
+  }
+
+  .polaroid-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .polaroid-card {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  .timeline-entry {
+    gap: 12px;
+  }
+
+  .cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cta-row .btn {
+    width: 100%;
+  }
+}
+

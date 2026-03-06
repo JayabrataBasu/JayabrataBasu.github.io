@@ -120,6 +120,75 @@ img {
   flex: 1;
 }
 
+.mobile-nav-handle,
+.mobile-nav-backdrop {
+  display: none;
+}
+
+.mobile-nav-handle {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top, 0px));
+  right: 12px;
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid rgba(127, 187, 179, 0.4);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #F6F3E7 0%, #F0EDE0 100%);
+  color: var(--text-main);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(92, 106, 114, 0.18), 0 2px 4px rgba(0, 0, 0, 0.08);
+  z-index: 1002;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mobile-nav-handle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(92, 106, 114, 0.22), 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.mobile-nav-handle:active {
+  transform: scale(0.95);
+}
+
+.mobile-nav-handle:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.mobile-nav-icon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mobile-nav-icon span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text-main);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.is-open .mobile-nav-icon span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.sidebar.is-open .mobile-nav-icon span:nth-child(2) {
+  opacity: 0;
+}
+
+.sidebar.is-open .mobile-nav-icon span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
 .nav-link {
   display: flex;
   align-items: center;
@@ -414,15 +483,93 @@ p {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .page-shell {
+    display: block;
+  }
+
   .sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    width: calc(100% - 24px);
+    max-width: 380px;
+    left: 12px;
+    right: auto;
+    top: calc(72px + env(safe-area-inset-top, 0px));
+    bottom: auto;
+    height: auto;
+    max-height: calc(90vh - 84px - env(safe-area-inset-top, 0px));
+    padding: 1.5rem 0 1.25rem;
+    border-radius: 18px;
+    z-index: 1001;
+    overscroll-behavior: contain;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), 
+                opacity 0.35s ease,
+                box-shadow 0.35s ease;
+  }
+
+  .sidebar.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow:
+      0 16px 48px rgba(92, 106, 114, 0.24),
+      0 8px 20px rgba(0, 0, 0, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.88),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+  }
+
+  .sidebar-header {
+    padding: 0 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .sidebar-profile {
+    display: none;
+  }
+
+  .sidebar-nav {
+    padding: 1rem 1rem 0.5rem;
+    overflow-y: auto;
+    max-height: calc(90vh - 180px);
+  }
+
+  .nav-link {
+    margin-bottom: 0.35rem;
+    padding: 0.85rem 1.15rem;
+  }
+
+  .mobile-nav-handle {
+    display: flex;
+  }
+
+  .mobile-nav-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: 0;
+    padding: 0;
+    background: rgba(33, 42, 48, 0.4);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 1000;
+  }
+
+  body.nav-open .mobile-nav-backdrop {
+    opacity: 1;
+    pointer-events: auto;
   }
   
   .main-stage {
     margin-left: 0;
-    padding: 1.5rem;
+    padding: calc(72px + env(safe-area-inset-top, 0px)) 1rem 2rem;
   }
   
   .content-grid {
@@ -775,7 +922,44 @@ p {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+    .sidebar {
+        width: calc(100% - 20px);
+        left: 10px;
+        max-width: none;
+    }
+
+    .sidebar-header {
+        padding: 0 1.25rem 1rem;
+    }
+
+    .brand {
+        gap: 0.6rem;
+        font-size: 1rem;
+    }
+
+    .brand-mark {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .nav-link {
+        padding: 0.8rem 1rem;
+    }
+
+    .mobile-nav-handle {
+        width: 44px;
+        height: 44px;
+        top: calc(10px + env(safe-area-inset-top, 0px));
+        right: 10px;
+    }
+
+    .mobile-nav-icon {
+        width: 22px;
+        height: 16px;
+  }
+
     .modal-overlay {
         padding: 0;
     }

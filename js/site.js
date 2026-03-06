@@ -37,11 +37,6 @@
     const mobileQuery = window.matchMedia('(max-width: 640px)');
     sidebar.id = sidebar.id || 'site-navigation';
 
-    const backdrop = document.createElement('button');
-    backdrop.type = 'button';
-    backdrop.className = 'mobile-nav-backdrop';
-    backdrop.setAttribute('aria-label', 'Close navigation');
-
     const handle = document.createElement('button');
     handle.type = 'button';
     handle.className = 'mobile-nav-handle';
@@ -57,7 +52,6 @@
     ].join('');
 
     body.prepend(handle);
-    body.append(backdrop);
 
     const setOpen = (isOpen) => {
         const shouldOpen = mobileQuery.matches && isOpen;
@@ -69,10 +63,6 @@
 
     handle.addEventListener('click', () => {
         setOpen(!sidebar.classList.contains('is-open'));
-    });
-
-    backdrop.addEventListener('click', () => {
-        setOpen(false);
     });
 
     navLinks.forEach(link => {

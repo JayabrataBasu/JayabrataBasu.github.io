@@ -120,8 +120,7 @@ img {
   flex: 1;
 }
 
-.mobile-nav-handle,
-.mobile-nav-backdrop {
+.mobile-nav-handle {
   display: none;
 }
 
@@ -141,7 +140,7 @@ img {
   justify-content: center;
   padding: 0;
   box-shadow: 0 4px 16px rgba(92, 106, 114, 0.18), 0 2px 4px rgba(0, 0, 0, 0.08);
-  z-index: 1002;
+  z-index: 10000;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -503,7 +502,8 @@ p {
     max-height: calc(90vh - 84px - env(safe-area-inset-top, 0px));
     padding: 1.5rem 0 1.25rem;
     border-radius: 18px;
-    z-index: 1001;
+    z-index: 9999;
+    isolation: isolate;
     overscroll-behavior: contain;
     transform: translateY(-100%);
     opacity: 0;
@@ -542,31 +542,15 @@ p {
   .nav-link {
     margin-bottom: 0.35rem;
     padding: 0.85rem 1.15rem;
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
   }
 
   .mobile-nav-handle {
     display: flex;
   }
 
-  .mobile-nav-backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    border: 0;
-    padding: 0;
-    background: rgba(33, 42, 48, 0.4);
-    backdrop-filter: blur(2px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease;
-    z-index: 1000;
-  }
-
-  body.nav-open .mobile-nav-backdrop {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
   .main-stage {
     margin-left: 0;
     padding: calc(72px + env(safe-area-inset-top, 0px)) 1rem 2rem;

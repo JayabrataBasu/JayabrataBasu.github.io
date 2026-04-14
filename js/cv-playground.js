@@ -4,12 +4,20 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('particleCanvas');
-  const ctx = canvas.getContext('2d');
   const info = document.getElementById('pg-info');
   const modeBtn = document.getElementById('modeBtn');
   const modeText = document.getElementById('modeText');
   const resetBtn = document.getElementById('resetBtn');
   const container = document.querySelector('.playground-container');
+
+  if (!canvas || !info || !modeBtn || !modeText || !resetBtn || !container) {
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return;
+  }
 
   // Responsive sizing function
   function resizeCanvas() {

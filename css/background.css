@@ -1,81 +1,64 @@
 /* ================================================
-   CSS HOUDINI RING PARTICLES BACKGROUND
-   with STATIC Firefox Fallback (No Animation - Accessibility Safe)
+   HOUDINI RING-PARTICLES BACKGROUND
+   Recoloured to the restrained palette: a dark field
+   with a faint engineering grid as the static fallback,
+   and the paint worklet (js/background.js) layered on
+   top in Chromium. Effect and structure are unchanged.
    ================================================ */
 
-/* --- REQUIRED: Register custom properties (Chromium only) --- */
+/* --- Register custom properties (Chromium only) --- */
 @property --animation-tick { syntax: "<number>"; inherits: false; initial-value: 0; }
 @property --ring-radius    { syntax: "<number>"; inherits: false; initial-value: 200; }
 @property --ring-x         { syntax: "<number>"; inherits: false; initial-value: 50; }
 @property --ring-y         { syntax: "<number>"; inherits: false; initial-value: 50; }
-/* --particle-data is a raw string (pre-baked particle array passed each frame) */
 @property --particle-data  { syntax: "*"; inherits: false; initial-value: ""; }
 
-/* ================================================
-   BASE CONTAINER - STATIC GRADIENT FALLBACK
-   Beautiful ambient gradients without any animation
-   ================================================ */
 #particle-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-    pointer-events: none;
-    overflow: hidden;
-    
-    /* Static layered radial gradients - Everforest palette */
-    background: 
-        /* Teal orb - top right */
-        radial-gradient(ellipse 70% 60% at 75% 15%, rgba(127, 187, 179, 0.45) 0%, rgba(127, 187, 179, 0.15) 40%, transparent 70%),
-        /* Blue orb - center right */
-        radial-gradient(ellipse 55% 65% at 85% 45%, rgba(58, 148, 197, 0.40) 0%, rgba(58, 148, 197, 0.12) 40%, transparent 70%),
-        /* Green orb - bottom center */
-        radial-gradient(ellipse 65% 50% at 55% 85%, rgba(53, 167, 124, 0.38) 0%, rgba(53, 167, 124, 0.10) 40%, transparent 70%),
-        /* Yellow orb - top left */
-        radial-gradient(ellipse 45% 45% at 20% 20%, rgba(223, 160, 0, 0.30) 0%, rgba(223, 160, 0, 0.08) 40%, transparent 65%),
-        /* Teal orb - bottom right */
-        radial-gradient(ellipse 60% 55% at 80% 75%, rgba(127, 187, 179, 0.35) 0%, rgba(127, 187, 179, 0.10) 40%, transparent 70%),
-        /* Base cream background */
-        #FDF6E3;
-        
-    /* CHROMIUM ONLY: Override static gradients with Paint Worklet */
-    /* Browsers that don't support paint() (Safari, Firefox) will ignore this line */
-    background-image: paint(ring-particles);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+
+  /* Static fallback: charcoal field + faint 32px grid + corner vignette */
+  background-color: var(--field);
+  background-image:
+    radial-gradient(ellipse 80% 70% at 70% 20%, rgba(212, 58, 44, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(rgba(233, 229, 216, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 229, 216, 0.035) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 100%,
+    32px 32px,
+    32px 32px;
+
+  /* Chromium only — overrides the fallback with the paint worklet */
+  background-image: paint(ring-particles);
 }
 
-/* Hide pseudo-elements and JS orbs - we don't need them anymore */
+/* Legacy decorative orbs / pseudo-elements are not used */
 #particle-bg::before,
 #particle-bg::after,
 .firefox-orb-1,
 .firefox-orb-2,
 .firefox-orb-3 {
-    display: none;
+  display: none;
 }
 
-/* ================================================
-   PAGE CONTENT LAYERING
-   ================================================ */
+/* Firefox / Safari (no paint worklet): keep the static grid field */
+.no-paint-worklet #particle-bg {
+  background-image:
+    radial-gradient(ellipse 80% 70% at 70% 20%, rgba(212, 58, 44, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 90% at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.45) 100%),
+    linear-gradient(rgba(233, 229, 216, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 229, 216, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+/* Content layering */
 .page-shell { position: relative; z-index: 1; }
-
-.sidebar { 
-    background: rgba(244, 240, 217, 0.96);
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 
-        0 8px 32px rgba(92, 106, 114, 0.15),
-        0 2px 8px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(127, 187, 179, 0.25);
-}
-
 .main-stage { position: relative; z-index: 1; }
-
-.card, .project-card, .globe-card, .contact-card {
-    background: rgba(244, 240, 217, 0.92) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.globe-card { background: rgba(239, 235, 212, 0.95) !important; }

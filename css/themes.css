@@ -1,68 +1,107 @@
-/* ========================
-   ENGINEER'S NOTEBOOK DESIGN SYSTEM
-   ======================== */
+/* ============================================================
+   DESIGN SYSTEM — TOKENS
+   Brutalist retro-computing interface.
+   Near-black field · warm technical off-white · industrial red
+   as a semantic signal only. Hard geometry, modular grid,
+   bitmap + monospace type.
+   ============================================================ */
 
 :root {
-  /* Typography */
-  --font-base: 'Inter', 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Inter', 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  /* ---- Typefaces -------------------------------------------------- */
+  --font-display: 'Silkscreen', 'JetBrains Mono', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, 'Courier New', monospace;
+  /* Legacy aliases (kept so older rules resolve) */
+  --font-base: var(--font-mono);
 
-  /* Everforest Light Medium Palette */
-  --m3-bg-background: #FDF6E3; /* bg0 - warm cream */
-  --m3-surface: #F4F0D9;       /* bg1 - soft parchment */
-  --m3-primary: #7FBBB3;       /* aqua - primary accent */
-  --m3-secondary: #A6B0A0;     /* grey0 - muted sage */
-  --m3-tertiary: #DFA000;      /* yellow - warm accent */
-  --text-primary: #5C6A72;     /* fg - slate green */
+  /* ---- Field (backgrounds) -------------------------------------- */
+  --field:         #17181a;   /* primary dark field */
+  --field-raised:  #1e2023;   /* panels / modules */
+  --field-sunken:  #101113;   /* wells, insets, code */
+  --field-signal:  #211516;   /* red-tinted well */
 
-  /* Everforest accent colors */
-  --ef-green: #83C092;
-  --ef-aqua: #35A77C;
-  --ef-blue: #3A94C5;
-  --ef-red: #F85552;
-  --ef-orange: #F57D26;
-  --ef-purple: #DF69BA;
+  /* ---- Ink (text + linework) ---------------------------------- */
+  --ink:        #e9e5d8;      /* primary text, primary rules */
+  --ink-dim:    #a7a394;      /* secondary text, metadata */
+  --ink-faint:  #6c6a60;      /* captions, disabled */
+  --ink-hair:   #3a3b38;      /* hairlines, grid */
 
-  /* Map to existing tokens for components */
-  --bg-body: var(--m3-bg-background);
-  --bg-card: var(--m3-surface);
-  --text-main: var(--text-primary);
-  --text-muted: #939F91;       /* grey1 */
-  --border-subtle: rgba(92, 106, 114, 0.12);
-  --accent-primary: var(--m3-primary);
-  --accent-hover: #6BAA7D;     /* darker aqua for hover */
+  /* ---- Signal (industrial red) ------------------------------- */
+  --signal:      #d43a2c;     /* active / selected / warning / emphasis */
+  --signal-bright: #e8483a;
+  --signal-dim:  #8f2a22;     /* pressed / underline shadow */
+  --signal-wash: rgba(212, 58, 44, 0.14);
 
-  /* Shadows & Radius - softer for Everforest aesthetic */
-  --shadow-soft: 0 4px 20px rgba(92, 106, 114, 0.08);
-  --shadow-card: 0 6px 18px rgba(92, 106, 114, 0.10);
-  --shadow-hover: 0 10px 26px rgba(92, 106, 114, 0.14);
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
-  --radius-l: 24px;
-  /* Backwards-compatible aliases for legacy styles */
-  --surface-color: var(--bg-card);
-  --accent-color: var(--accent-primary);
-  --accent-strong: var(--accent-hover);
-  --muted-color: var(--text-muted);
-  --outline-color: rgba(47,62,70,0.06);
-  /* Spacing */
-  --sidebar-width: 260px;
+  /* ---- Structure ------------------------------------------------- */
+  --rule-hair: 1px;
+  --rule: 2px;
+  --rule-heavy: 3px;
+  --radius: 0px;              /* hard geometry everywhere */
+
+  /* ---- Spacing scale (8px grid) ------------------------------- */
+  --u: 8px;
+  --u2: 16px;
+  --u3: 24px;
+  --u4: 32px;
+  --u5: 40px;
+  --u6: 48px;
+  --u8: 64px;
+
+  /* ---- Layout ------------------------------------------------- */
+  --sidebar-width: 244px;
+  --stage-max: 1240px;
+
+  /* ---- Motion ------------------------------------------------- */
+  --step-fast: 60ms steps(1, end);
+  --step: 120ms steps(2, end);
+  --ease-mech: 140ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* ============================================================
+     BACKWARDS-COMPATIBLE ALIASES
+     Map the previous theme's token names onto the new system so
+     any rule not explicitly rewritten still renders on-palette.
+     ============================================================ */
+  --bg-body: var(--field);
+  --bg-card: var(--field-raised);
+  --bg-card-secondary: var(--field-sunken);
+  --surface-color: var(--field-raised);
+  --text-main: var(--ink);
+  --text-color: var(--ink);
+  --text-primary: var(--ink);
+  --text-muted: var(--ink-dim);
+  --muted-color: var(--ink-dim);
+  --border-subtle: var(--ink-hair);
+  --border-color: var(--ink-hair);
+  --outline-color: var(--ink);
+  --outline-width: var(--rule);
+  --accent-primary: var(--signal);
+  --accent-color: var(--signal);
+  --accent-hover: var(--signal-bright);
+  --accent-strong: var(--signal);
+  --m3-bg-background: var(--field);
+  --m3-surface: var(--field-raised);
+  --m3-primary: var(--signal);
+  --m3-secondary: var(--field-sunken);
+  --m3-tertiary: var(--signal);
+
+  --shadow-soft: none;
+  --shadow-card: none;
+  --shadow-hover: none;
+  --shadow-strong: none;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-l: 0px;
+
+  --journal-heading: var(--font-display);
+  --journal-body: var(--font-mono);
+  --journal-heading-color: var(--ink);
+  --journal-body-color: var(--ink-dim);
+  --journal-card-bg: var(--field-raised);
+  --journal-card-border: var(--ink-hair);
 }
 
-/* Background is now handled by the Three.js particle sphere */
-body {
-  background-color: transparent;
-  color: var(--text-main);
-  font-family: var(--font-base);
-  margin: 0;
-  padding: 0;
-}
-
-/* Typography Utilities */
-.text-muted { color: var(--text-muted); }
-.font-mono { font-family: var(--font-mono); font-size: 0.875rem; }
-.accent-text { color: var(--accent-primary); }
-
+/* Typography utilities preserved from previous system */
+.text-muted { color: var(--ink-dim); }
+.font-mono { font-family: var(--font-mono); font-size: 0.8125rem; }
+.accent-text { color: var(--signal); }

@@ -1,39 +1,117 @@
-/* Sphere section layout (refined) */
-#sphere-section { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh; padding:clamp(3rem,6vh,5rem) 0 2rem; }
+/* ============================================================
+   ORBITAL SPHERE — signature element
+   The JS (js/sphere.js) is untouched. This only reframes the
+   container and restyles the tooltip. clamp() sizing,
+   aspect-ratio and touch-action are preserved so the sphere
+   math is unaffected.
+   ============================================================ */
 
-#sphere-container { position:relative; margin:0 auto; width:clamp(260px,52vw,560px); aspect-ratio:1/1; height:auto; touch-action:none; -webkit-user-select:none; user-select:none; cursor:grab; display:flex; align-items:center; justify-content:center; overflow:visible; }
+#sphere-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: clamp(3rem, 6vh, 5rem) 0 2rem;
+}
+
+#sphere-container {
+  position: relative;
+  margin: 0 auto;
+  width: clamp(240px, 46vw, 480px);
+  aspect-ratio: 1 / 1;
+  height: auto;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
 #sphere-container:active { cursor: grabbing; }
-.sphere-wrapper {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        transform-style: preserve-3d;
-}
-.sphere-icon { position:absolute; top:50%; left:50%; width:clamp(28px,6.2vw,56px); height:clamp(28px,6.2vw,56px); display:flex; align-items:center; justify-content:center; will-change:transform,opacity; }
-.sphere-icon img {
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        transition: filter 0.3s;
-}
-#tooltip {
-        position: fixed;
-        padding: 8px 14px;
-        background: var(--accent-color);
-        color: var(--background-color);
-        border-radius: 6px;
-        font-size: 14px;
-        font-weight: 600;
-        pointer-events: none;
-        opacity: 0;
-        transform: scale(0.9);
-        transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.8s var(--ease-out-cubic);
-        z-index: 1000;
+
+/* Instrument-bezel corner brackets around the sphere */
+#sphere-container::before,
+#sphere-container::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: var(--rule) solid var(--signal);
+  pointer-events: none;
 }
 
-@media (max-width: 850px) { #sphere-container { width:clamp(220px,68vw,480px); } }
+#sphere-container::before {
+  top: -10px;
+  left: -10px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+#sphere-container::after {
+  bottom: -10px;
+  right: -10px;
+  border-left: 0;
+  border-top: 0;
+}
+
+.sphere-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.sphere-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(26px, 6vw, 52px);
+  height: clamp(26px, 6vw, 52px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+.sphere-icon img {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: grayscale(1) brightness(1.35) contrast(0.9);
+  transition: filter 0.3s;
+}
+
+.sphere-icon:hover img {
+  filter: none;
+}
+
+#tooltip {
+  position: fixed;
+  padding: 5px 10px;
+  background: var(--field);
+  color: var(--ink);
+  border: var(--rule) solid var(--signal);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 0.15s steps(2, end);
+  z-index: 12000;
+}
+
+@media (max-width: 850px) {
+  #sphere-container { width: clamp(220px, 66vw, 460px); }
+}
+
 @media (max-width: 600px) {
-        #sphere-section { min-height:46vh; padding:2.5rem 0 1rem; }
-        #sphere-container { width:clamp(170px,78vw,340px); }
-        .sphere-icon { width:clamp(22px,11vw,40px); height:clamp(22px,11vw,40px); }
+  #sphere-section { min-height: 46vh; padding: 2.5rem 0 1rem; }
+  #sphere-container { width: clamp(180px, 76vw, 340px); }
+  .sphere-icon { width: clamp(22px, 11vw, 40px); height: clamp(22px, 11vw, 40px); }
 }

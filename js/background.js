@@ -76,7 +76,7 @@ class ParticleRing {
             const dist  = Math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
             let   alpha = (dist - fadeStart) / fadeRange;
             alpha = alpha < 0 ? 0 : alpha > 1 ? 1 : alpha;
-            alpha *= 0.7;
+            alpha *= 0.28;
 
             if (alpha < 0.01) continue; // skip before any draw calls
 
@@ -153,19 +153,16 @@ if ('paintWorklet' in CSS) {
         const fw = lerp(sW * 0.6, sW * 1.5, morphMid);
         const fh = lerp(sW * 0.6, sW * 0.9, morphMid);
 
-        // Color — baked at representative screen position
-        const normX = 0.5 + Math.cos(angle) * 0.3; // approximate x on-screen
-        const normY = 0.5 + Math.sin(angle) * 0.3; // approximate y on-screen
-
-        let bR = lerp(131, 58, normX);
-        let bG = lerp(192, 148, normX);
-        let bB = lerp(146, 197, normX);
-        if (normY > 0.6) {
-            const tY  = (normY - 0.6) / 0.4;
-            const mix = tY * tY;
-            bR = lerp(bR, 53, mix);
-            bG = lerp(bG, 167, mix);
-            bB = lerp(bB, 124, mix);
+        // Restrained palette: mostly warm technical off-white, with an
+        // occasional industrial-red fleck acting as a status signal.
+        let bR, bG, bB;
+        if (rng() < 0.11) {
+            bR = 212; bG = 58; bB = 44;
+        } else {
+            const shade = 0.72 + rng() * 0.28;
+            bR = 233 * shade;
+            bG = 229 * shade;
+            bB = 216 * shade;
         }
 
         particleData[o]     = angle;
@@ -225,8 +222,17 @@ if ('paintWorklet' in CSS) {
         requestAnimationFrame(animate);
     }
 
-    animate();
-    console.log('Optimized Ripple Flow Particle Worklet initialized. Particles: ' + PARTICLE_COUNT);
+    // Respect reduced-motion: render one static frame, skip the rAF loop.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+        container.style.setProperty('--ring-radius', STATE.radiusBase);
+        container.style.setProperty('--ring-x', visualCenterXPercent);
+        container.style.setProperty('--ring-y', 40);
+        container.style.setProperty('--animation-tick', 0);
+    } else {
+        animate();
+    }
+    console.log('Ring particle worklet initialized. Particles: ' + PARTICLE_COUNT);
 
 } else {
     // Firefox / Safari fallback — static gradient from CSS is sufficient

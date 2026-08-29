@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let rotationX = 0, rotationY = 0, targetRotationX = 0.2, targetRotationY = 0.2;
     let isDragging = false, lastMouseX = 0, lastMouseY = 0;
     const EASE_FACTOR = 0.08;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function createIcons() {
         const count = skills.length;
         const goldenRatio = (1 + Math.sqrt(5)) / 2;
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     function updatePositions() {
-        if (!isDragging) { targetRotationY += 0.003; }
+        if (!isDragging && !prefersReducedMotion) { targetRotationY += 0.003; }
         rotationX += (targetRotationX - rotationX) * EASE_FACTOR;
         rotationY += (targetRotationY - rotationY) * EASE_FACTOR;
         const sinX = Math.sin(rotationX), cosX = Math.cos(rotationX);

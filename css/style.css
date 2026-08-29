@@ -1,400 +1,359 @@
-/* Modern Naturalist's Journal — Overrides */
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap');
+/* ============================================================
+   PAGE TREATMENTS
+   Each page is another module of the same environment:
+   HOME  = command centre / overview
+   ABOUT = identity / profile module
+   CV    = archival record
+   CONTACT = communications panel
+   ============================================================ */
 
-:root {
-  --journal-heading: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
-  --journal-body: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
-  --journal-heading-color: #5C6A72; /* Everforest fg */
-  --journal-body-color: #708089;   /* Slightly muted fg */
+/* ============================================================
+   HOME — command centre
+   ============================================================ */
 
-  --journal-card-bg: #F4F0D9;      /* bg1 - parchment */
-  --journal-card-border: #E6E2CC;  /* bg4 - soft border */
-  --journal-shadow-color: #5C6A72; /* Softer shadow */
-  --journal-sage: #A6B0A0;         /* grey0 */
-}
-
-/* Legacy global typography/card/button rules moved to neobrutal.css */
-
-/* ============================================
-   TIMELINE: The Field Log
-   ============================================ */
-.timeline-panel {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--journal-card-border);
-}
-
-/* PLAYGROUND container */
-.card.playground { grid-column: 1 / -1; padding: 0; overflow: hidden; }
-.playground-container {
-  width: 100%;
-  background: transparent;
-  position: relative;
-  padding: 24px;
-  box-sizing: border-box;
-}
-.playground-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  cursor: crosshair;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  background: transparent;
-}
-.playground .info {
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  opacity: 0.9;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-.playground .info.hidden { opacity: 0; }
-
-.playground .controls {
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  background: rgba(255,255,255,0.92);
-  padding: 10px 16px;
-  border-radius: 999px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.playground .controls .mode-indicator {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  padding: 6px 12px;
-  background: #f9fafb;
-  border-radius: 12px;
-}
-.playground .controls .btn { padding: 8px 14px; }
-
-@media (min-width:900px) {
-  .card.playground { padding: 12px 24px; }
-  .playground-container { padding: 32px; }
-}
-
-.timeline-title {
-  font-family: var(--journal-heading);
-  color: var(--journal-heading-color);
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-.timeline-container {
-  max-height: 500px;
-  overflow-y: auto;
-  padding-right: 8px;
-  position: relative;
-  padding-left: 24px;
-}
-
-/* Dashed border-left for the timeline line */
-.timeline-container {
-  border-left: 2px dashed var(--journal-card-border);
-}
-
-.timeline-entry {
-  position: relative;
-  margin-bottom: 2rem;
-  display: flex;
-  gap: 16px;
-}
-
-/* Timeline dot */
-.timeline-dot {
-  position: absolute;
-  left: -16px;
-  top: 4px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: var(--journal-card-border);
-  border: 2px solid var(--journal-card-bg);
-  transition: background-color 200ms ease, box-shadow 200ms ease;
-  flex-shrink: 0;
-}
-
-.timeline-entry:hover .timeline-dot {
-  background-color: var(--journal-heading-color);
-  box-shadow: 0 0 0 6px rgba(47, 62, 70, 0.08);
-}
-
-.timeline-date {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  color: var(--journal-heading-color);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.2rem;
-}
-
-.timeline-title-entry {
-  font-family: var(--journal-heading);
-  color: var(--journal-heading-color);
-  font-size: 1.1rem;
-  margin: 0 0 0.4rem 0;
-  font-weight: 700;
-}
-
-.timeline-description {
-  color: var(--journal-body-color);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* ============================================
-   ABOUT PAGE: Gallery & Hero Section
-   ============================================ */
-.about-hero {
-  text-align: center;
-  margin-bottom: 4rem;
-  padding: 2rem 0;
-}
-
-.profile-image-wrapper {
-  margin-bottom: 2rem;
-}
-
-.profile-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--journal-card-border);
-  filter: sepia(0.2);
-  box-shadow: 0 8px 16px rgba(47, 62, 70, 0.1);
-}
-
-.bio-section {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.bio-section h1 {
-  margin-bottom: 0.4rem;
-}
-
-.bio-subtitle {
-  font-family: var(--journal-heading);
-  color: var(--journal-heading-color);
-  font-size: 1.25rem;
-  margin-bottom: 1.2rem;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.bio-text {
-  color: var(--journal-body-color);
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin: 0;
-}
-
-/* Gallery Section */
-.about-gallery {
-  margin-top: 3rem;
-}
-
-.about-gallery h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--journal-heading-color);
-}
-
-.polaroid-grid {
+.home-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 24px;
-  justify-items: center;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: var(--u5);
+  align-items: start;
+  max-width: var(--stage-max);
 }
 
-/* Polaroid Card Style */
-.polaroid-card {
-  width: 140px;
-  aspect-ratio: 3 / 4;
-  background: #F9F7F1;
-  border: 8px solid white;
-  box-shadow: 0 10px 24px rgba(47, 62, 70, 0.15);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 200ms ease;
-  cursor: pointer;
-}
+.welcome-column { min-width: 0; }
 
-.polaroid-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(47, 62, 70, 0.2);
-}
-
-.polaroid-image {
-  flex: 1;
-  background-color: var(--journal-card-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-}
-
-.polaroid-icon {
-  width: 48px;
-  height: 48px;
-  color: var(--journal-heading-color);
-  opacity: 0.7;
-}
-
-.polaroid-label {
-  padding: 8px 10px;
-  background: #F9F7F1;
-  font-family: var(--journal-body);
-  font-size: 0.8rem;
-  color: var(--journal-heading-color);
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  border-top: 1px solid rgba(183, 183, 164, 0.2);
-}
-
-/* ============================================
-   UTILITY: Scrollbar Styling
-   ============================================ */
-.timeline-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.timeline-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.timeline-container::-webkit-scrollbar-thumb {
-  background: var(--journal-card-border);
-  border-radius: 3px;
-}
-
-.timeline-container::-webkit-scrollbar-thumb:hover {
-  background: var(--journal-heading-color);
-}
-
-/* ============================================
-   HOME PAGE: Profile + Headline Flex
-   ============================================ */
+/* Profile plate + headline */
 .profile-headline-flex {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
+  gap: var(--u3);
+  align-items: stretch;
+  margin-bottom: var(--u3);
+  border: var(--rule) solid var(--ink);
+  background: var(--field-raised);
 }
 
 .profile-photo-wrapper {
   flex-shrink: 0;
-  background: var(--journal-card-bg);
-  border: 1px solid var(--journal-card-border);
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 2px 8px rgba(47, 62, 70, 0.08);
+  padding: var(--u2);
+  background: var(--field-sunken);
+  border-right: var(--rule) solid var(--ink);
 }
 
 .profile-photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
+  width: 104px;
+  height: 104px;
   object-fit: cover;
-  display: block;
+  filter: grayscale(1) contrast(1.08);
+  border: var(--rule-hair) solid var(--ink-hair);
 }
 
 .headline-text {
   flex: 1;
+  min-width: 0;
+  padding: var(--u2) var(--u3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .headline-text h1 {
-  margin-top: 0;
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.25rem, 0.9rem + 2vw, 2rem);
 }
 
 .headline-text .text-large {
-  margin-top: 0.8rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-dim);
 }
 
-@media (max-width: 640px) {
-  .welcome-column {
-    padding-top: 0;
-  }
+.headline-text .text-large::before {
+  content: "> ";
+  color: var(--signal);
+}
 
-  .profile-headline-flex {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+/* ---- The Field Log — vertical instrument timeline ---------- */
+.timeline-panel {
+  margin-top: var(--u5);
+  padding-top: var(--u3);
+  border-top: var(--rule) solid var(--ink);
+}
 
-  .headline-text {
-    text-align: center;
-  }
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: var(--u3);
+}
 
-  .timeline-panel {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-  }
+.timeline-title::before {
+  content: "// ";
+  color: var(--signal);
+}
 
-  .timeline-container {
-    max-height: none;
-    padding-left: 18px;
-  }
+.timeline-container {
+  position: relative;
+  max-height: 460px;
+  overflow-y: auto;
+  padding-left: var(--u3);
+  border-left: var(--rule) solid var(--ink-hair);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-hair) transparent;
+}
 
+.timeline-entry {
+  position: relative;
+  display: flex;
+  gap: var(--u2);
+  margin-bottom: var(--u3);
+}
+
+.timeline-entry:last-child { margin-bottom: 0; }
+
+/* Square node on the rail */
+.timeline-dot {
+  position: absolute;
+  left: calc(-1 * var(--u3) - 5px);
+  top: 3px;
+  width: 9px;
+  height: 9px;
+  background: var(--field);
+  border: var(--rule) solid var(--ink-dim);
+  transition: background var(--ease-mech), border-color var(--ease-mech);
+}
+
+.timeline-entry:hover .timeline-dot {
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+.timeline-content { min-width: 0; }
+
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--signal);
+  margin-bottom: 0.25rem;
+}
+
+.timeline-title-entry {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+}
+
+.timeline-description {
+  color: var(--ink-dim);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.timeline-container::-webkit-scrollbar { width: 8px; }
+.timeline-container::-webkit-scrollbar-track { background: var(--field-sunken); }
+.timeline-container::-webkit-scrollbar-thumb { background: var(--ink-hair); }
+.timeline-container::-webkit-scrollbar-thumb:hover { background: var(--ink-dim); }
+
+/* ---- Sphere module column --------------------------------- */
+.globe-column {
+  position: sticky;
+  top: var(--u4);
+  min-width: 0;
+}
+
+.globe-card {
+  position: relative;
+  background: var(--field-sunken);
+  border: var(--rule) solid var(--ink);
+  padding: var(--u4) var(--u3) var(--u3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 440px;
+}
+
+.globe-card::before {
+  content: "TOOLING";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.45rem var(--u2);
+  background: var(--field);
+  border-bottom: var(--rule) solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+}
+
+/* ============================================================
+   ABOUT — identity / profile module
+   ============================================================ */
+
+.about-hero {
+  display: flex;
+  gap: var(--u4);
+  align-items: flex-start;
+  max-width: var(--stage-max);
+  margin-bottom: var(--u5);
+  padding-bottom: var(--u4);
+  border-bottom: var(--rule) solid var(--ink);
+}
+
+.profile-image-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  padding: var(--u);
+  background: var(--field-sunken);
+  border: var(--rule) solid var(--ink);
+}
+
+.profile-image {
+  width: 168px;
+  height: 168px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1) contrast(1.08);
+  border: var(--rule-hair) solid var(--ink-hair);
+}
+
+.bio-section { max-width: 62ch; }
+
+.bio-section h1 {
+  margin-bottom: var(--u2);
+}
+
+.bio-subtitle {
+  font-family: var(--font-mono);
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--u2);
+}
+
+.bio-subtitle::before {
+  content: "> ";
+  color: var(--signal);
+}
+
+.bio-text {
+  color: var(--ink-dim);
+  font-size: 0.88rem;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ---- Areas of Focus — labelled square-icon grid ----------- */
+.about-gallery {
+  max-width: var(--stage-max);
+  margin-top: var(--u4);
+}
+
+.about-gallery h2 {
+  margin-bottom: var(--u3);
+}
+
+.about-gallery h2::before {
+  content: "// ";
+  color: var(--signal);
+}
+
+.polaroid-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--rule);
+  background: var(--ink);
+  border: var(--rule) solid var(--ink);
+}
+
+.polaroid-card {
+  aspect-ratio: 4 / 5;
+  background: var(--field-raised);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: default;
+  transition: background var(--ease-mech);
+}
+
+.polaroid-card:hover {
+  background: var(--field-signal);
+}
+
+.polaroid-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--u2);
+  background: var(--field-sunken);
+}
+
+.polaroid-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--ink-dim);
+  stroke-width: 1.5;
+}
+
+.polaroid-card:hover .polaroid-icon { color: var(--signal); }
+
+.polaroid-label {
+  padding: 0.5rem 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-align: center;
+  border-top: var(--rule) solid var(--ink);
+}
+
+/* ============================================================
+   CV + CONTACT — record / comms panels
+   ============================================================ */
+
+.cv-box,
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--u3);
+  max-width: var(--stage-max);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+    gap: var(--u4);
+  }
+  .globe-column { position: static; }
+  .globe-card { min-height: 380px; }
+}
+
+@media (max-width: 720px) {
   .about-hero {
-    margin-bottom: 2.5rem;
-    padding: 1rem 0 0;
+    flex-direction: column;
+    gap: var(--u3);
   }
-
-  .bio-subtitle {
-    font-size: 1.1rem;
-  }
+  .profile-image { width: 140px; height: 140px; }
 }
 
 @media (max-width: 480px) {
-  .profile-photo {
-    width: 88px;
-    height: 88px;
+  .profile-headline-flex { flex-direction: column; }
+  .profile-photo-wrapper {
+    border-right: 0;
+    border-bottom: var(--rule) solid var(--ink);
   }
-
-  .globe-card {
-    min-height: 340px;
-    padding: 1.25rem;
-  }
-
-  .polaroid-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .polaroid-card {
-    width: 100%;
-    max-width: 150px;
-  }
-
-  .timeline-entry {
-    gap: 12px;
-  }
-
-  .cta-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .cta-row .btn {
-    width: 100%;
-  }
+  .profile-photo { width: 100%; height: 180px; }
+  .timeline-container { max-height: none; }
+  .polaroid-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
 }
-

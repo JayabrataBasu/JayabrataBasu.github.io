@@ -235,7 +235,7 @@
 .bio-section h1 { margin-bottom: var(--u2); }
 
 .bio-subtitle {
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   color: var(--ink);
   font-size: 0.98rem;
   line-height: 1.75;

@@ -8,10 +8,14 @@
 
 :root {
   /* ---- Typefaces -------------------------------------------------- */
+  /* display  = bitmap headline           (section identifiers, H1/H2)
+     mono     = functional interface type (nav, buttons, labels, metadata)
+     body     = reading type              (prose, descriptions, lede) */
   --font-display: 'Silkscreen', 'JetBrains Mono', 'Courier New', monospace;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, 'Courier New', monospace;
+  --font-body: 'Space Mono', 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
   /* Legacy aliases (kept so older rules resolve) */
-  --font-base: var(--font-mono);
+  --font-base: var(--font-body);
 
   /* ---- Field (backgrounds) -------------------------------------- */
   --field:         #17181a;   /* primary dark field */

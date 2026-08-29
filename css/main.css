@@ -72,10 +72,10 @@ h1, h2, h3, h4, h5, h6 {
   word-break: break-word;
 }
 
-h1 { font-size: clamp(1.5rem, 1rem + 2.4vw, 2.35rem); }
-h2 { font-size: clamp(1.15rem, 0.9rem + 1.4vw, 1.6rem); }
-h3 { font-size: clamp(0.95rem, 0.85rem + 0.7vw, 1.2rem); }
-h4 { font-size: 0.95rem; }
+h1 { font-size: clamp(1.35rem, 0.95rem + 1.9vw, 1.95rem); }
+h2 { font-size: clamp(1.05rem, 0.85rem + 1.1vw, 1.4rem); }
+h3 { font-size: clamp(0.9rem, 0.82rem + 0.55vw, 1.08rem); }
+h4 { font-size: 0.9rem; }
 
 p {
   line-height: 1.7;
@@ -222,16 +222,15 @@ strong { color: var(--ink); font-weight: 600; }
   margin-left: var(--sidebar-width);
   flex: 1;
   min-width: 0;
-  padding: var(--u5) var(--u5) var(--u8);
+  padding: var(--u6) clamp(var(--u3), 5vw, 72px) var(--u8);
   min-height: 100vh;
 }
 
-.main-stage > h1:first-child,
-.main-stage > .home-layout {
+.main-stage > * {
   max-width: var(--stage-max);
 }
 
-/* Page module header — the running strip above page content */
+/* Masthead — the title block that opens each page */
 .main-stage > h1 {
   position: relative;
   padding-bottom: var(--u2);
@@ -239,13 +238,19 @@ strong { color: var(--ink); font-weight: 600; }
   border-bottom: var(--rule) solid var(--ink);
 }
 
-.main-stage > h1::before {
-  content: "// ";
-  color: var(--signal);
+.main-stage > p.text-large {
+  max-width: 60ch;
+  margin-bottom: var(--u5);
 }
 
-.main-stage > p.text-large {
-  max-width: 64ch;
+/* Quiet footer line closing each page */
+.site-foot {
+  margin-top: var(--u2);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 /* ============================================================
@@ -303,20 +308,26 @@ strong { color: var(--ink); font-weight: 600; }
   border-top: 0;
 }
 
-/* Small uppercase system label */
+/* Section kicker — a quiet identifier above a masthead.
+   Editorial, not a command prompt: a short red rule, then the label. */
 .sys-label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--ink-faint);
-  margin-bottom: var(--u);
+  color: var(--ink-dim);
+  margin-bottom: var(--u2);
 }
 
 .sys-label::before {
-  content: "> ";
-  color: var(--signal);
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--signal);
+  flex-shrink: 0;
 }
 
 /* Horizontal rule with measurement ticks */
@@ -604,13 +615,10 @@ strong { color: var(--ink); font-weight: 600; }
 .modal-body h3 {
   color: var(--ink);
   margin: var(--u3) 0 var(--u);
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-}
-
-.modal-body h3::before {
-  content: "// ";
-  color: var(--signal);
+  padding-bottom: 0.35rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  border-bottom: var(--rule-hair) solid var(--ink-hair);
 }
 
 .modal-body ul {
@@ -625,10 +633,13 @@ strong { color: var(--ink); font-weight: 600; }
 }
 
 .modal-body li::before {
-  content: ">";
+  content: "";
   position: absolute;
   left: 0;
-  color: var(--signal);
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  background: var(--signal);
 }
 
 .modal-footer {

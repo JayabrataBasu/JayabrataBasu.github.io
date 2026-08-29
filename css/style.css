@@ -1,205 +1,213 @@
 /* ============================================================
    PAGE TREATMENTS
-   Each page is another module of the same environment:
-   HOME  = command centre / overview
-   ABOUT = identity / profile module
-   CV    = archival record
-   CONTACT = communications panel
+   One coherent system; each page composed like a page in a
+   technical publication rather than a dashboard screen.
+   Retro-computational grammar, editorial pacing.
    ============================================================ */
 
 /* ============================================================
-   HOME — command centre
+   HOME — personal overview
    ============================================================ */
 
-.home-layout {
+.home-masthead {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: var(--u5);
-  align-items: start;
-  max-width: var(--stage-max);
-}
-
-.welcome-column { min-width: 0; }
-
-/* Profile plate + headline */
-.profile-headline-flex {
-  display: flex;
-  gap: var(--u3);
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: var(--u4);
   align-items: stretch;
-  margin-bottom: var(--u3);
-  border: var(--rule) solid var(--ink);
-  background: var(--field-raised);
+  padding-bottom: var(--u4);
+  border-bottom: var(--rule) solid var(--ink);
+  margin-bottom: var(--u5);
 }
 
-.profile-photo-wrapper {
-  flex-shrink: 0;
-  padding: var(--u2);
+.home-portrait {
+  padding: var(--u);
   background: var(--field-sunken);
-  border-right: var(--rule) solid var(--ink);
+  border: var(--rule) solid var(--ink);
+  align-self: start;
 }
 
-.profile-photo {
-  width: 104px;
-  height: 104px;
+.home-portrait img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.08);
+  display: block;
+  filter: grayscale(1) contrast(1.05);
   border: var(--rule-hair) solid var(--ink-hair);
 }
 
-.headline-text {
-  flex: 1;
-  min-width: 0;
-  padding: var(--u2) var(--u3);
+.home-intro {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.headline-text h1 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.25rem, 0.9rem + 2vw, 2rem);
+.home-intro h1 {
+  margin: 0 0 var(--u);
+  font-size: clamp(1.4rem, 0.9rem + 2.4vw, 2.15rem);
 }
 
-.headline-text .text-large {
+.home-intro .text-large {
   margin: 0;
-  font-size: 0.9rem;
   color: var(--ink-dim);
+  font-size: 0.95rem;
 }
 
-.headline-text .text-large::before {
-  content: "> ";
-  color: var(--signal);
+.home-intro .cta-row { margin-top: var(--u3); }
+
+/* Body: the Field Log carries the page; a quiet figure sits beside it */
+.home-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: clamp(var(--u4), 5vw, 72px);
+  align-items: start;
 }
 
-/* ---- The Field Log — vertical instrument timeline ---------- */
+/* ---- The Field Log — chronological register ---------------- */
 .timeline-panel {
-  margin-top: var(--u5);
-  padding-top: var(--u3);
-  border-top: var(--rule) solid var(--ink);
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .timeline-title {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
   color: var(--ink);
   margin-bottom: var(--u3);
-}
-
-.timeline-title::before {
-  content: "// ";
-  color: var(--signal);
+  padding-bottom: var(--u);
+  border-bottom: var(--rule) solid var(--ink);
 }
 
 .timeline-container {
-  position: relative;
-  max-height: 460px;
-  overflow-y: auto;
-  padding-left: var(--u3);
-  border-left: var(--rule) solid var(--ink-hair);
-  scrollbar-width: thin;
-  scrollbar-color: var(--ink-hair) transparent;
+  counter-reset: log;
+  max-height: none;
+  overflow: visible;
+  padding: 0;
+  border: 0;
 }
 
 .timeline-entry {
+  counter-increment: log;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2.6rem 4.5rem minmax(0, 1fr);
   gap: var(--u2);
-  margin-bottom: var(--u3);
+  padding: var(--u3) 0;
+  border-bottom: var(--rule-hair) solid var(--ink-hair);
+  margin: 0;
 }
 
-.timeline-entry:last-child { margin-bottom: 0; }
+.timeline-entry:first-child { border-top: var(--rule-hair) solid var(--ink-hair); }
 
-/* Square node on the rail */
+/* index — pure ordering, not a metric */
+.timeline-entry::before {
+  content: counter(log, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  padding-top: 0.2rem;
+}
+
+/* the old rail node, kept small and quiet */
 .timeline-dot {
   position: absolute;
-  left: calc(-1 * var(--u3) - 5px);
-  top: 3px;
-  width: 9px;
-  height: 9px;
-  background: var(--field);
-  border: var(--rule) solid var(--ink-dim);
-  transition: background var(--ease-mech), border-color var(--ease-mech);
+  left: 2.6rem;
+  top: var(--u3);
+  width: 6px;
+  height: 6px;
+  background: var(--signal);
+  opacity: 0;
+  transition: opacity var(--ease-mech);
 }
 
-.timeline-entry:hover .timeline-dot {
-  background: var(--signal);
-  border-color: var(--signal);
-}
+.timeline-entry:hover .timeline-dot { opacity: 1; }
 
 .timeline-content { min-width: 0; }
 
 .timeline-date {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   color: var(--signal);
-  margin-bottom: 0.25rem;
+  padding-top: 0.15rem;
 }
 
 .timeline-title-entry {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--ink);
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.4rem;
 }
 
 .timeline-description {
   color: var(--ink-dim);
-  font-size: 0.82rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  line-height: 1.65;
   margin: 0;
 }
 
-.timeline-container::-webkit-scrollbar { width: 8px; }
-.timeline-container::-webkit-scrollbar-track { background: var(--field-sunken); }
-.timeline-container::-webkit-scrollbar-thumb { background: var(--ink-hair); }
-.timeline-container::-webkit-scrollbar-thumb:hover { background: var(--ink-dim); }
-
-/* ---- Sphere module column --------------------------------- */
-.globe-column {
+/* ---- Quiet figure — non-semantic technical linework -------- */
+.home-figure {
   position: sticky;
-  top: var(--u4);
-  min-width: 0;
-}
-
-.globe-card {
-  position: relative;
-  background: var(--field-sunken);
+  top: var(--u5);
   border: var(--rule) solid var(--ink);
-  padding: var(--u4) var(--u3) var(--u3);
+  background: var(--field-sunken);
+  padding: calc(var(--u5) + 4px) var(--u3) var(--u3);
+  min-height: 420px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 440px;
 }
 
-.globe-card::before {
-  content: "TOOLING";
+/* Red registration brackets on the frame corners */
+.home-figure::before,
+.home-figure::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: var(--rule) solid var(--signal);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.home-figure::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+.home-figure::after  { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+.home-figure__label {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  padding: 0.45rem var(--u2);
+  padding: 0.5rem var(--u2);
   background: var(--field);
   border-bottom: var(--rule) solid var(--ink);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
   color: var(--ink-dim);
 }
 
+.home-figure #sphere-container {
+  width: min(100%, 380px);
+}
+
 /* ============================================================
-   ABOUT — identity / profile module
+   ABOUT — personal & intellectual profile
    ============================================================ */
 
 .about-hero {
-  display: flex;
-  gap: var(--u4);
-  align-items: flex-start;
-  max-width: var(--stage-max);
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: var(--u5);
+  align-items: start;
   margin-bottom: var(--u5);
   padding-bottom: var(--u4);
   border-bottom: var(--rule) solid var(--ink);
@@ -207,123 +215,116 @@
 
 .profile-image-wrapper {
   position: relative;
-  flex-shrink: 0;
   padding: var(--u);
   background: var(--field-sunken);
   border: var(--rule) solid var(--ink);
 }
 
 .profile-image {
-  width: 168px;
-  height: 168px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
   object-fit: cover;
   display: block;
-  filter: grayscale(1) contrast(1.08);
+  filter: grayscale(1) contrast(1.05);
   border: var(--rule-hair) solid var(--ink-hair);
 }
 
-.bio-section { max-width: 62ch; }
+.bio-section { max-width: 60ch; }
 
-.bio-section h1 {
-  margin-bottom: var(--u2);
-}
+.bio-section h1 { margin-bottom: var(--u2); }
 
 .bio-subtitle {
   font-family: var(--font-mono);
   color: var(--ink);
-  font-size: 0.95rem;
-  line-height: 1.7;
+  font-size: 0.98rem;
+  line-height: 1.75;
   margin-bottom: var(--u2);
-}
-
-.bio-subtitle::before {
-  content: "> ";
-  color: var(--signal);
 }
 
 .bio-text {
   color: var(--ink-dim);
-  font-size: 0.88rem;
-  line-height: 1.75;
+  font-size: 0.9rem;
+  line-height: 1.8;
   margin: 0;
 }
 
-/* ---- Areas of Focus — labelled square-icon grid ----------- */
-.about-gallery {
-  max-width: var(--stage-max);
-  margin-top: var(--u4);
-}
+/* ---- Areas of Focus — a ruled index, not a widget wall ----- */
+.about-gallery { margin-top: var(--u5); }
 
 .about-gallery h2 {
   margin-bottom: var(--u3);
-}
-
-.about-gallery h2::before {
-  content: "// ";
-  color: var(--signal);
+  padding-bottom: var(--u);
+  border-bottom: var(--rule) solid var(--ink);
 }
 
 .polaroid-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--rule);
-  background: var(--ink);
-  border: var(--rule) solid var(--ink);
+  grid-template-columns: 1fr;
 }
 
 .polaroid-card {
-  aspect-ratio: 4 / 5;
-  background: var(--field-raised);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  cursor: default;
-  transition: background var(--ease-mech);
+  display: grid;
+  grid-template-columns: 2.6rem 40px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--u2);
+  padding: var(--u2) 0;
+  border-bottom: var(--rule-hair) solid var(--ink-hair);
+  counter-increment: focus;
+  background: transparent;
+  transition: none;
 }
 
-.polaroid-card:hover {
-  background: var(--field-signal);
+.polaroid-grid { counter-reset: focus; }
+
+.polaroid-card::before {
+  content: counter(focus, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-faint);
 }
+
+.polaroid-card:hover { background: transparent; }
 
 .polaroid-image {
-  flex: 1;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--u2);
-  background: var(--field-sunken);
 }
 
 .polaroid-icon {
-  width: 40px;
-  height: 40px;
-  color: var(--ink-dim);
-  stroke-width: 1.5;
+  width: 26px;
+  height: 26px;
+  color: var(--ink-faint);
+  stroke-width: 1.25;
 }
 
 .polaroid-card:hover .polaroid-icon { color: var(--signal); }
 
 .polaroid-label {
-  padding: 0.5rem 0.6rem;
+  padding: 0;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-dim);
-  text-align: center;
-  border-top: var(--rule) solid var(--ink);
+  color: var(--ink);
+  text-align: left;
+  border: 0;
 }
 
 /* ============================================================
-   CV + CONTACT — record / comms panels
+   CV + CONTACT — record / contact pages
    ============================================================ */
 
 .cv-box,
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--u3);
-  max-width: var(--stage-max);
 }
 
 /* ============================================================
@@ -331,29 +332,48 @@
    ============================================================ */
 
 @media (max-width: 1024px) {
-  .home-layout {
+  .home-body {
     grid-template-columns: 1fr;
     gap: var(--u4);
   }
-  .globe-column { position: static; }
-  .globe-card { min-height: 380px; }
+  .home-figure {
+    position: relative;
+    top: auto;
+    order: -1;
+    min-height: 360px;
+  }
 }
 
 @media (max-width: 720px) {
-  .about-hero {
-    flex-direction: column;
+  .home-masthead {
+    grid-template-columns: 132px minmax(0, 1fr);
     gap: var(--u3);
   }
-  .profile-image { width: 140px; height: 140px; }
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: var(--u3);
+  }
+  .profile-image-wrapper { max-width: 220px; }
 }
 
-@media (max-width: 480px) {
-  .profile-headline-flex { flex-direction: column; }
-  .profile-photo-wrapper {
-    border-right: 0;
-    border-bottom: var(--rule) solid var(--ink);
+@media (max-width: 520px) {
+  .home-masthead {
+    grid-template-columns: 1fr;
   }
-  .profile-photo { width: 100%; height: 180px; }
-  .timeline-container { max-height: none; }
-  .polaroid-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+  .home-portrait { max-width: 172px; justify-self: start; }
+  .home-figure {
+    min-height: 300px;
+    padding: calc(var(--u5) + 4px) var(--u2) var(--u2);
+  }
+
+  .timeline-entry {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    row-gap: 0.4rem;
+  }
+  .timeline-entry::before { grid-row: 1; }
+  .timeline-date { grid-column: 2; padding-top: 0; }
+  .timeline-content { grid-column: 1 / -1; }
+  .timeline-dot { display: none; }
+
+  .polaroid-card { grid-template-columns: 2rem 30px minmax(0, 1fr); }
 }

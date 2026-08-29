@@ -1,43 +1,72 @@
 /* ============================================================
-   PROJECTS — repository / module index
+   PROJECTS + RESEARCH — curated work archive
+   Presented as a catalogue register: index, plate, entry.
    ============================================================ */
 
-.project-card {
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
+.work-register {
+  border-top: var(--rule) solid var(--ink);
+  counter-reset: work;
 }
 
-/* Image well — keeps the source asset intact, only frames it */
-.card-image,
-.card-placeholder {
+.work-entry {
+  counter-increment: work;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 208px) minmax(0, 1fr);
+  gap: clamp(var(--u2), 3vw, var(--u4));
+  padding: var(--u4) 0;
+  border-bottom: var(--rule-hair) solid var(--ink-hair);
+}
+
+.work-entry::before {
+  content: counter(work, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  padding-top: 0.3rem;
+}
+
+.work-entry--text {
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+}
+
+.work-entry__body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ---- Plate (image / placeholder / injected slideshow) ------ */
+.work-entry__media .card-image,
+.work-entry__media .card-placeholder,
+.work-entry__media .card-slideshow {
   width: 100%;
-  height: 190px;
-  margin-bottom: var(--u2);
+  height: auto;
+  aspect-ratio: 3 / 2;
+  margin: 0;
   object-fit: cover;
   border: var(--rule) solid var(--ink);
   background-color: var(--field-sunken);
 }
 
-.card-placeholder {
-  background-image: repeating-linear-gradient(
-    45deg,
-    var(--ink-hair) 0,
-    var(--ink-hair) 1px,
-    transparent 1px,
-    transparent 7px
+/* An intentionally empty plate — a quiet band, thin frame + a
+   single diagonal, no invented preview. */
+.work-entry__media .card-placeholder {
+  aspect-ratio: 5 / 3;
+  border-color: var(--ink-hair);
+  background-image: linear-gradient(
+    to top right,
+    transparent calc(50% - 0.5px),
+    var(--ink-hair) calc(50% - 0.5px),
+    var(--ink-hair) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
   );
 }
 
-/* Slideshow container injected by js/projects.js */
 .card-slideshow {
   position: relative;
-  width: 100%;
-  height: 190px;
   overflow: hidden;
-  margin-bottom: var(--u2);
-  border: var(--rule) solid var(--ink);
-  background-color: var(--field-sunken);
 }
 
 .card-slideshow img {
@@ -56,23 +85,49 @@
   z-index: 2;
 }
 
-/* Push the CTA row to the foot of every card so a grid row aligns */
-.project-card .cta-row {
-  margin-top: auto;
-  padding-top: var(--u2);
+/* ---- Entry body ------------------------------------------- */
+.work-entry__body > .tech-pill {
+  align-self: flex-start;
+  margin-bottom: var(--u);
+  color: var(--signal);
+  border-color: var(--signal);
+  background: var(--field-signal);
+}
+
+.work-entry__body .card-title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 var(--u);
+}
+
+.work-entry__body .card-description {
+  color: var(--ink-dim);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  margin: 0 0 var(--u2);
+  max-width: 62ch;
+}
+
+.work-entry__body .tech-stack {
+  margin: 0 0 var(--u3);
+}
+
+.work-entry__body .cta-row {
+  margin: auto 0 0;
 }
 
 /* ============================================================
    MODAL GALLERY (rendered by js/projects.js)
    ============================================================ */
 
-.project-gallery {
-  margin: var(--u3) 0;
-}
+.project-gallery { margin: var(--u3) 0; }
 
-.project-gallery h3 {
-  margin-bottom: var(--u2);
-}
+.project-gallery h3 { margin-bottom: var(--u2); }
 
 .gallery-grid {
   display: grid;
@@ -94,10 +149,20 @@
    RESPONSIVE
    ============================================================ */
 
-@media (max-width: 480px) {
-  .card-image,
-  .card-placeholder,
-  .card-slideshow {
-    height: 160px;
+@media (max-width: 768px) {
+  .work-entry {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--u2);
   }
+  .work-entry__media {
+    grid-column: 2;
+    max-width: 340px;
+    margin-bottom: var(--u3);
+  }
+  .work-entry__body { grid-column: 2; }
+  .work-entry__media .card-placeholder { aspect-ratio: 2 / 1; }
+}
+
+@media (max-width: 420px) {
+  .work-entry { grid-template-columns: 2rem minmax(0, 1fr); }
 }

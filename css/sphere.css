@@ -33,31 +33,6 @@
 
 #sphere-container:active { cursor: grabbing; }
 
-/* Instrument-bezel corner brackets around the sphere */
-#sphere-container::before,
-#sphere-container::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border: var(--rule) solid var(--signal);
-  pointer-events: none;
-}
-
-#sphere-container::before {
-  top: -10px;
-  left: -10px;
-  border-right: 0;
-  border-bottom: 0;
-}
-
-#sphere-container::after {
-  bottom: -10px;
-  right: -10px;
-  border-left: 0;
-  border-top: 0;
-}
-
 .sphere-wrapper {
   position: absolute;
   width: 100%;

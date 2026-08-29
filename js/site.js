@@ -8,6 +8,7 @@
         about: 'About',
         cv: 'CV',
         projects: 'Projects',
+        research: 'Research',
         contact: 'Contact'
     };
 
@@ -19,6 +20,7 @@
                 (currentPage === 'about' && href === 'about.html') ||
                 (currentPage === 'cv' && href === 'cv.html') ||
                 (currentPage === 'projects' && href === 'projects.html') ||
+                (currentPage === 'research' && href === 'research.html') ||
                 (currentPage === 'contact' && href === 'contact.html');
 
             link.classList.toggle('active', isCurrent);

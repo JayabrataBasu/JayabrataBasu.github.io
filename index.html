@@ -16,7 +16,7 @@
 </head>
 <body data-page="home">
     <div class="page-shell">
-        <!-- Control Panel -->
+        <!-- Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="brand">
@@ -54,6 +54,12 @@
                     </svg>
                     <span>Projects</span>
                 </a>
+                <a class="nav-link" href="research.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Research</span>
+                </a>
                 <a class="nav-link" href="contact.html">
                     <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -65,88 +71,85 @@
 
         <!-- Main Content Stage -->
         <main class="main-stage">
-            <p class="sys-label">Home / Overview</p>
-            <div class="home-layout">
-                <div class="welcome-column">
-                    <!-- Profile + Headline -->
-                    <div class="profile-headline-flex">
-                        <div class="profile-photo-wrapper">
-                            <img src="assets/profile/jayabratabasu.jpg" alt="Jayabrata Basu" class="profile-photo">
-                        </div>
-                        <div class="headline-text">
-                            <h1 class="blink">Learning, Building and Improving</h1>
-                            <p class="text-large">Software, Coffee and Reading.</p>
-                        </div>
-                    </div>
+            <p class="sys-label">Overview</p>
 
+            <header class="home-masthead">
+                <div class="home-portrait">
+                    <img src="assets/profile/jayabratabasu.jpg" alt="Jayabrata Basu">
+                </div>
+                <div class="home-intro">
+                    <h1>Learning, Building and Improving</h1>
+                    <p class="text-large">Software, Coffee and Reading.</p>
                     <div class="cta-row">
                         <a class="btn primary" href="projects.html">View Projects</a>
                         <a class="btn secondary" href="cv.html">Download CV</a>
                     </div>
+                </div>
+            </header>
 
-                    <!-- The Field Log: Timeline Component -->
-                    <div class="timeline-panel">
-                        <h2 class="timeline-title">The Field Log</h2>
-                        <div class="timeline-container">
-                            <div class="timeline-entry">
-                                <div class="timeline-dot" aria-hidden="true"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2025</div>
-                                    <h3 class="timeline-title-entry">VeridicalDB</h3>
-                                    <p class="timeline-description">A relational database management system coded from scratch in Go.</p>
-                                </div>
+            <div class="home-body">
+                <!-- The Field Log: chronological register -->
+                <section class="timeline-panel">
+                    <h2 class="timeline-title">The Field Log</h2>
+                    <div class="timeline-container">
+                        <div class="timeline-entry">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-date">2025</div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-title-entry">VeridicalDB</h3>
+                                <p class="timeline-description">A relational database management system coded from scratch in Go.</p>
                             </div>
+                        </div>
 
-                            <div class="timeline-entry">
-                                <div class="timeline-dot" aria-hidden="true"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2024</div>
-                                    <h3 class="timeline-title-entry">HarvestForGood</h3>
-                                    <p class="timeline-description">A platform to bring together researchers, farmers, and policymakers in order to create a future for sustainable farming and agriculture in the Global South.</p>
-                                </div>
+                        <div class="timeline-entry">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-title-entry">HarvestForGood</h3>
+                                <p class="timeline-description">A platform to bring together researchers, farmers, and policymakers in order to create a future for sustainable farming and agriculture in the Global South.</p>
                             </div>
+                        </div>
 
-                            <div class="timeline-entry">
-                                <div class="timeline-dot" aria-hidden="true"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2024</div>
-                                    <h3 class="timeline-title-entry">Research Associate</h3>
-                                    <p class="timeline-description">Working as a research associate at the Schulich School of Business, York University under the tutelage of Prof. Preet s Aulakh.</p>
-                                </div>
+                        <div class="timeline-entry">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-title-entry">Research Associate</h3>
+                                <p class="timeline-description">Working as a research associate at the Schulich School of Business, York University under the tutelage of Prof. Preet s Aulakh.</p>
                             </div>
+                        </div>
 
-                            <div class="timeline-entry">
-                                <div class="timeline-dot" aria-hidden="true"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2024</div>
-                                    <h3 class="timeline-title-entry">Research Intern</h3>
-                                    <p class="timeline-description">Interned at Aston Business School under the tutelage of Prof. Surender Munjal.</p>
-                                </div>
+                        <div class="timeline-entry">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-date">2024</div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-title-entry">Research Intern</h3>
+                                <p class="timeline-description">Interned at Aston Business School under the tutelage of Prof. Surender Munjal.</p>
                             </div>
+                        </div>
 
-                            <div class="timeline-entry">
-                                <div class="timeline-dot" aria-hidden="true"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-date">2023</div>
-                                    <h3 class="timeline-title-entry">Engineering</h3>
-                                    <p class="timeline-description">Began my engineering journey at SRMIST.</p>
-                                </div>
+                        <div class="timeline-entry">
+                            <div class="timeline-dot" aria-hidden="true"></div>
+                            <div class="timeline-date">2023</div>
+                            <div class="timeline-content">
+                                <h3 class="timeline-title-entry">Engineering</h3>
+                                <p class="timeline-description">Began my engineering journey at SRMIST.</p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div class="globe-column">
-                    <div class="globe-card">
-                        <div id="sphere-container">
-                            <div class="sphere-wrapper"></div>
-                        </div>
+                <!-- Tooling — the orbital field of tools and languages -->
+                <aside class="home-figure">
+                    <span class="home-figure__label">Tooling</span>
+                    <div id="sphere-container">
+                        <div class="sphere-wrapper"></div>
                     </div>
-                </div>
+                </aside>
             </div>
 
             <hr class="tick-rule" aria-hidden="true">
-            <p class="sys-label">Jayabrata Basu — Portfolio</p>
+            <p class="site-foot">Jayabrata Basu — Portfolio</p>
         </main>
     </div>
 

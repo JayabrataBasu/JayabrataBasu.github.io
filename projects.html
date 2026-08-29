@@ -16,7 +16,7 @@
 </head>
 <body data-page="projects">
     <div class="page-shell">
-        <!-- Control Panel -->
+        <!-- Navigation -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <div class="brand">
@@ -54,6 +54,12 @@
                     </svg>
                     <span>Projects</span>
                 </a>
+                <a class="nav-link" href="research.html">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Research</span>
+                </a>
                 <a class="nav-link" href="contact.html">
                     <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -65,102 +71,102 @@
 
         <!-- Main Content Stage -->
         <main class="main-stage">
-            <h1>Projects &amp; Research</h1>
-            <p class="text-large text-muted" style="margin-bottom: 2rem;">Selected builds and research contributions.</p>
+            <p class="sys-label">Selected Work</p>
+            <h1>Projects</h1>
+            <p class="text-large text-muted">Selected builds.</p>
 
-            <p class="sys-label">Repository / Build Index</p>
+            <div class="work-register">
+                <!-- 01 -->
+                <article class="work-entry project-card" data-project="zeldaa">
+                    <div class="work-entry__media">
+                        <div class="card-image card-placeholder" aria-hidden="true"></div>
+                    </div>
+                    <div class="work-entry__body">
+                        <div class="tech-pill">Game</div>
+                        <h3 class="card-title">Zeldaa</h3>
+                        <p class="card-description">2D adventure built with Python/Pygame featuring pixel art world, puzzles, and custom event system.</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">Python</span>
+                            <span class="tech-pill">Pygame</span>
+                            <span class="tech-pill">Tiled</span>
+                        </div>
+                        <div class="cta-row">
+                            <button class="btn primary" data-open-modal="zeldaa">View Details</button>
+                            <a class="btn secondary" href="https://github.com/JayabrataBasu/ZELDAA" target="_blank" rel="noopener">Code</a>
+                        </div>
+                    </div>
+                </article>
 
-            <!-- Content Grid -->
-            <div class="content-grid">
-                <!-- Project Card 1 -->
-                <div class="card project-card" data-project="zeldaa">
-                    <div class="card-image card-placeholder" aria-hidden="true"></div>
-                    <div class="tech-pill">Game</div>
-                    <h3 class="card-title">Zeldaa</h3>
-                    <p class="card-description">2D adventure built with Python/Pygame featuring pixel art world, puzzles, and custom event system.</p>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">Pygame</span>
-                        <span class="tech-pill">Tiled</span>
+                <!-- 02 -->
+                <article class="work-entry project-card" data-project="veridical">
+                    <div class="work-entry__media">
+                        <div class="card-image card-placeholder" aria-hidden="true"></div>
                     </div>
-                    <div class="cta-row" style="margin-top: 1rem;">
-                        <button class="btn primary" data-open-modal="zeldaa">View Details</button>
-                        <a class="btn secondary" href="#" target="_blank">Code</a>
+                    <div class="work-entry__body">
+                        <div class="tech-pill">Database</div>
+                        <h3 class="card-title">VeridicalDB</h3>
+                        <p class="card-description">A relational database engine built from scratch in Go — embeddable or client–server, with row and columnar storage, MVCC transactions, B-tree indexing, write-ahead logging, and broad SQL support.</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">Go</span>
+                            <span class="tech-pill">BubbleTea</span>
+                            <span class="tech-pill">Java</span>
+                            <span class="tech-pill">Python</span>
+                        </div>
+                        <div class="cta-row">
+                            <button class="btn primary" data-open-modal="veridical">View Details</button>
+                            <a class="btn secondary" href="https://github.com/JayabrataBasu/VeridicalDB" target="_blank" rel="noopener">Code</a>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project Card 2 -->
-                <div class="card project-card" data-project="veridical">
-                    <div class="card-image card-placeholder" aria-hidden="true"></div>
-                    <div class="tech-pill">Database</div>
-                    <h3 class="card-title">VeridicalDB</h3>
-                    <p class="card-description"> A relational database management system (RDBMS) in Go, handling SQL queries, data storage, indexing, and ACID-compliant transactions for robust data operations. And a TUI for interactive database management!</p>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Go</span>
-                        <span class="tech-pill">BubbleTea</span>
-                        <span class="tech-pill">Java</span>
-                        <span class="tech-pill">Python</span>
+                <!-- 03 -->
+                <article class="work-entry project-card" data-project="axiom">
+                    <div class="work-entry__media">
+                        <div class="card-image card-placeholder" aria-hidden="true"></div>
                     </div>
-                    <div class="cta-row" style="margin-top: 1rem;">
-                        <button class="btn primary" data-open-modal="veridical">View Details</button>
-                        <a class="btn secondary" href="#" target="_blank">Code</a>
+                    <div class="work-entry__body">
+                        <div class="tech-pill">MobileApp</div>
+                        <h3 class="card-title">Axiom</h3>
+                        <p class="card-description">A platform designed to capture your ideas and assemble them..</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">Dart</span>
+                            <span class="tech-pill">Flutter</span>
+                            <span class="tech-pill">Android</span>
+                        </div>
+                        <div class="cta-row">
+                            <button class="btn primary" data-open-modal="axiom">View Details</button>
+                            <a class="btn secondary" href="https://github.com/JayabrataBasu/AXIOM" target="_blank" rel="noopener">Code</a>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Project Card 3 -->
-                <div class="card project-card" data-project="pipeline">
-                    <div class="card-image card-placeholder" aria-hidden="true"></div>
-                    <div class="tech-pill">MobileApp</div>
-                    <h3 class="card-title">Axiom</h3>
-                    <p class="card-description">A platform designed to capture your ideas and assemble them..</p>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Dart</span>
-                        <span class="tech-pill">Flutter</span>
-                        <span class="tech-pill">Android</span>
-
+                <!-- 04 -->
+                <article class="work-entry project-card" data-project="harvestforgood">
+                    <div class="work-entry__media">
+                        <div class="card-image card-placeholder" aria-hidden="true"></div>
                     </div>
-                    <div class="cta-row" style="margin-top: 1rem;">
-                        <button class="btn primary" data-open-modal="pipeline">View Details</button>
+                    <div class="work-entry__body">
+                        <div class="tech-pill">Website</div>
+                        <h3 class="card-title">HarvestForGood</h3>
+                        <p class="card-description">A web platform for sustainable agriculture, food security, and climate resilience — bringing together business, policy, and research to drive innovation in the agri-food ecosystem.</p>
+                        <div class="tech-stack">
+                            <span class="tech-pill">Typescript</span>
+                            <span class="tech-pill">Next.js</span>
+                            <span class="tech-pill">React</span>
+                            <span class="tech-pill">PostgreSQL</span>
+                            <span class="tech-pill">Django</span>
+                            <span class="tech-pill">Python</span>
+                        </div>
+                        <div class="cta-row">
+                            <button class="btn primary" data-open-modal="harvestforgood">View Details</button>
+                            <a class="btn secondary" href="https://github.com/JayabrataBasu/HarvestForGood" target="_blank" rel="noopener">Code</a>
+                        </div>
                     </div>
-                </div>
-
-                <!-- Project Card 4 -->
-                <div class="card project-card" data-project="pipeline">
-                    <div class="card-image card-placeholder" aria-hidden="true"></div>
-                    <div class="tech-pill">Website</div>
-                    <h3 class="card-title">HarvestForGood</h3>
-                    <p class="card-description">Lightweight, observable ingestion path for telemetry with budgeted latency and simple replay.</p>
-                    <div class="tech-stack">
-                        <span class="tech-pill">Typescript</span>
-                        <span class="tech-pill">Next.js</span>
-                        <span class="tech-pill">React</span>
-                        <span class="tech-pill">PostgreSQL</span>
-                        <span class="tech-pill">Django</span>
-                        <span class="tech-pill">Python</span>
-
-                    </div>
-                    <div class="cta-row" style="margin-top: 1rem;">
-                        <button class="btn primary" data-open-modal="harvestforgood">View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="rule-break" aria-hidden="true">Research Records</div>
-
-            <div class="content-grid">
-                <!-- Research Card -->
-                <div class="card">
-                    <div class="tech-pill">Research</div>
-                    <h3 class="card-title">Chronic Liver Disease Detection via Weighted Logits Fusion of Deep Neural Networks</h3>
-                    <p class="card-description">First authorship in developing an approach for classification of chronic liver disease using weighted logits fusion of deep neural networks.</p>
-                    <div class="cta-row" style="margin-top: 1rem;">
-                        <a class="btn primary" href="#" target="_blank">Read Paper</a>
-                    </div>
-                </div>
+                </article>
             </div>
 
             <hr class="tick-rule" aria-hidden="true">
-            <p class="sys-label">Jayabrata Basu — Portfolio</p>
+            <p class="site-foot">Jayabrata Basu — Portfolio</p>
         </main>
     </div>
 

@@ -1,18 +1,16 @@
 (() => {
-    // Tab Navigation
+    // Tab Navigation (retained; no-op when a page has no tabs)
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetTab = btn.dataset.tab;
-            
-            // Update active states
             tabBtns.forEach(b => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
-            
             btn.classList.add('active');
-            document.querySelector(`[data-tab-content="${targetTab}"]`).classList.add('active');
+            const target = document.querySelector(`[data-tab-content="${targetTab}"]`);
+            if (target) target.classList.add('active');
         });
     });
 
@@ -22,27 +20,17 @@
     const closeBtn = document.querySelector('.modal-close');
     const openBtns = document.querySelectorAll('[data-open-modal]');
 
-    // Project data
+    // Project data — grounded in the public repositories on
+    // github.com/JayabrataBasu. No metrics or details are invented here.
     const projectData = {
         zeldaa: {
             title: 'Zeldaa',
-            category: 'Game Development',
-            description: 'A 2D adventure game inspired by classic titles, built using Python and Pygame. Features include a rich storyline, puzzle-solving elements, and an immersive pixel-art world inspired by The Legend of Zelda series.',
-            overview: 'Zeldaa reimagines classic adventure gameplay with modern development practices. The game features a tile-based world, dynamic lighting, enemy AI with pathfinding, and a custom event system for rich storytelling.',
-            features: [
-                'Pixel-perfect collision detection and physics',
-                'Custom particle system for visual effects',
-                'Event-driven narrative system with branching dialogue',
-                'Enemy AI with A* pathfinding algorithm',
-                'Dynamic lighting and shadow casting',
-                'Inventory and equipment management',
-                'Save/Load system with JSON serialization'
-            ],
-            techStack: ['Python', 'Pygame', 'JSON', 'Git'],
-            challenges: 'Implementing efficient collision detection for hundreds of entities while maintaining 60 FPS was the primary challenge. Solved by implementing spatial partitioning with a quadtree data structure.',
+            category: 'Game',
+            description: 'A small 2D RPG built with Python and Pygame.',
+            overview: 'Zeldaa is a student project built with Python and Pygame for a university course (21CSS101J). It keeps to a modest scope — a tile-based world to move through, using Creative Commons artwork — and was made mostly for the enjoyment of putting a game together.',
+            techStack: ['Python', 'Pygame'],
             links: [
-                { label: 'View Code', url: '#', primary: true },
-                { label: 'Play Demo', url: '#', primary: false }
+                { label: 'View Code', url: 'https://github.com/JayabrataBasu/ZELDAA', primary: true }
             ],
             images: [
                 'assets/images/Zeldaa-1.png',
@@ -51,64 +39,47 @@
             ]
         },
         veridical: {
-            title: 'VeridicalDb',
-            category: 'Database Systems',
-            description: 'A high-performance, distributed database engine optimized for low-latency queries and horizontal scalability. Designed for modern, data-intensive applications.',
-            overview: 'VeridicalDb is a from-scratch implementation of a distributed key-value store with ACID guarantees. Built with Go for performance and reliability, it implements consensus via Raft and supports both strong and eventual consistency modes.',
+            title: 'VeridicalDB',
+            category: 'Database',
+            description: 'A modern, embeddable database engine built from scratch in Go.',
+            overview: 'VeridicalDB is a relational database engine written from scratch in Go. It can run embedded inside an application or as a client–server database speaking the PostgreSQL wire protocol. Storage covers both row-oriented and columnar layouts, with MVCC transactions for concurrent access.',
             features: [
-                'Distributed consensus using Raft algorithm',
-                'Configurable consistency levels (strong/eventual)',
-                'Automatic sharding and rebalancing',
-                'Write-ahead logging (WAL) for durability',
-                'Snapshot-based backups and point-in-time recovery',
-                'gRPC API with client libraries',
-                'Prometheus metrics and structured logging'
+                'Row and columnar storage engines',
+                'ACID transactions with snapshot isolation (MVCC)',
+                'B-tree indexing and write-ahead logging',
+                'SQL across DDL, DML and DQL — JOINs, CTEs, window functions',
+                'Stored procedures, triggers, full-text search and JSON support',
+                'User management, role-based access control and TLS',
+                'PostgreSQL wire-protocol compatibility; Docker support'
             ],
-            techStack: ['Go', 'gRPC', 'Raft', 'Make', 'Git'],
-            challenges: 'Ensuring data consistency during network partitions while maintaining low latency required careful tuning of the Raft implementation and implementing clever caching strategies at the client level.',
+            techStack: ['Go', 'SQL', 'Docker'],
             links: [
-                { label: 'View Repository', url: '#', primary: true },
-                { label: 'Documentation', url: '#', primary: false }
+                { label: 'View Repository', url: 'https://github.com/JayabrataBasu/VeridicalDB', primary: true }
             ]
         },
-        pipeline: {
-            title: 'Event Pipeline',
-            category: 'Systems Engineering',
-            description: 'Lightweight, observable ingestion path for telemetry with budgeted latency and simple replay capabilities. Built for real-time data processing.',
-            overview: 'A high-throughput event ingestion pipeline designed to handle millions of events per second with predictable latency. Implements backpressure handling, circuit breakers, and automatic retries.',
-            features: [
-                'Sub-millisecond p99 latency at scale',
-                'Automatic batching and compression',
-                'Circuit breaker pattern for fault tolerance',
-                'Structured logging with correlation IDs',
-                'Replay functionality for debugging',
-                'Schema validation and evolution support',
-                'Grafana dashboards for monitoring'
-            ],
-            techStack: ['Go', 'Kafka', 'Prometheus', 'Docker'],
-            challenges: 'Achieving consistent sub-millisecond latency under heavy load required careful profiling and optimization, including lock-free data structures and memory pooling to reduce GC pressure.',
+        axiom: {
+            title: 'Axiom',
+            category: 'Application',
+            description: 'A cross-platform application built with Flutter.',
+            overview: 'Axiom is a work-in-progress Flutter application, built from a single Dart codebase with Android, iOS and desktop targets.',
+            techStack: ['Dart', 'Flutter'],
             links: [
-                { label: 'Technical Write-up', url: '#', primary: true }
+                { label: 'View Code', url: 'https://github.com/JayabrataBasu/AXIOM', primary: true }
             ]
         },
         harvestforgood: {
             title: 'HarvestForGood',
-            category: 'Website Development',
-            description: 'Lightweight, observable ingestion path for telemetry with budgeted latency and simple replay capabilities. Built for real-time data processing.',
-            overview: 'A high-throughput event ingestion pipeline designed to handle millions of events per second with predictable latency. Implements backpressure handling, circuit breakers, and automatic retries.',
+            category: 'Website',
+            description: 'A platform dedicated to advancing sustainable agriculture, food security, and climate resilience.',
+            overview: 'HarvestForGood is a web platform built to bring together stakeholders from business, policy, and research, fostering innovation across the agri-food ecosystem. It is organised around three pillars.',
             features: [
-                'Sub-millisecond p99 latency at scale',
-                'Automatic batching and compression',
-                'Circuit breaker pattern for fault tolerance',
-                'Structured logging with correlation IDs',
-                'Replay functionality for debugging',
-                'Schema validation and evolution support',
-                'Grafana dashboards for monitoring'
+                'Business — economically viable sustainability models and environmental stewardship in agriculture',
+                'Policy — governance frameworks and regulatory incentives for sustainable practice',
+                'Research — food security, climate resilience and ecosystem health'
             ],
-            techStack: ['Go', 'Kafka', 'Prometheus', 'Docker'],
-            challenges: 'Achieving consistent sub-millisecond latency under heavy load required careful profiling and optimization, including lock-free data structures and memory pooling to reduce GC pressure.',
+            techStack: ['Next.js', 'Tailwind CSS', 'TypeScript'],
             links: [
-                { label: 'Technical Write-up', url: '#', primary: true }
+                { label: 'View Repository', url: 'https://github.com/JayabrataBasu/HarvestForGood', primary: true }
             ]
         }
     };
@@ -119,7 +90,6 @@
             e.preventDefault();
             const projectId = btn.dataset.openModal;
             const project = projectData[projectId];
-            
             if (project) {
                 renderProjectModal(project);
                 modal.classList.add('active');
@@ -128,42 +98,44 @@
         });
     });
 
-    // Close modal
     function closeModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
     }
 
-    closeBtn.addEventListener('click', closeModal);
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    // ESC key to close
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
             closeModal();
         }
     });
 
-    // Render project modal content
+    // Render project modal content — every section is optional
     function renderProjectModal(project) {
-        const techStackHTML = project.techStack.map(tech => 
-            `<span class="tech-chip">${tech}</span>`
-        ).join('');
+        const techStackHTML = (project.techStack || [])
+            .map(tech => `<span class="tech-chip">${tech}</span>`).join('');
 
-        const linksHTML = project.links.map(link => 
-            `<a class="btn ${link.primary ? 'primary' : ''}" href="${link.url}" target="_blank">${link.label}</a>`
-        ).join('');
+        const linksHTML = (project.links || [])
+            .map(link => `<a class="btn ${link.primary ? 'primary' : 'secondary'}" href="${link.url}" target="_blank" rel="noopener">${link.label}</a>`)
+            .join('');
 
-        const featuresHTML = project.features.map(feature => 
-            `<li>${feature}</li>`
-        ).join('');
+        const overviewHTML = project.overview
+            ? `<h3>Overview</h3><p>${project.overview}</p>` : '';
 
-        const imagesHTML = project.images ? `
+        const featuresHTML = (project.features && project.features.length)
+            ? `<h3>Key Features</h3><ul>${project.features.map(f => `<li>${f}</li>`).join('')}</ul>` : '';
+
+        const notesHTML = project.notes
+            ? `<h3>Notes</h3><p>${project.notes}</p>` : '';
+
+        const imagesHTML = (project.images && project.images.length) ? `
             <div class="project-gallery">
                 <h3>Gallery</h3>
                 <div class="gallery-grid">
@@ -179,51 +151,35 @@
                 <div class="tech-pill">${project.category}</div>
                 <h2>${project.title}</h2>
                 <p class="lede">${project.description}</p>
-                <div class="modal-meta">
-                    ${techStackHTML}
-                </div>
+                ${techStackHTML ? `<div class="modal-meta">${techStackHTML}</div>` : ''}
             </div>
 
             <div class="modal-body">
-                <h3>Overview</h3>
-                <p>${project.overview}</p>
-
+                ${overviewHTML}
                 ${imagesHTML}
-
-                <h3>Key Features</h3>
-                <ul>
-                    ${featuresHTML}
-                </ul>
-
-                <h3>Technical Challenges</h3>
-                <p>${project.challenges}</p>
+                ${featuresHTML}
+                ${notesHTML}
             </div>
 
-            <div class="modal-footer">
-                ${linksHTML}
-            </div>
+            ${linksHTML ? `<div class="modal-footer">${linksHTML}</div>` : ''}
         `;
     }
-    // Initialize Card Slideshows
+
+    // Initialize Card Slideshows for entries that have images
     function initCardSlideshows() {
-        // Find all project cards
         const projectCards = document.querySelectorAll('.project-card');
-        
+
         projectCards.forEach(card => {
             const projectId = card.dataset.project;
             const project = projectData[projectId];
-            
-            // Only proceed if project exists and has images
+
             if (project && project.images && project.images.length > 0) {
                 const imageContainer = card.querySelector('.card-image');
-                
-                // If there's a placeholder container, replace it or populate it
+
                 if (imageContainer) {
-                    // Create slideshow container
                     const slideshowDiv = document.createElement('div');
                     slideshowDiv.className = 'card-slideshow';
-                    
-                    // Create image elements
+
                     project.images.forEach((imgSrc, index) => {
                         const img = document.createElement('img');
                         img.src = imgSrc;
@@ -231,28 +187,24 @@
                         if (index === 0) img.classList.add('active');
                         slideshowDiv.appendChild(img);
                     });
-                    
-                    // Insert slideshow and remove placeholder
+
                     imageContainer.parentNode.insertBefore(slideshowDiv, imageContainer);
                     imageContainer.remove();
-                    
-                    // Start slideshow interval (only if multiple images)
+
                     if (project.images.length > 1) {
                         let currentIndex = 0;
                         const images = slideshowDiv.querySelectorAll('img');
-                        
+
                         setInterval(() => {
                             images[currentIndex].classList.remove('active');
                             currentIndex = (currentIndex + 1) % images.length;
                             images[currentIndex].classList.add('active');
-                        }, 3000); // Change every 3 seconds
+                        }, 3200);
                     }
                 }
             }
         });
     }
 
-    // Initialize slideshows on load
     initCardSlideshows();
-
 })();
